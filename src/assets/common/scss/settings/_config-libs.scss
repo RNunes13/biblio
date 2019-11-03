@@ -1,0 +1,29 @@
+
+/**
+ * SASS Rem config
+ */
+$rem-baseline: $font-size;
+$rem-fallback: true;
+
+/**
+ * Initialize.css config
+ */
+$initialize-box-sizing: border-box;
+$initialize-font-family: $font-main;
+$initialize-font-size: $rem-baseline;
+$initialize-line-height: 1.4;
+// Options
+$initialize-dinosaur-mode: true; // Toggle support for IE8, IE9 & IE10
+$initialize-print-styles: false; // Toggle HTML5 Boilerplate print styles
+$initialize-html5-boilerplate-overwrites: false; // Toggle HTML5 Boilerplate overwrites
+// Optional values
+$initialize-color: $color-body-text;
+$initialize-heading-color: null;
+$initialize-heading-font-family: null;
+$initialize-heading-margins: 0;
+$initialize-block-margins: 0;
+
+/**
+ * SASS Form Reset
+ */
+$form-reset-box-sizing: inherit;

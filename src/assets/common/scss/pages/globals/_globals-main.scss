@@ -1,0 +1,7 @@
+
+body {
+  &.has--no-scroll {
+    height: 100%;
+    overflow: hidden;
+  }
+}

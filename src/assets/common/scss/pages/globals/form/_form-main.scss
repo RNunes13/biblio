@@ -1,0 +1,46 @@
+
+.rn-form {
+  @include rem(padding, 0 20px);
+
+  &__group {
+    @include rem(margin-bottom, 20px);
+  }
+
+  &__label {
+    @include rem(margin-bottom, 10px);
+    @include rem(font-size, 15px);
+    @include font-weight(bold);
+    display: block;
+    color: $color-night-rider;
+
+    &.required {
+      &::after {
+        @include rem(margin-left, 5px);
+        content: '*';
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &__input,
+  &__textarea {
+    @include rem(padding, 10px 15px);
+    width: 100%;
+    border: 1px solid $color-gainsboro;
+    outline: none;
+    transition: border-color 200ms $accelerate-ease;
+
+    &:focus {
+      border-color: $color-night-rider;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+  }
+
+  &__button {
+    @extend %btn--primary;
+    @include rem(margin, 30px auto 20px);
+  }
+}

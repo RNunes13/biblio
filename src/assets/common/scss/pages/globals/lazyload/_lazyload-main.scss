@@ -1,0 +1,42 @@
+
+@keyframes placeloader-shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+/**
+ * Edge support
+ */
+img[data-src],
+img[data-srcset] {
+  display: block;
+  min-height: 1px;
+}
+
+/**
+ * General
+ */
+img {
+  &.has--placeloader {
+    background-size: 800px 104px;
+    background: #f6f7f8;
+    background: linear-gradient(
+        to right,
+        #f1f1f1 8%,
+        #ededed 18%,
+        #f1f1f1 33%
+    );
+    height: 0;
+    position: relative;
+    overflow: hidden;
+    color: transparent;
+    font-size: 0;
+
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: placeloader-shimmer;
+    transition: all 0.3s;
+  }
+}

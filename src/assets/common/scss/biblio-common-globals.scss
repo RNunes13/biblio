@@ -1,0 +1,34 @@
+
+/**
+ * Global style for any project page
+ * Usefull for Mobile/Tablet/Desktop separated env
+ */
+
+/**
+ * Common config (tools, mixins, variables, etc.)
+ */
+@import './settings/config-base';
+@import './settings/fonts';
+
+/**
+ * Generic
+ */
+@import './generic/initialize';
+@import './generic/form-reset';
+
+/**
+ * Module Globals
+ */
+ @import './pages/globals/globals-base';
+
+/**
+ * Elements
+ */
+@import './elements/root';
+
+/**
+ * Utils (shame file included)
+ * Helper Classes & IE10+/Edge Fallback
+ */
+@import './utils/helpers';
+@import './utils/ie-fallback';

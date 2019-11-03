@@ -1,0 +1,33 @@
+
+/*
+ * Container
+ */
+%container {
+  @include rem(padding-left, 20px);
+  @include rem(padding-right, 20px);
+  margin: 0 auto;
+  transition: max-width 200ms $accelerate-ease;
+
+  @include breakpoint(min-width, 1200px) {
+    @include rem(max-width, 1140px);
+  }
+
+  @include between-breakpoints(992px, 1199px) {
+    @include rem(max-width, 960px);
+  }
+
+  @include between-breakpoints(768px, 991px) {
+    @include rem(max-width, 720px);
+  }
+
+  @include between-breakpoints(576px, 767px) {
+    @include rem(max-width, 540px);
+  }
+
+  
+  @include breakpoint(max-width, 575px) {
+    @include rem(padding-left, 15px);
+    @include rem(padding-right, 15px);
+    max-width: auto;
+  }
+}

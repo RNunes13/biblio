@@ -1,0 +1,19 @@
+
+.rn-overlay {
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($color-black, 0.65);
+  transition: all 0.3s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: z('overlay');
+
+  &.is--active {
+    opacity: 1;
+    visibility: visible;
+  }
+}

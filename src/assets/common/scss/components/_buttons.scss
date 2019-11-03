@@ -1,0 +1,71 @@
+
+/*
+ * Buttons
+ */
+%btn {
+  @include rem(padding, 12px 25px);
+  @include rem(min-height, 45px);
+  @include rem(font-size, 14px);
+  @include rem(letter-spacing, 1px);
+  @include rem(border-radius, 30px);
+  @include font-weight(bold);
+  @include flex-centered;
+  cursor: pointer;
+  position: relative;
+  font-family: $font-main;
+  text-decoration: none;
+  border: 2px solid transparent;
+  color: $color-white;
+  transition: all 200ms $accelerate-ease;
+
+  &--reset {
+    @include reset-button;
+  }
+
+  // All buttons
+  &--primary,
+  &--white-fill {
+    @extend %btn;
+
+    &:focus,
+    &.has--focus {
+      outline: 0;
+    }
+
+    // Disabled comes first so active can properly restyle
+    &.is--disabled,
+    &:disabled {
+      @include button-disabled;
+    }
+
+    // Opinionated: add 'hand' cursor to non-disabled elements
+    &:not(:disabled):not(.is--disabled) {
+      cursor: pointer;
+    }
+  }
+
+  /**
+   * Specif buttons styles
+   */
+  &--primary {
+    border-color: $color-primary;
+    background-color: $color-primary;
+    color: $color-white;
+
+    @include hover-supported() {
+      background-color: $color-white;
+      color: $color-black;
+    }
+  }
+
+  &--white-fill {
+    border-color: $color-white;
+    background-color: transparent;
+    color: $color-white;
+
+    @include hover-supported() {
+      background-color: $color-white;
+      color: $color-black;
+    }
+  }
+}

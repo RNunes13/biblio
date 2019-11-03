@@ -1,0 +1,103 @@
+
+.rn-header {
+  $header: &;
+  width: 100%;
+  z-index: z('header');
+  transition-property: background-color, height;
+  transition-duration: 200ms;
+  transition-timing-function: $accelerate-ease;
+
+  @include mq('sm') {
+    height: 90px;
+  }
+
+  @include mq('sm', max) {
+    height: $mobile-header-height;
+  }
+
+  &.is--fill {
+    height: calc(#{$mobile-header-height} - 10px);
+    background-color: $color-white;
+    box-shadow: 0 0 10px -3px $color-black;
+
+    #{$header}__menu::before {
+      color: $color-black;
+    }
+
+    #{$header}__logo {
+      @include rem(height, 30px);
+      @include rem(width, 30px);
+
+      &--white {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      &--black {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__container {
+    @extend %container;
+    @include rem(padding-top, 15px);
+    @include rem(padding-bottom, 15px);
+    @include flex-spaced;
+    height: 100%;
+
+    @include mq('xs', max) {
+      @include rem(padding, 25px);
+    }
+  }
+
+  &__logo {
+    @include rem(height, 40px);
+    @include rem(width, 40px);
+    position: relative;
+    transition-property: width, height;
+    transition-duration: 200ms;
+    transition-timing-function: $accelerate-ease;
+
+    &--white,
+    &--black {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition-property: opacity, visibility;
+      transition-duration: 200ms;
+      transition-timing-function: $accelerate-ease;
+    }
+
+    &--black {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &__menu {
+    @include mq('sm') {
+      display: none;
+    }
+
+    @include mq('sm', max) {
+      display: block;
+    }
+
+    &::before {
+      @extend %iconfont;
+      @include rem(font-size, 20px);
+      content: '\EA04';
+      color: $color-white;
+      transition: color 200ms $accelerate-ease;
+    }
+
+    &.is--open {
+      &::before {
+        @include rem(font-size, 15px);
+        content: '\EA05';
+      }
+    }
+  }
+}

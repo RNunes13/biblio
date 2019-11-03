@@ -1,0 +1,26 @@
+
+/**
+ * Form reset - Vendor lib
+ */
+
+@import '../../../../../node_modules/scss-form-reset/form-reset';
+
+input {
+  @include form-reset-input;
+}
+
+label {
+  @include form-reset-label;
+}
+
+select {
+  @include form-reset-select;
+}
+
+button {
+  @include form-reset-button;
+}
+
+textarea {
+  @include form-reset-textarea;
+}

@@ -1,0 +1,92 @@
+
+html {
+  @include rem-baseline;
+  font-weight: $font-weight-base;
+  cursor: default; // Cursors only change to hint non-obvious interfaces
+  height: 100%;
+  word-break: break-word; // Words break to prevent overflow
+}
+
+body {
+  @include scrollbar(7px, $color-black, $color-gainsboro);
+  background-color: $color-body-bg;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /**
+   * iOS Hack
+   * Needs 'viewport-fit=cover' on meta Viewport
+   */
+  padding: constant(safe-area-inset-top) constant(safe-area-inset-right) constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+  /* Status bar height on iOS 11.0 */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  /* Status bar height on iOS 11+ */
+}
+
+/**
+ * Mobile Fast Click
+ * Clicking links, buttons, and form fields will be
+ * a lot quicker and responsive on touch devices.
+ */
+
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea,
+[tabindex] {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+/**
+ * Remove touch highlight indicator
+ */
+ a,
+ div,
+ span,
+ button {
+   -webkit-tap-highlight-color: transparent;
+ }
+
+/**
+ * Hand cursor on clickable input elements
+ */
+
+a,
+input[type='button'],
+input[type='submit'],
+input[type='file'],
+input[type='image'],
+button {
+  cursor: pointer;
+}
+
+@include headings {
+  font-size: $font-size;
+  font-weight: $font-weight-base;
+}
+
+a {
+  @include reset-link;
+}
+
+ul,
+ol {
+  @include reset-list;
+}
+
+img {
+  @include reset-media;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}

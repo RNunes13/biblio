@@ -1,0 +1,56 @@
+{
+  "name": "biblio",
+  "version": "0.0.1",
+  "description": "Library book lending and reservation system",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RNunes13/Biblio"
+  },
+  "author": {
+    "name": "Rodrigo Nunes",
+    "email": "nunesrodrigo13@outlook.com"
+  },
+  "scripts": {
+    "clean": "gulp clean",
+    "start": "npm run clean && gulp start --colors"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.2.0",
+    "initialize-css": "^1.4.0",
+    "scss-form-reset": "0.0.3",
+    "smoothscroll": "^0.4.0",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/preset-env": "^7.6.3",
+    "autoprefixer": "^9.7.1",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.26.7",
+    "browserify": "^16.5.0",
+    "cssnano": "^4.1.10",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-connect-php": "^1.0.3",
+    "gulp-consolidate": "^0.2.0",
+    "gulp-iconfont": "^10.0.3",
+    "gulp-livereload": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "sass-rem": "^2.0.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=10.16.3"
+  }
+}

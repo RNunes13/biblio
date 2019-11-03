@@ -1,0 +1,39 @@
+
+.rn-back-top {
+  @include flex-centered;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid $color-night-rider;
+  background-color: $color-night-rider;
+  opacity: 0;
+  visibility: hidden;
+  transition-property: border-color, background-color, opacity, visibility;
+  transition-duration: 200ms;
+  transition-timing-function: $accelerate-ease;
+  z-index: z('back-top');
+
+  @include hover-supported() {
+    background-color: transparent;
+
+    &::before {
+      color: $color-night-rider;
+    }
+  }
+
+  &::before {
+    @extend %iconfont;
+    content: '\EA09';
+    color: $color-white;
+    transform: rotate(90deg);
+    transition: color 200ms $accelerate-ease;
+  }
+
+  &.is--active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
