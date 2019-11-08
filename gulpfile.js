@@ -18,6 +18,7 @@ const livereload   = require('gulp-livereload');
 const iconFont     = require('gulp-iconfont');
 const rename       = require("gulp-rename");
 const consolidate  = require('gulp-consolidate');
+const imagemin     = require('gulp-imagemin');
 const runTimestamp = Math.round(Date.now() / 1000);
 
 require('dotenv').config();
@@ -32,11 +33,12 @@ const DEST_PATH = 'build';
 
 const projectName = 'biblio';
 const commomFiles = ['globals'];
-const otherFiles  = ['home', 'general'];
+const otherFiles  = ['home', 'general', 'login'];
 
 const PATHS = {
   styles: { src: `${SRC_PATH}/assets/**/*.scss`, dest: `${DEST_PATH}/assets/css` },
   js: { src: `${SRC_PATH}/assets/**/*.js`, dest: `${DEST_PATH}/assets/js` },
+  img: { src: `${SRC_PATH}/assets/images/*.*`, dest: `${DEST_PATH}/assets/images` },
   views: { src: `${SRC_PATH}/views/*.pug`, dest: `${DEST_PATH}/` },
   api: { src: `${SRC_PATH}/api/**/*.php`, dest: `${DEST_PATH}/api` },
 };
@@ -152,7 +154,14 @@ function iconfont() {
 }
 
 function copyApiFile() {
-  gulp.src(PATHS.api.src).pipe(gulp.dest(PATHS.api.dest));
+  return gulp.src(PATHS.api.src).pipe(gulp.dest(PATHS.api.dest));
+}
+
+function minifyImages() {
+  return gulp
+    .src(PATHS.img.src)
+		.pipe(imagemin())
+		.pipe(gulp.dest(PATHS.img.dest))
 }
 
 function start() {
@@ -170,6 +179,7 @@ function start() {
 
   // Run the compile tasks
   copyApiFile();
+  minifyImages();
   iconfont();
   styles();
   views();
@@ -178,7 +188,8 @@ function start() {
   // Watchers
   gulp.watch(PATHS.styles.src, gulp.series([styles]));
   gulp.watch(PATHS.js.src, gulp.series([js]));
-  gulp.watch(PATHS.views.src, gulp.series([views]));
+  gulp.watch(PATHS.api.src, gulp.series([copyApiFile]));
+  gulp.watch(`${SRC_PATH}/views/**/*.pug`, gulp.series([views]));
 }
 
 exports.start = start;

@@ -1,0 +1,55 @@
+<?php
+  class User {
+    // DB connection and table name
+    private $conn;
+    private $table_name = "user";
+
+    // Attibutes
+    public $id;
+    public $name;
+    public $username;
+    public $email;
+    public $password;
+    public $cpf;
+    public $rg;
+    public $role_id;
+    public $created_at;
+    public $updated_at;
+    public $deleted;
+
+    public function __construct($db){
+      $this->conn = $db;
+    }
+
+    public function login($username, $password) {
+      $password_hash = md5($password);
+
+      $query = "SELECT * FROM " . $this->table_name . " WHERE username = :username AND password = :password";
+   
+      $stmt = $this->conn->prepare($query);
+
+      // sanitize
+      $username = htmlspecialchars(strip_tags($username));
+
+      // bind values
+      $stmt->bindParam(":username", $username);
+      $stmt->bindParam(":password", $password_hash);
+
+      $stmt->execute();
+
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      if ($result) {
+        return array("success" => true);
+      } else {
+        return array(
+          "success" => false,
+          "error" => array(
+            "code" => "@Biblio:InvalidCredentials",
+            "message" => "Invalid credentials."
+          )
+        );
+      }
+    }
+  }
+?>

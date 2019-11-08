@@ -60,3 +60,4 @@ dist/
 src/assets/common/scss/settings/_iconfont-*.scss
 
 build
+.env

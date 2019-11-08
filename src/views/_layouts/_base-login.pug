@@ -1,0 +1,19 @@
+
+include ./../_mixins/_metaTags.pug
+
+block vars
+
+doctype
+html(lang='pt-BR')
+  //- Head
+  include ./../_partials/utils/_head.pug
+
+  body
+    //- Main Content
+    main(class=`rn-${$templateClass}__main js--${$templateClass}`, role='main')
+      block content
+
+    //- Scripts
+    block scripts
+      include ./../_partials/utils/_scripts.pug
+      include ./../_partials/utils/_google-fonts.pug

@@ -1,0 +1,18 @@
+extends ./_layouts/_base-login.pug
+
+//- Template variables
+block vars
+  - var $templateName = 'login'
+  - var $templateClass = 'login'
+
+//- Page styles
+block append styles
+  link(href=`assets/css/biblio-${$templateName}.css`, media='all', rel='stylesheet')/
+
+//- Main Content
+block content
+  include ./_partials/login/_login.pug
+
+//- Page scripts
+block append scripts
+  script(src=`assets/js/biblio-${$templateName}.js`)

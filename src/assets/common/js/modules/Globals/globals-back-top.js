@@ -3,6 +3,7 @@ import smoothScroll from 'smoothscroll';
 
 export default {
   init() {
+    Biblio.backTop &&
     setTimeout(() => {
       this.showButton();
       this.onClick();

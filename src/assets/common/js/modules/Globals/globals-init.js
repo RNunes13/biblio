@@ -4,6 +4,7 @@ export default {
     this.fontsLoad();
     this.setGlobals();
     this.setLazy();
+    this.setAlertify();
   },
 
   fontsLoad() {
@@ -31,13 +32,9 @@ export default {
     Biblio.overlay = document.querySelector('.js--overlay');
     Biblio.backTop = document.querySelector('.js--back-top');
     Biblio.rivets = window.rivets;
-    Biblio.firebase = window.firebase;
 
     // External Plugins
     Biblio.isMobile = isMobile.any;
-
-    // Global variables
-    Biblio.navbarHeight = 55; // pixels
   },
 
   setLazy() {
@@ -56,5 +53,19 @@ export default {
         document.querySelector(_this).clasList.remove('has--placeloader');
       },
     });
+  },
+
+  setAlertify() {
+    alertify.defaults = {
+      notifier: {
+        delay: 50,
+        position: 'bottom-center',
+      },
+      glossary:{
+        title: 'Alerta',
+        ok: 'OK',
+        cancel: 'Cancelar'            
+      },
+    };
   },
 };

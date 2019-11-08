@@ -7,6 +7,6 @@ export default {
   },
 
   closeOverlay() {
-    Biblio.overlay.addEventListener('click', (ev) => Biblio.closeMenus(true));
+    Biblio.overlay && Biblio.overlay.addEventListener('click', (ev) => Biblio.closeMenus(true));
   },
 };

@@ -3,7 +3,7 @@
     private $host = "localhost";
     private $db_name = "biblio";
     private $username = "root";
-    private $password = "";
+    private $password = "ml31Microsoft5%";
     public $conn;
 
     public function getConnection() {

@@ -1,0 +1,58 @@
+section(class="rn-login js--login")
+  div(class="rn-login__wrap")
+    div(class="rn-login__heading")
+      figure(class="rn-login__heading--icon")
+        img(src="assets/images/icon.png" alt="Biblio logo")
+    div(class="rn-login__content")
+      p(class="rn-login__info") Faça o login para acesso a aplicação
+      form(class="rn-login__form rn-form" rv-on-submit="app.controller.signIn.submit")
+        fieldset(rv-disabled="app.state.form.isSubmiting")
+          div(class="rn-form__group")
+            input(
+              class="rn-form__input",
+              rv-class-has-error="app.state.form.username.hasError"
+              type="text",
+              name="username",
+              id="username",
+              placeholder="Usuário",
+              rv-value="app.state.form.username.value"
+            )
+            div(
+              class="rn-form__error"
+              rv-if="app.state.form.username.hasError"
+              rv-text="app.state.form.username.error"
+            )
+          div(class="rn-form__group password")
+            input(
+              class="rn-form__input js--login-password",
+              rv-class-has-error="app.state.form.password.hasError"
+              type="password",
+              name="password",
+              id="password",
+              placeholder="Senha",
+              rv-value="app.state.form.password.value"
+            )
+            div(
+              class="rn-form__error"
+              rv-if="app.state.form.password.hasError"
+              rv-text="app.state.form.password.error"
+            )
+          div(class="rn-form__group showPassword")
+            input(
+              class="rn-form__input",
+              type="checkbox",
+              name="showPassword",
+              id="showPassword",
+              rv-checked="app.state.form.showPassword"
+              rv-on-change="app.controller.signIn.togglePassword"
+            )
+            label(for="showPassword", rv-text="app.state.form.showPasswordText")
+          div(class="rn-form__group")
+            button(
+              class="rn-form__button js--login-button",
+              rv-text="app.state.form.buttonText",
+              type="submit"
+            )
+      div(class="rn-login__register")
+        span(class="rn-login__register--text") Não tem uma conta?
+        a(href="/register.html") Crie uma agora!

@@ -3,10 +3,11 @@
  * Buttons
  */
 %btn {
-  @include rem(padding, 12px 25px);
-  @include rem(min-height, 45px);
+  @include rem(padding, 5px 16px);
+  @include rem(min-height, 38px);
   @include rem(font-size, 14px);
   @include rem(letter-spacing, 1px);
+  @include rem(line-height, 18px);
   @include rem(border-radius, 30px);
   @include font-weight(bold);
   @include flex-centered;
@@ -53,8 +54,8 @@
     color: $color-white;
 
     @include hover-supported() {
-      background-color: $color-white;
-      color: $color-black;
+      background-color: darken($color-primary, 10%);
+      border-color: darken($color-primary, 10%);
     }
   }
 

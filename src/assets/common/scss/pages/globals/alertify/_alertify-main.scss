@@ -1,0 +1,51 @@
+
+/*
+ * Alertify JS
+ */
+.ajs {
+  &-message {
+    @include rem(border-radius, 4px);
+    display: flex;
+    align-items: center;
+    background-color: $color-oyster-bay;
+    border: 1px solid $color-mosque;
+    color: $color-mosque;
+    
+    &::before {
+      @include rem(margin-right, 8px);
+      @include rem(font-size, 20px);
+      @extend %iconfont;
+      content: '\EA02';
+    }
+  }
+
+  &-success {
+    background-color: $color-swans-down !important;
+    border: 1px solid $color-crusoe !important;
+    color: $color-crusoe !important;
+
+    &::before {
+      content: '\EA01';
+    }
+  }
+
+  &-error {
+    background-color: $color-pale-pink !important;
+    border: 1px solid $color-red-berry !important;
+    color: $color-red-berry !important;
+
+    &::before {
+      content: '\EA04';
+    }
+  }
+
+  &-warning {
+    background-color: $color-china-ivory !important;
+    border: 1px solid $color-golden-brown !important;
+    color: $color-golden-brown !important;
+
+    &::before {
+      content: '\EA03';
+    }
+  }
+}
