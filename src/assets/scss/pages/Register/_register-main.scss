@@ -1,0 +1,99 @@
+
+@keyframes grow {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.rn-register {
+  @include rem(padding, 20px);
+  @include flex-centered;
+  width: 100vw;
+  min-height: 100%;
+  overflow-y: auto;
+
+  @include mq('xs', max) {
+    @include rem(padding, 10px);
+  }
+
+  &__wrap {
+    @include scrollbar(5px, $color-secondary);
+    @include rem(max-width, 350px);
+    @include rem(padding, 15px 30px 20px);
+    @include rem(border-radius, 5px);
+    width: 100%;
+    background-color: $color-white;
+    border: 1px solid $color-light-grey;
+    transition: padding $transition-duration $transition-function;
+    box-shadow: 0 0 10px 0 $color-light-grey;
+
+    @include mq('xs', max) {
+      @include rem(padding, 15px 20px 30px);
+    }
+  }
+
+  &__heading {
+    &--icon {
+      @include rem(margin, 0 auto);
+      text-align: center;
+      opacity: 0;
+      transform: scale(0);
+      animation: grow 500ms linear forwards 500ms;
+      
+      img {
+        @include rem(max-width, 90px);
+        transition: max-width $transition-duration $transition-function;
+      }
+    }
+  }
+
+  &__info {
+    @include rem(margin-bottom, 20px);
+    @include rem(font-size, 14px);
+    text-align: center;
+    color: $color-grey;
+  }
+
+  &__form {
+    .password {
+      @include rem(margin-bottom, 5px);
+    }
+
+    .showPassword {
+      @include rem(margin-bottom, 15px);
+      
+      label {
+        @include rem(font-size, 13px);
+        color: $color-bunting;
+      }
+    }
+
+    .submit {
+      margin-bottom: 0;;
+    }
+  }
+
+  &__register {
+    @include rem(margin-top, 20px);
+    @include rem(padding-top, 20px);
+    border-top: 1px solid $color-whisper;
+    text-align: center;
+
+    &--text {
+      @include rem(font-size, 14px);
+      display: block;
+      color: $color-grey;
+    }
+
+    a {
+      @include rem(font-size, 15px);
+      @include font-weight(semi-bold);
+      display: inline-block;
+      color: $color-primary;
+      transition: opacity $transition-duration $transition-function;
+
+      &:hover {
+        opacity: 0.65;
+      }
+    }
+  }
+}

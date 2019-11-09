@@ -2,6 +2,16 @@
 export const state = {
   form: {
     isSubmiting: false,
+    name: {
+      value: '',
+      hasError: false,
+      error: '',
+    },
+    email: {
+      value: '',
+      hasError: false,
+      error: '',
+    },
     username: {
       value: '',
       hasError: false,
@@ -14,6 +24,6 @@ export const state = {
     },
     showPassword: false,
     showPasswordText: 'Mostrar senha',
-    buttonText: 'Acessar',
+    buttonText: 'Cadastrar',
   },
 };

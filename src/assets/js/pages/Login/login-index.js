@@ -1,5 +1,5 @@
 
-import LoginMain from '../../../common/js/modules/Login/index';
+import LoginMain from '../../../common/js/modules/Login';
 
 export default {
   init() {

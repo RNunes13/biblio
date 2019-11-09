@@ -1,7 +1,7 @@
 
 .rn-form {
   &__group {
-    @include rem(margin-bottom, 20px);
+    @include rem(margin-bottom, 15px);
   }
 
   &__label {
@@ -25,7 +25,7 @@
     @include rem(padding, 10px 15px);
     @include rem(font-size, 15px);
     @include rem(border-radius, 4px);
-    @include placeholder($color-night-rider, 0.45);
+    @include placeholder($color-night-rider, 0.6);
     width: 100%;
     border: 2px solid $color-light-grey;
     outline: none;
