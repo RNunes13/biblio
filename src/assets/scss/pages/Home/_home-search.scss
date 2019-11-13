@@ -1,0 +1,38 @@
+
+.rn-home__search {
+  &--wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & > div {
+      @include rem(margin, 0 5px 10px);
+
+      @include mq('md') {
+        flex: 1 1 20%;
+      }
+
+      @include mq('md', max) {
+        flex: 1 1 30%;
+      }
+
+      @include mq('sm', max) {
+        flex: 1 1 45%;
+      }
+
+      @include mq('xs', max) {
+        flex: 1 1 100%;
+      }
+    }
+  }
+
+  &--submit {
+    text-decoration: underline;
+    padding: 0;
+  }
+
+  &--reset {
+    text-decoration: underline;
+    color: $color-mischka;
+  }
+}

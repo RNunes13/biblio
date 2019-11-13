@@ -55,9 +55,7 @@ function clean() {
 function js(done) {
   const fn = (fileName, src, dest) => {
     browserify({
-      extensions: ['.js'],
       entries:  [ `${src}/${fileName}.js` ],
-      debug: true
     })
     .transform('babelify', {
       presets: ['@babel/preset-env']

@@ -27,6 +27,13 @@
 @import './elements/root';
 
 /**
+ * Components
+ */
+ @import './components/buttons';
+ @import './components/container';
+ @import './components/title';
+
+/**
  * Utils (shame file included)
  * Helper Classes & IE10+/Edge Fallback
  */

@@ -20,6 +20,7 @@
     "axios": "^0.19.0",
     "dotenv": "^8.2.0",
     "initialize-css": "^1.4.0",
+    "regenerator-runtime": "^0.13.3",
     "scss-form-reset": "0.0.3",
     "smoothscroll": "^0.4.0",
     "underscore": "^1.9.1"

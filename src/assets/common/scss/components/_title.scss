@@ -1,0 +1,12 @@
+
+/*
+ * Container
+ */
+.rn-title {
+  @include rem(margin-bottom, 15px);
+  @include rem(font-size, 22px);
+  @include rem(line-height, 25px);
+  @include font-weight(semi-bold);
+  color: $color-bunting;
+  text-align: center;
+}

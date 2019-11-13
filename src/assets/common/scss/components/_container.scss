@@ -2,7 +2,7 @@
 /*
  * Container
  */
-%container {
+.rn-container {
   @include rem(padding-left, 20px);
   @include rem(padding-right, 20px);
   margin: 0 auto;

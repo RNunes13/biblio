@@ -1,3 +1,5 @@
-section(class="rn-home")
-  span Books
-  button(class="js--btn-test") API test 
+div(class="rn-home__books")
+  p(rv-if="app.state.books.isLoading") Carregando...
+  ul(rv-if="app.state.books.isLoading | eq false")
+    li(rv-each-book="app.state.books.data")
+      span(rv-text="book.title")

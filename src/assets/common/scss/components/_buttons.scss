@@ -2,7 +2,7 @@
 /*
  * Buttons
  */
-%btn {
+.rn-btn {
   @include rem(padding, 5px 16px);
   @include rem(min-height, 38px);
   @include rem(font-size, 14px);
@@ -19,36 +19,30 @@
   color: $color-white;
   transition: all 200ms $accelerate-ease;
 
-  &--reset {
-    @include reset-button;
+  &:focus,
+  &.has--focus {
+    outline: 0;
   }
 
-  // All buttons
-  &--primary,
-  &--white-fill {
-    @extend %btn;
+  // Disabled comes first so active can properly restyle
+  &.is--disabled,
+  &:disabled {
+    @include button-disabled;
+  }
 
-    &:focus,
-    &.has--focus {
-      outline: 0;
-    }
+  // Opinionated: add 'hand' cursor to non-disabled elements
+  &:not(:disabled):not(.is--disabled) {
+    cursor: pointer;
+  }
 
-    // Disabled comes first so active can properly restyle
-    &.is--disabled,
-    &:disabled {
-      @include button-disabled;
-    }
-
-    // Opinionated: add 'hand' cursor to non-disabled elements
-    &:not(:disabled):not(.is--disabled) {
-      cursor: pointer;
-    }
+  &__reset {
+    @include reset-button;
   }
 
   /**
    * Specif buttons styles
    */
-  &--primary {
+  &__primary {
     border-color: $color-primary;
     background-color: $color-primary;
     color: $color-white;
@@ -59,14 +53,15 @@
     }
   }
 
-  &--white-fill {
-    border-color: $color-white;
-    background-color: transparent;
-    color: $color-white;
+  &__link {
+    @include rem(font-size, 15px);
+    @include font-weight(semi-bold);
+    display: inline-block;
+    color: $color-primary;
+    transition: opacity $transition-duration $transition-function;
 
-    @include hover-supported() {
-      background-color: $color-white;
-      color: $color-black;
+    &:hover {
+      opacity: 0.65;
     }
   }
 }
