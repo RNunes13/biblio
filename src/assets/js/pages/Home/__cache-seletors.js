@@ -1,6 +1,6 @@
 
 export default {
   home: {
-    btnTest: document.querySelector('.js--btn-test'),
+    searchShow: document.querySelector('.js--search-show'),
   },
 };

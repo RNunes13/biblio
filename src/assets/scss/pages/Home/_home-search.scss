@@ -26,6 +26,19 @@
     }
   }
 
+  &--show {
+    @include rem(margin-bottom, 10px);
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      @include rem(margin-right, 5px);
+      @extend %iconfont;
+      content: '\EA06';
+    }
+  }
+
   &--submit {
     text-decoration: underline;
     padding: 0;

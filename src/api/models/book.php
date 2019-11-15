@@ -17,6 +17,7 @@
     public $number_pages;
     public $quantity;
     public $publishing_company_id;
+    public $thumbnail;
     public $created_at;
     public $updated_at;
 

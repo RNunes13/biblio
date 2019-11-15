@@ -1,0 +1,126 @@
+
+.rn-home__book {
+  $book: &;
+  @include rem(margin-bottom, 10px);
+  @include rem(border-radius, 5px);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 10px -6px $color-night-rider;
+  margin-right: 1%;
+  transition: box-shadow $transition-duration $transition-function;
+
+  @include mq('lg') {
+    width: 19%;
+
+    &:nth-child(5n) {
+      margin-right: 0;
+    }
+  }
+
+  @include between-breakpoints(992px, 1199px) {
+    width: 24%;
+
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+
+  @include between-breakpoints(768px, 991px) {
+    width: 32%;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+
+  @include between-breakpoints(360px, 767px) {
+    width: 49%;
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+
+  @include breakpoint(max-width, 360px) {
+    @include rem(max-width, 200px);
+    margin: 0 auto 10px;
+    width: 100%;
+  }
+
+  @include hover-supported() {
+    #{$book}--details {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &--thumbnail {
+    @include rem(max-height, 250px);
+    flex-grow: 1;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-height: 100%;
+    }
+  }
+
+  &--title {
+    @include rem(padding, 10px);
+    @include font-weight(semi-bold);
+    border-top: 1px solid $color-light-grey;
+    background-color: $color-white;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    color: $color-bunting;
+  }
+
+  &--details {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($color-white, 0.95);
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity, visibility, transform;
+    transition-duration: $transition-duration;
+    transition-timing-function: $decelerate-ease;
+    transform: translateY(100%);
+
+    .details {
+      &__title {
+        @include rem(padding, 15px);
+        @include rem(font-size, 18px);
+        @include font-weight(semi-bold);
+        max-height: calc(100% - 42px);
+        flex-grow: 1;
+        color: $color-baltic-sea;
+      }
+
+      &__button {
+        @include rem(height, 42px);
+        @include font-weight(semi-bold);
+        @include flex-centered;
+        width: 100%;
+        flex-shrink: 0;
+        background-color: darken($color-primary, 5%);
+        color: $color-white;
+        box-shadow: 0 -10px 15px $color-white;
+        transition: background-color $transition-duration $transition-function;
+
+        @include hover-supported() {
+          background-color: darken($color-primary, 12%);
+        }
+      }
+    }
+  }
+}

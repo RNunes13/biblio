@@ -1,41 +1,46 @@
 - var fields = [{ type: 'text', name: 'book', label: 'Livro', placeholder: 'Nome do livro' }, { type: 'text', name: 'author', label: 'Autor', placeholder: 'Nome do autor' }, { type: 'text', name: 'genre', label: 'Gênero', placeholder: 'Gênero do livro' }]
 
 div(class="rn-home__search")
- form(class="rn-home__search--form", rv-on-submit="app.controller.search.submit")
-  div(class="rn-home__search--wrap")
-    each field in fields
+  button(
+    class="rn-home__search--show rn-btn rn-btn__link js--search-show",
+    rv-on-click="app.controller.search.toggle"
+    rv-text="app.state.showSearchInfo"
+  )
+  form(rv-show="app.state.showSearch", class="rn-home__search--form", rv-on-submit="app.controller.search.submit")
+    div(class="rn-home__search--wrap")
+      each field in fields
+        div(class="rn-form__group")
+          label(class="rn-form__label", for=field.name) #{field.label}
+          input(
+            class=`rn-form__input ${field.class}`,
+            rv-class-has-error=`app.state.form.${field.name}.hasError`
+            type=field.type,
+            name=field.name,
+            id=field.name,
+            placeholder=field.placeholder,
+            rv-value=`app.state.form.${field.name}.value`
+          )
       div(class="rn-form__group")
-        label(class="rn-form__label", for=field.name) #{field.label}
-        input(
-          class=`rn-form__input ${field.class}`,
-          rv-class-has-error=`app.state.form.${field.name}.hasError`
-          type=field.type,
-          name=field.name,
-          id=field.name,
-          placeholder=field.placeholder,
-          rv-value=`app.state.form.${field.name}.value`
+        label(class="rn-form__label", for="publishing_company") Editora
+        select(
+          class="rn-form__select",
+          rv-class-has-error="app.state.form.publishingCompany.hasError"
+          id="publishing_company",
+          rv-value="app.state.form.publisher.value"
         )
+          option(value="" disabled selected) Escolha a editora
+          option(
+            rv-each-publishers="app.props.publishers",
+            rv-value="publishers.id"
+            rv-text="publishers.name"
+          )
     div(class="rn-form__group")
-      label(class="rn-form__label", for="publishing_company") Editora
-      select(
-        class="rn-form__select",
-        rv-class-has-error="app.state.form.publishingCompany.hasError"
-        id="publishing_company",
-        rv-value="app.state.form.publisher.value"
-      )
-        option(value="" disabled selected) Escolha a editora
-        option(
-          rv-each-publishers="app.props.publishers",
-          rv-value="publishers.id"
-          rv-text="publishers.name"
-        )
-  div(class="rn-form__group")
-    button(
-      class="rn-home__search--submit rn-btn rn-btn__link",
-      type="submit"
-    ) Buscar
-    button(
-      class="rn-home__search--reset rn-btn rn-btn__link",
-      type="button",
-      rv-on-click="app.controller.search.clear"
-    ) Limpar
+      button(
+        class="rn-home__search--submit rn-btn rn-btn__link",
+        type="submit"
+      ) Buscar
+      button(
+        class="rn-home__search--reset rn-btn rn-btn__link",
+        type="button",
+        rv-on-click="app.controller.search.clear"
+      ) Limpar

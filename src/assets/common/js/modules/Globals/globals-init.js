@@ -46,12 +46,16 @@ export default {
       class_error: 'has--lazy-error',
       elements_selector: '.js--lazy',
       threshold: 500,
-      callback_set(_this) {
-        document.querySelector(_this).clasList.remove('has--lazy');
+      callback_reveal(el) {
+        el.classList.remove('has--lazy');
       },
-      callback_load(_this) {
-        document.querySelector(_this).clasList.remove('has--placeloader');
+      callback_loaded(el) {
+        el.classList.remove('has--placeloader');
       },
+      callback_error(el) {
+        el.setAttribute('src', 'assets/images/book-placeholder.jpg');
+        el.classList.remove('has--placeloader');
+      }
     });
   },
 

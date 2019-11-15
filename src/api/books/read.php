@@ -33,6 +33,7 @@
         "number_pages" => $number_pages,
         "quantity" => $quantity,
         "publishing_company_id" => $publishing_company_id,
+        "thumbnail" => $thumbnail,
         "created_at" => $created_at,
         "updated_at" => $updated_at
       );

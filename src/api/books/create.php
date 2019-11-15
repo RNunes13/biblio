@@ -32,6 +32,7 @@
     $book->number_pages = $data->number_pages;
     $book->quantity = $data->quantity;
     $book->publishing_company_id = $data->publishing_company_id;
+    $book->thumbnail = $data->thumbnail;
 
     $resp = $book->create();
 

@@ -36,15 +36,13 @@ async function bindData() {
 }
 
 function loadBooks() {
-  setTimeout(() => {
-    getBooks()
-    .then((resp) => {
-      Biblio.homeComponent.app.state.books.data = resp.records;
-    })
-    .catch((err) => {
-      console.error(err);
-      alertify.error('Ocorreu um erro na consulta dos livros.');
-    })
-    .finally(() => Biblio.homeComponent.app.state.books.isLoading = false);
-  }, 2000);
+  getBooks()
+  .then((resp) => {
+    Biblio.homeComponent.app.state.books.data = resp.records;
+  })
+  .catch((err) => {
+    console.error(err);
+    alertify.error('Ocorreu um erro na consulta dos livros.');
+  })
+  .finally(() => Biblio.homeComponent.app.state.books.isLoading = false);
 }

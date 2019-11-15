@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  @include scrollbar(7px, $color-black, $color-light-grey);
+  @include scrollbar(8px, $color-secondary, $color-light-grey);
   background-color: $color-body-bg;
   height: 100%;
   display: flex;

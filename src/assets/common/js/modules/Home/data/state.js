@@ -1,5 +1,7 @@
 
 export const state = {
+  showSearch: isMobile.any ? false : true,
+  showSearchInfo: 'Buscar livros',
   books: {
     isLoading: true,
     data: [],

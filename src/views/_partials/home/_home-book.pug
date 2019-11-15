@@ -1,0 +1,16 @@
+- var imgRemoveIconNotFound = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+div(class="rn-home__book", rv-each-book="app.state.books.data")
+  figure(class="rn-home__book--thumbnail")
+    img(
+      class="has--placeloader js--lazy",
+      src=imgRemoveIconNotFound,
+      rv-data-src="book.thumbnail",
+      rv-alt="book.title",
+      rv-title="book.title"
+      rv-lazyload-image
+    )
+  p(class="rn-home__book--title", rv-text="book.title")
+  div(class="rn-home__book--details")
+    p(class="details__title") {{ book.title }} - {{ book.author }}
+    button(class="details__button") Mais detalhes

@@ -23,4 +23,9 @@ export const search = {
     scope.app.state.form.genre.value = '';
     scope.app.state.form.publisher.value = '';
   },
+
+  toggle(_, scope) {
+    scope.app.state.showSearch = !scope.app.state.showSearch;
+    scope.app.state.showSearchInfo = scope.app.state.showSearch ? 'Ocultar busca' : 'Buscar livros';
+  }
 };

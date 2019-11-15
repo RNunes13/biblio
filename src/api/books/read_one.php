@@ -30,6 +30,7 @@
         "number_pages" => $book->number_pages,
         "quantity" => $book->quantity,
         "publishing_company_id" => $book->publishing_company_id,
+        "thumbnail" => $book->thumbnail,
         "created_at" => $book->created_at,
         "updated_at" =>$book->updated_at
       );

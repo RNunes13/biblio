@@ -1,5 +1,5 @@
 div(class="rn-home__books")
-  p(rv-if="app.state.books.isLoading") Carregando...
-  ul(rv-if="app.state.books.isLoading | eq false")
-    li(rv-each-book="app.state.books.data")
-      span(rv-text="book.title")
+  div(rv-if="app.state.books.isLoading")
+    include ../loader/_loader.pug
+  div(class="rn-home__books--wrap", rv-if="app.state.books.isLoading | eq false")
+    include ./_home-book.pug

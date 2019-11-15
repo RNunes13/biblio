@@ -7,8 +7,8 @@
   width: 40px;
   height: 40px;
   border-radius: 5px;
-  border: 2px solid $color-night-rider;
-  background-color: $color-night-rider;
+  border: 2px solid $color-primary;
+  background-color: $color-primary;
   opacity: 0;
   visibility: hidden;
   transition-property: border-color, background-color, opacity, visibility;
@@ -20,13 +20,13 @@
     background-color: transparent;
 
     &::before {
-      color: $color-night-rider;
+      color: $color-primary;
     }
   }
 
   &::before {
     @extend %iconfont;
-    content: '\EA09';
+    content: '\EA05';
     color: $color-white;
     transform: rotate(90deg);
     transition: color 200ms $accelerate-ease;
