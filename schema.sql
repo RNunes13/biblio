@@ -45,9 +45,9 @@ CREATE TABLE IF NOT EXISTS `biblio`.`user` (
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
   `deleted` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  INDEX `fk_role_idx` (`role_id` ASC) VISIBLE,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
+  INDEX `fk_role_idx` (`role_id` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   CONSTRAINT `fk_role`
     FOREIGN KEY (`role_id`)
     REFERENCES `biblio`.`role` (`id`)
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `biblio`.`user_phone` (
   `user_id` INT NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT now(),
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
-  INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_user_idx` (`user_id` ASC),
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_user_phone`
     FOREIGN KEY (`user_id`)
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `biblio`.`user_address` (
   `created_at` DATETIME NOT NULL DEFAULT now(),
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
   PRIMARY KEY (`id`),
-  INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_user_idx` (`user_id` ASC),
   CONSTRAINT `fk_user_address`
     FOREIGN KEY (`user_id`)
     REFERENCES `biblio`.`user` (`id`)
@@ -132,8 +132,8 @@ CREATE TABLE IF NOT EXISTS `biblio`.`book` (
   `created_at` DATETIME NOT NULL DEFAULT now(),
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
   PRIMARY KEY (`id`),
-  INDEX `fk_publishing_company_idx` (`publishing_company_id` ASC) VISIBLE,
-  UNIQUE INDEX `isbn_UNIQUE` (`isbn` ASC) VISIBLE,
+  INDEX `fk_publishing_company_idx` (`publishing_company_id` ASC),
+  UNIQUE INDEX `isbn_UNIQUE` (`isbn` ASC),
   CONSTRAINT `fk_publishing_company`
     FOREIGN KEY (`publishing_company_id`)
     REFERENCES `biblio`.`publishing_company` (`id`)
@@ -154,8 +154,8 @@ CREATE TABLE IF NOT EXISTS `biblio`.`book_loan` (
   `status` VARCHAR(60) NOT NULL DEFAULT 'active',
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
   PRIMARY KEY (`id`),
-  INDEX `fk_book_idx` (`book_id` ASC) VISIBLE,
-  INDEX `fk_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_book_idx` (`book_id` ASC),
+  INDEX `fk_user_idx` (`user_id` ASC),
   CONSTRAINT `fk_book`
     FOREIGN KEY (`book_id`)
     REFERENCES `biblio`.`book` (`id`)
@@ -180,8 +180,8 @@ CREATE TABLE IF NOT EXISTS `biblio`.`booking_history` (
   `status` VARCHAR(60) NOT NULL DEFAULT 'waiting',
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
   PRIMARY KEY (`id`),
-  INDEX `fk_book_id_idx` (`book_id` ASC) VISIBLE,
-  INDEX `fk_user_id_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_book_id_idx` (`book_id` ASC),
+  INDEX `fk_user_id_idx` (`user_id` ASC),
   CONSTRAINT `fk_book_id`
     FOREIGN KEY (`book_id`)
     REFERENCES `biblio`.`book` (`id`)
