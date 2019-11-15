@@ -56,7 +56,6 @@
   &__link {
     @include rem(font-size, 15px);
     @include font-weight(semi-bold);
-    display: inline-block;
     color: $color-primary;
     transition: opacity $transition-duration $transition-function;
 
