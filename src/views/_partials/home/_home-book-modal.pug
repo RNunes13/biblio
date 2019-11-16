@@ -1,0 +1,29 @@
+- var imgRemoveIconNotFound = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+- var infos = [{ label: 'Autor', text: 'app.state.books.selected.author' },{ label: 'Gênero', text: 'app.state.books.selected.genre' },{ label: 'Nº Páginas', text: 'app.state.books.selected.number_pages' },{ label: 'Edição', text: 'app.state.books.selected.edition' },{ label: 'Ano de lançamento', text: 'app.state.books.selected.release_year' },{ label: 'ISBN', text: 'app.state.books.selected.isbn' },{ label: 'Identificação interna', text: 'app.state.books.selected.internal_identification' },{ label: 'Editora', text: 'app.state.books.selected.publisher' }];
+
+div(class="rn-book__modal modal hidden js--book-modal", rv-class-hidden="app.state.showModal | eq false")
+  div(class="modal__backdrop", rv-on-click="app.controller.modal.close")
+  div(class="modal__content")
+    div(class="modal__heading")
+      p(class="modal__title") Detalhes do livro
+      button(class="modal__close", rv-on-click="app.controller.modal.close")
+    div(class="modal__body")
+      div(class="rn-book__modal--left")
+        figure(class="rn-book__modal--thumbnail")
+          img(
+            class="has--placeloader img-zoomable js--book-image-modal js--lazy",
+            src=imgRemoveIconNotFound,
+            rv-data-src="app.state.books.selected.thumbnail",
+            rv-alt="app.state.books.selected.title",
+            rv-title="app.state.books.selected.title"
+            rv-lazyload-image
+          )
+      div(class="rn-book__modal--right")
+        p(class="rn-book__modal--title") {{ app.state.books.selected.title }}
+        each info in infos
+          p(class="rn-book__modal--infos")
+            strong #{info.label}:
+            span #{ `{{${info.text}}}` }
+    div(class="modal__footer")
+      button(class="rn-btn rn-btn__primary reserve") Reservar
+      button(class="rn-btn rn-btn__primary--outline close", rv-on-click="app.controller.modal.close") Fechar

@@ -1,0 +1,62 @@
+
+.rn-book__modal {
+  .modal {
+    &__content {
+      @include rem(max-width, 700px);
+    }
+
+    &__body {
+      display: flex;
+
+      @include mq('xs', max) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  &--left {
+    @include rem(margin-right, 20px);
+    @include rem(max-width, 250px);
+    width: 100%;
+    transition: max-width $transition-duration $decelerate-ease;
+
+    @include mq('sm', max) {
+      @include rem(max-width, 200px);
+    }
+
+    @include mq('xs', max) {
+      @include rem(margin-bottom, 20px);
+      margin-right: 0;
+      max-width: none;
+    }
+  }
+
+  &--thumbnail {
+    width: 100%;
+
+    @include mq('xs', max) {
+      @include rem(max-width, 200px);
+      margin: 0 auto;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &--title {
+    @include rem(margin-bottom, 10px);
+    @include rem(font-size, 20px);
+    @include rem(line-height, 22px);
+    @include font-weight(semi-bold);
+  }
+
+  &--infos {
+    @include rem(margin-bottom, 3px);
+
+    strong {
+      @include rem(margin-right, 5px);
+    }
+  }
+}

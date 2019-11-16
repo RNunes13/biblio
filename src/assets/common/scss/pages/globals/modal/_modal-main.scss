@@ -1,0 +1,88 @@
+
+.modal {
+  $modal: &;
+  @include rem(padding, 15px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: z('modal');
+  overflow-y: auto;
+  transition-property: opacity visibility;
+  transition-duration: $transition-duration;
+  transition-timing-function: $decelerate-ease;
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+
+    #{$modal}__content {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-100%);
+    }
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba($color-black, 0.8);
+    z-index: -1;
+  }
+
+  &__content {
+    @include rem(margin, 0 auto);
+    @include rem(max-width, 600px);
+    @include rem(border-radius, 5px);
+    width: 100%;
+    background-color: $color-white;
+    transition-property: opacity visibility transform;
+    transition-duration: $transition-duration;
+    transition-timing-function: $decelerate-ease;
+  }
+
+  &__heading {
+    @include rem(padding, 10px);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-light-grey;
+  }
+
+  &__title {
+    @include rem(font-size, 20px);
+    @include font-weight(semi-bold);
+    flex-grow: 1;
+  }
+
+  &__close {
+    @include rem(width, 30px);
+    flex-shrink: 0;
+
+    &::before {
+      @include rem(font-size, 13px);
+      @extend %iconfont;
+      content: '\EA07';
+    }
+  }
+
+  &__body {
+    @include rem(padding, 10px);
+  }
+
+  &__footer {
+    @include rem(padding, 10px);
+    border-top: 1px solid $color-light-grey;
+    display: flex;
+    align-items: center;
+
+    & > button {
+      &:not(:last-child) {
+        @include rem(margin-right, 10px);
+      }
+    }
+  }
+}

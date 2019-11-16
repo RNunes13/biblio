@@ -1,10 +1,13 @@
 
+import Zooming from 'zooming';
+
 export default {
   init() {
     this.fontsLoad();
     this.setGlobals();
     this.setLazy();
     this.setAlertify();
+    this.setZooming();
   },
 
   fontsLoad() {
@@ -71,5 +74,13 @@ export default {
         cancel: 'Cancelar'            
       },
     };
+  },
+
+  setZooming() {
+    Biblio.zooming = new Zooming({
+      bgColor: '#000000',
+      bgOpacity: 0.9,
+      scaleBase: Biblio.isMobile ? 0.9 : 0.8,
+    }).listen('.img-zoomable')
   },
 };

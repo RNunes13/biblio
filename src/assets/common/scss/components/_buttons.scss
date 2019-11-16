@@ -51,6 +51,17 @@
       background-color: darken($color-primary, 10%);
       border-color: darken($color-primary, 10%);
     }
+
+    &--outline {
+      border-color: $color-primary;
+      background-color: transparent;
+      color: $color-primary;
+
+      @include hover-supported() {
+        background-color: $color-primary;
+        color: $color-white;
+      }
+    }
   }
 
   &__link {

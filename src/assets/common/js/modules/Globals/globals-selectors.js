@@ -1,6 +1,10 @@
 
 export const home = {
   homeComponent: document.querySelector('.js--home'),
+  bookModal: {
+    self: document.querySelector('.js--book-modal'),
+    thumbnail: document.querySelector('.js--book-image-modal'),
+  },
 };
 
 export const login = {
