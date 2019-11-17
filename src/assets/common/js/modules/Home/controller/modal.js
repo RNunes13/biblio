@@ -1,5 +1,7 @@
 
 import { home as El } from '../../Globals/globals-selectors';
+import { checkUser } from '../../../utils/check-user';
+import axios from 'axios';
 
 export const modal = {
   close(_, scope) {
@@ -16,6 +18,23 @@ export const modal = {
     scope.app.state.books.selected = scope.book;
     scope.app.state.showModal = true;
 
-    Biblio.lazyload.update([El.bookModal.thumbnail]);
+    Biblio.lazyload.load(El.bookModal.thumbnail, true);
+  },
+
+  async reserve(_, scope) {
+    const book_id = scope.app.state.books.selected.id;
+    const user = checkUser(`/reserve.html?book_id=${book_id}`);
+
+    if (!user) return;
+
+    try {
+      const resp = await axios.post('/api/booking/reserve.php', { book_id, user_id: user.id });
+      const { data } = resp;
+
+      window.location.pathname = `/booking-confirmation.html?booking_id=${data.booking_id}`;
+    } catch (err) {
+      console.error(err);
+      alertify.error('Ocorreu um erro ao tentar reservar o livro. Tente novamente em instantes.');
+    }
   }
 };

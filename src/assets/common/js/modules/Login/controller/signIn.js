@@ -1,5 +1,6 @@
 
 import { login as El } from '../../Globals/globals-selectors';
+import qs from 'querystring';
 import axios from 'axios';
 
 function validForm(scope) {
@@ -37,8 +38,17 @@ export const signIn = {
     const password = scope.app.state.form.password.value;
 
     axios.post('/api/users/login.php', { username, password })
-    .then((resp) => {
-      alertify.success('Login aceito'); 
+    .then(({ data }) => {
+      alertify.success('Login aceito');
+
+      console.log(data);
+
+      window.localStorage.setItem('@Biblio:user', JSON.stringify(data.user));
+
+      const query = window.location.search.replace('?', '');
+      const redirect = qs.parse(query).redirect_to || '/';
+
+      window.location.href = window.location.origin + redirect;
     })
     .catch(({response }) => {
       const { error } = response.data;

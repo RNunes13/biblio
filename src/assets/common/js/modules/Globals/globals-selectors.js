@@ -20,3 +20,8 @@ export const register = {
 export const booking = {
   bookingComponent: document.querySelector('.js--booking'),
 };
+
+export const header = {
+  headerComponent: document.querySelector('.js--header'),
+  userInfo: document.querySelector('.js--header-user-info'),
+};

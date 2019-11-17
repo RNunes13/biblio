@@ -7,3 +7,4 @@ rivets.formatters.and = (comparee, comparator) => comparee && comparator;
 rivets.formatters.or = (comparee, comparator) => comparee || comparator;
 
 rivets.formatters.emptyBooks = (loadingBooks, submitingForm) => !loadingBooks && !submitingForm;
+rivets.formatters.firstName = (value) => value.split(' ')[0];

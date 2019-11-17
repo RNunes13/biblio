@@ -24,7 +24,7 @@
     public function login($username, $password) {
       $password_hash = md5($password);
 
-      $query = "SELECT * FROM " . $this->table_name . " WHERE username = :username AND password = :password";
+      $query = "SELECT * FROM " . $this->table_name . " WHERE username = :username AND password = :password AND deleted = false";
    
       $stmt = $this->conn->prepare($query);
 
@@ -40,7 +40,22 @@
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if ($result) {
-        return array("success" => true);
+        extract($result);
+
+        $picture = "http://www.gravatar.com/avatar/" . md5($email) . ".jpg?s=80&d=identicon";
+
+        $user = array(
+          "id" => $id,
+          "name" => $name,
+          "username" => $username,
+          "email" => $email,
+          "role" => $role_id,
+          "picture" => $picture,
+          "created_at" => $created_at,
+          "updated_at" => $updated_at,
+        );
+
+        return array("success" => true, "user" => $user);
       } else {
         return array(
           "success" => false,

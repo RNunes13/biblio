@@ -1,0 +1,15 @@
+- var imgRemoveIconNotFound = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+div(class="rn-header__user--info js--header-user-info")
+  figure(class="rn-header__user--picture")
+    img(
+      class="has--placeloader js--lazy",
+      src=imgRemoveIconNotFound,
+      rv-data-src="app.state.user.picture",
+      rv-alt="app.state.user.name",
+      rv-title="app.state.user.name"
+    )
+  span(class="rn-header__user--name", rv-text="app.state.user.name | firstName")
+
+div(class="rn-header__user--menu js--header-user-menu")
+  button(class="menu-item icon-logout", rv-on-click="app.controller.user.logout") Sair

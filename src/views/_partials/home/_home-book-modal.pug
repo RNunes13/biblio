@@ -25,5 +25,5 @@ div(class="rn-book__modal modal hidden js--book-modal", rv-class-hidden="app.sta
             strong #{info.label}:
             span #{ `{{${info.text}}}` }
     div(class="modal__footer")
-      button(class="rn-btn rn-btn__primary reserve") Reservar
+      button(class="rn-btn rn-btn__primary reserve", rv-on-click="app.controller.modal.reserve") Reservar
       button(class="rn-btn rn-btn__primary--outline close", rv-on-click="app.controller.modal.close") Fechar

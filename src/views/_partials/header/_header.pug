@@ -3,6 +3,8 @@ header(class="rn-header js--header")
     figure(class="rn-header__logo")
       a(href="/")
         img(src="assets/images/logo.png", alt="Biblio", title="Biblio")
-    div(class="rn-header__buttons")
+    div(class="rn-header__buttons", rv-if="app.state.user | not")
       a(class="rn-header__signup rn-btn rn-btn__link", href="/register.html") Cadastre-se
       a(class="rn-header__signin rn-btn rn-btn__primary", href="/login.html") Entrar
+    div(class="rn-header__user js--header-user", rv-if="app.state.user")
+      include ./_header-user-info.pug

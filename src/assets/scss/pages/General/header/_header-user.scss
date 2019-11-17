@@ -1,0 +1,91 @@
+
+$header-user-height: 45px;
+
+.rn-header__user {
+  $user: &;
+  position: relative;
+  height: $header-user-height;
+
+  &.menu-open {
+    #{$user}--info::after {
+      transform: rotate(90deg);
+    }
+  }
+
+  &--info {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &::after {
+      @include rem(margin-left, 15px);
+      @extend %iconfont;
+      content: '\EA05';
+      display: inline-flex;
+      transform: rotate(-90deg);
+      transition: transform $transition-duration $decelerate-ease;
+    }
+  }
+
+  &--picture {
+    @include rem(margin-right, 10px);
+    @include rem(width, 45px);
+    @include rem(height, 45px);
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &--name {
+    @include font-weight(semi-bold);
+    color: $color-bunting;
+  }
+
+  &--menu {
+    @include rem(border-radius, 5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    margin-top: calc(#{$header-user-height} + 10px);
+    background-color: $color-white;
+    box-shadow: 0 0 10px -5px $color-black;
+    transition: transform $transition-duration $decelerate-ease;
+    transform: scaleY(0);
+    transform-origin: top;
+
+    &.is--open {
+      transform: scaleY(1);
+    }
+
+    .menu {
+      &-item {
+        @include rem(padding, 10px);
+        @include rem(font-size, 15px);
+        @include font-weight(semi-bold);
+        display: flex;
+        align-items: center;
+        text-align: left;
+        width: 100%;
+        color: $color-baltic-sea;
+        background-color: $color-white;
+        transition: background-color $transition-duration $transition-function;
+
+        @include hover-supported() {
+          background-color: $color-solitude;
+        }
+      }
+    }
+
+    .icon {
+      &-logout {
+        &::before {
+          @include rem(margin-right, 8px);
+          @extend %iconfont;
+          content: '\EA08';
+          color: $color-baltic-sea;
+        }
+      }
+    }
+  }
+}

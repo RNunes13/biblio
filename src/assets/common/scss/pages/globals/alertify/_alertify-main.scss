@@ -13,6 +13,11 @@
 }
 
 .ajs {
+  &-modal,
+  &-dimmer {
+    z-index: z('ajs-modal') !important;
+  }
+
   &-message {
     @include rem(border-radius, 4px);
     width: 100% !important;

@@ -8,6 +8,7 @@ export default {
     this.setLazy();
     this.setAlertify();
     this.setZooming();
+    this.closeMenus();
   },
 
   fontsLoad() {
@@ -34,6 +35,8 @@ export default {
     Biblio.footer = document.querySelector('.js--footer');
     Biblio.overlay = document.querySelector('.js--overlay');
     Biblio.backTop = document.querySelector('.js--back-top');
+    Biblio.headerUser = document.querySelector('.js--header-user');
+    Biblio.userMenu = document.querySelector('.js--header-user-menu');
     Biblio.rivets = window.rivets;
 
     // External Plugins
@@ -73,6 +76,15 @@ export default {
         ok: 'OK',
         cancel: 'Cancelar'            
       },
+      theme: {
+        input: 'ajs-input',
+        ok: 'ajs-ok',
+        cancel: 'ajs-cancel'
+      },
+      hooks: {
+        preinit: function(instance) {},
+        postinit: function(instance) {},
+      },
     };
   },
 
@@ -82,5 +94,16 @@ export default {
       bgOpacity: 0.9,
       scaleBase: Biblio.isMobile ? 0.9 : 0.8,
     }).listen('.img-zoomable')
+  },
+
+  closeMenus() {
+    Biblio.closeMenus = (removeOverlay = false) => {
+      if (removeOverlay) {
+        Biblio.overlay.classList.remove('is--active');
+        Biblio.body.classList.remove('has--no-scroll');
+        Biblio.userMenu.classList.remove('is--open');
+        Biblio.headerUser.classList.remove('menu-open');
+      }
+    };
   },
 };
