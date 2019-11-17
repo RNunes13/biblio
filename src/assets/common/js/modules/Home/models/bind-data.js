@@ -38,7 +38,8 @@ async function bindData() {
 function loadBooks() {
   getBooks()
   .then((resp) => {
-    Biblio.homeComponent.app.state.books.data = resp.records;
+    Biblio.homeComponent.app.state.books.raw = resp.records.slice();
+    Biblio.homeComponent.app.state.books.data = resp.records.slice();
   })
   .catch((err) => {
     console.error(err);

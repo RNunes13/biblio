@@ -2,11 +2,24 @@
 /*
  * Alertify JS
  */
+.alertify-notifier {
+  @include rem(padding, 0 10px);
+  @include rem(max-width, 360px);
+  width: 100% !important;
+
+  &.ajs-center {
+    transform: translateX(-50%) !important;
+  }
+}
+
 .ajs {
   &-message {
     @include rem(border-radius, 4px);
+    width: 100% !important;
     display: flex;
     align-items: center;
+    left: 0 !important;
+    transform: none !important;
     background-color: $color-oyster-bay;
     border: 1px solid $color-mosque;
     color: $color-mosque;

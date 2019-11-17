@@ -1,5 +1,10 @@
 div(class="rn-home__books")
-  div(rv-if="app.state.books.isLoading")
+  div(rv-if="app.state.books.isLoading | or app.state.form.isSubmiting")
     include ../loader/_loader.pug
   div(class="rn-home__books--wrap", rv-if="app.state.books.isLoading | eq false")
     include ./_home-book.pug
+  p(
+    class="rn-home__books--empty",
+    rv-show="app.state.books.data | length | lt 1"
+    rv-if="app.state.books.isLoading | emptyBooks app.state.form.isSubmiting"
+  ) Nenhum livro encontrado

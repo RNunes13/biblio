@@ -26,7 +26,7 @@
     }
 
     function read() {
-      $query = "SELECT * FROM " . $this->table_name;
+      $query = "SELECT book.*, pc.name AS 'publisher_name' FROM " . $this->table_name . " JOIN publishing_company AS pc ON pc.id = book.publishing_company_id";
    
       $stmt = $this->conn->prepare($query);
       $stmt->execute();
@@ -94,6 +94,58 @@
       $this->publishing_company_id = $row['publishing_company_id'];
       $this->created_at = $row['created_at'];
       $this->updated_at = $row['updated_at'];
+    }
+
+    function search($title, $author, $genre, $publishing_company_id) {
+      // sanitize
+      $title = htmlspecialchars(strip_tags($title));
+      $author = htmlspecialchars(strip_tags($author));
+      $genre = htmlspecialchars(strip_tags($genre));
+      $publisher = htmlspecialchars(strip_tags($publishing_company_id));
+
+      $condition = [];
+
+      if (!empty($title)) array_push($condition, count($condition) == 0 ? "title LIKE '%" . $title . "%'" : "OR title LIKE '%" . $title . "%'");
+      if (!empty($author)) array_push($condition, count($condition) == 0 ? "author LIKE '%" . $author . "%'" : "OR author LIKE '%" . $author . "%'");
+      if (!empty($genre)) array_push($condition, count($condition) == 0 ? "genre LIKE '%" . $genre . "%'" : "OR genre LIKE '%" . $genre . "%'");
+      if (!empty($publisher)) array_push($condition, count($condition) == 0 ? "publishing_company_id = " . $publisher : "OR publishing_company_id = " . $publisher);
+
+      $query = "SELECT * FROM " . $this->table_name . " WHERE " . join(" ", $condition);
+   
+      $stmt = $this->conn->prepare( $query );
+
+      $stmt->execute();
+
+      $num = $stmt->rowCount();
+  
+      $books_arr = array();
+      $books_arr["records"] = array();
+
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        extract($row);
+
+        $book_item = array(
+          "id" => $id,
+          "title" => $title,
+          "author" => $author,
+          "genre" => $genre,
+          "edition" => $edition,
+          "release_year" => $release_year,
+          "isbn" => $isbn,
+          "active" => $active,
+          "internal_identification" => $internal_identification,
+          "number_pages" => $number_pages,
+          "quantity" => $quantity,
+          "publishing_company_id" => $publishing_company_id,
+          "thumbnail" => $thumbnail,
+          "created_at" => $created_at,
+          "updated_at" => $updated_at
+        );
+
+        array_push($books_arr["records"], $book_item);
+      }
+
+      return $books_arr;
     }
   }
 ?>

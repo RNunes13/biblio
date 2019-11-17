@@ -12,7 +12,7 @@
 
   $stmt = $book->read();
   $num = $stmt->rowCount();
-  
+
   if ($num > 0) {
     $books_arr = array();
     $books_arr["records"] = array();
@@ -32,7 +32,7 @@
         "internal_identification" => $internal_identification,
         "number_pages" => $number_pages,
         "quantity" => $quantity,
-        "publishing_company_id" => $publishing_company_id,
+        "publisher" => array("id" => $publishing_company_id, "name" => $publisher_name),
         "thumbnail" => $thumbnail,
         "created_at" => $created_at,
         "updated_at" => $updated_at

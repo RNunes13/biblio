@@ -4,4 +4,10 @@
     display: flex;
     flex-wrap: wrap;
   }
+
+  &--empty {
+    @include font-weight(semi-bold);
+    color: $color-bunting;
+    text-align: center;
+  }
 }

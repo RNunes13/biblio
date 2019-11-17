@@ -40,6 +40,11 @@
       border-color: $color-primary;
     }
 
+    &:disabled {
+      background-color: $color-light-grey;
+      cursor: not-allowed;
+    }
+
     &.has-error {
       border-color: $color-persian-red;
     }
