@@ -7,5 +7,6 @@ body {
 }
 
 main {
+  @include rem(padding, 20px 0);
   flex: 1 1 auto;
 }

@@ -16,3 +16,7 @@ export const register = {
   registerComponent: document.querySelector('.js--register'),
   passwordField: document.querySelector('.js--register-password'),
 };
+
+export const booking = {
+  bookingComponent: document.querySelector('.js--booking'),
+};
