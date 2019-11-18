@@ -68,7 +68,7 @@ export default {
   setAlertify() {
     alertify.defaults = {
       notifier: {
-        delay: 5,
+        delay: 10,
         position: 'bottom-center',
       },
       glossary:{

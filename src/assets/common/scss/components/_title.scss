@@ -1,6 +1,6 @@
 
 /*
- * Container
+ * Title / Subtitle
  */
 .rn-title {
   @include rem(margin-bottom, 15px);
@@ -9,4 +9,12 @@
   @include font-weight(semi-bold);
   color: $color-bunting;
   text-align: center;
+}
+
+.rn-subtitle {
+  @include rem(margin-bottom, 10px);
+  @include rem(font-size, 18px);
+  @include font-weight(semi-bold);
+  color: $color-bunting;
+  border-bottom: 1px solid $color-light-grey;
 }

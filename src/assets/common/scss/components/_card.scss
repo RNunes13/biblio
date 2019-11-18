@@ -1,0 +1,15 @@
+
+/*
+ * Card
+ */
+.rn-card {
+  @include rem(padding-top, 20px);
+  @include rem(padding-bottom, 20px);
+  @include rem(border-radius, 5px);
+  background-color: $color-white;
+  box-shadow: 0 1px 10px -6px $color-black;
+
+  @include mq('xs', max) {
+    @include rem(margin, 0 15px);
+  }
+}

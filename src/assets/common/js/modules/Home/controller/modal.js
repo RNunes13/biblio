@@ -31,7 +31,7 @@ export const modal = {
       const resp = await axios.post('/api/booking/reserve.php', { book_id, user_id: user.id });
       const { data } = resp;
 
-      window.location.pathname = `/booking-confirmation.html?booking_id=${data.booking_id}`;
+      window.location.href = `${window.location.origin}/booking-confirmation.html?booking_id=${data.booking_id}`;
     } catch (err) {
       console.error(err);
       alertify.error('Ocorreu um erro ao tentar reservar o livro. Tente novamente em instantes.');

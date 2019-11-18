@@ -71,7 +71,7 @@
       return array("success" => false, "message" => $stmt->errorInfo());
     }
 
-    function readOne(){
+    function readOne() {
       $query = "SELECT * FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
 
       $stmt = $this->conn->prepare( $query );

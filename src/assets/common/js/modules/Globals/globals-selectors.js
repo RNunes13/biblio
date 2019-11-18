@@ -17,8 +17,8 @@ export const register = {
   passwordField: document.querySelector('.js--register-password'),
 };
 
-export const booking = {
-  bookingComponent: document.querySelector('.js--booking'),
+export const bookingConfirmation = {
+  bookingConfirmationComponent: document.querySelector('.js--booking-confirmation'),
 };
 
 export const header = {

@@ -1,0 +1,30 @@
+
+- var bookFields = [{ label: 'Nome', value: 'app.state.booking.book.title' },{ label: 'Autor', value: 'app.state.booking.book.author' },{ label: 'ISBN', value: 'app.state.booking.book.isbn' },{ label: 'Identificação interna', value: 'app.state.booking.book.internal_identification' },{ label: 'Editora', value: 'app.state.booking.book.publisher' }]
+
+- var bookingFields = [{ label: 'Código', value: 'app.state.booking.id' },{ label: 'Data solicitação', value: 'app.state.booking.reservation_date' },{ label: 'Usuário', value: 'app.state.booking.user.name' }]
+
+section(class="rn-confirmation rn-container rn-card js--print")
+  h1(class="rn-title") Reserva efetuada
+
+  div(class="rn-confirmation__wrap", rv-if="app.state.booking")
+    p(class="rn-subtitle") Dados do livro
+    each bookField in bookFields
+      p(class="rn-confirmation__info")
+        strong #{bookField.label}: 
+        span(rv-text=bookField.value)
+    br
+    p(class="rn-subtitle") Dados da reserva
+    each bookingField in bookingFields
+      p(class="rn-confirmation__info")
+        strong #{bookingField.label}: 
+        span(rv-text=bookingField.value)
+    p(class="rn-confirmation__info")
+      strong Dias de empréstimo: 
+      span {{ app.state.booking.loan_days }} dias a partir da retirada do livro.
+    p(class="rn-confirmation__info")
+      strong Observações: 
+      br
+      span Ao efetuar a reserva, o livro está disponível para retirada na biblioteca. Caso em até 
+      strong {{ app.state.booking.collection_days }} dias úteis 
+      | a retirada não ser efetuada, a reserva será cancelada automaticamente e o livro será disponibilizado novamente.
+    button(class="rn-confirmation__print rn-btn rn-btn__primary--outline", rv-on-click="app.controller.confirmation.print") Imprimir comprovante
