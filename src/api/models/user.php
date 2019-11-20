@@ -46,11 +46,12 @@
 
         $user = array(
           "id" => $id,
+          "cpf" => $cpf,
           "name" => $name,
-          "username" => $username,
           "email" => $email,
           "role" => $role_id,
           "picture" => $picture,
+          "username" => $username,
           "created_at" => $created_at,
           "updated_at" => $updated_at,
         );
@@ -64,6 +65,32 @@
             "message" => "Invalid credentials."
           )
         );
+      }
+    }
+
+    public function checkUsername($username, $usernameUser) {
+      $query = empty($usernameUser) ?
+        "SELECT * FROM " . $this->table_name . " WHERE username = :username AND deleted = false" :
+        "SELECT * FROM " . $this->table_name . " WHERE username = :username AND username != :username_user AND deleted = false";
+   
+      $stmt = $this->conn->prepare($query);
+      
+      // sanitize
+      $username = htmlspecialchars(strip_tags($username));
+      $usernameUser = htmlspecialchars(strip_tags($usernameUser));
+      
+      // bind values
+      $stmt->bindParam(":username", $username);
+      !empty($usernameUser) && $stmt->bindParam(":username_user", $usernameUser);
+
+      $stmt->execute();
+
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      if ($result) {
+        return array("success" => true, "available" => false);
+      } else {
+        return array("success" => true, "available" => true);
       }
     }
   }

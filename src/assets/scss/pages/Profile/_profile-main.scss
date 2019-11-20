@@ -1,0 +1,76 @@
+
+.rn-profile {
+  &__form {
+    .name,
+    .email,
+    .username,
+    .cpf {
+      @include mq('sm', max) { width: 100% !important }
+      @include mq('md', max) { width: 48% }
+    }
+
+    .name {
+      @include mq('md') { width: 35% }
+    }
+
+    .email {
+      @include mq('md') { width: 30% }
+    }
+    
+    .username {
+      @include mq('md') { width: 30% }
+    }
+
+    .cpf {
+      @include mq('md') { width: 35% }
+    }
+    
+    .modify-password {
+      border-bottom: 1px solid $color-mischka;
+      
+      @include mq('lg', max) {
+        flex-wrap: wrap;
+      }
+
+      @include mq('sm', max) {
+        align-items: flex-start;
+      }
+    }
+
+    .currentPassword,
+    .newPassword,
+    .confirmationPassword {
+      @include mq('lg') {
+        width: 25%;
+      }
+
+      @include mq('lg', max) {
+        flex-grow: 1;
+        width: 32%;
+      }
+
+      @include mq('sm', max) {
+        width: 100%;
+      }
+    }
+
+    .confirmationPassword {
+      @include mq('lg', max) {
+        margin-right: 0;
+      }
+    }
+
+    .confirmChangePassword {
+      flex-grow: 1;
+      text-align: right;
+
+      @include mq('lg') {
+        @include flex-centered;
+      }
+    }
+
+    &--changePassword {
+      padding: 0;
+    }
+  }
+}

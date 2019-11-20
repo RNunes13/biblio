@@ -59,7 +59,14 @@ export default {
         el.classList.remove('has--placeloader');
       },
       callback_error(el) {
-        el.setAttribute('src', 'assets/images/book-placeholder.jpg');
+        const placeholder = el.getAttribute('placeholder');
+
+        if (placeholder) {
+          el.setAttribute('src', placeholder);
+        } else {
+          el.setAttribute('src', 'assets/images/book-placeholder.jpg');
+        }
+
         el.classList.remove('has--placeloader');
       }
     });

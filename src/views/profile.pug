@@ -1,0 +1,18 @@
+extends ./_layouts/_base.pug
+
+//- Template variables
+block vars
+  - var $templateName = 'profile'
+  - var $templateClass = 'profile'
+
+//- Page styles
+block append styles
+  link(href=`assets/css/biblio-${$templateName}.css`, media='all', rel='stylesheet')/
+
+//- Main Content
+block content
+  include ./_partials/profile/_profile-main.pug
+
+//- Page scripts
+block append scripts
+  script(src=`assets/js/biblio-${$templateName}.js`)

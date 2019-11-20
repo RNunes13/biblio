@@ -1,0 +1,124 @@
+section(class="rn-profile rn-container rn-card js--profile")
+  h1(class="rn-title") Meu Perfil
+  form(class="rn-profile__form rn-form", rv-on-submit="app.controller.profile.submit")
+    fieldset(rv-disabled="app.state.form.isSubmiting")
+      div(class="rn-form__row")
+        div(class="rn-form__group name")
+          label(class="rn-form__label" for="name") Nome
+          input(
+            id="name"
+            type="text"
+            required="required"
+            class="rn-form__input"
+            placeholder="Digite seu nome"
+            rv-value="app.state.form.name.value"
+          )
+        div(class="rn-form__group email")
+          label(class="rn-form__label" for="email") Email
+          input(
+            id="email"
+            type="email"
+            class="rn-form__input"
+            placeholder="Digite seu email"
+            rv-value="app.state.form.email.value"
+            required="required"
+            rv-class-has-error="app.state.form.email.hasError"
+          )
+          div(
+            class="rn-form__error"
+            rv-if="app.state.form.email.hasError"
+            rv-text="app.state.form.email.error"
+          )
+        div(class="rn-form__group username")
+          label(class="rn-form__label" for="username") Usuário
+          input(
+            id="username"
+            type="text"
+            class="rn-form__input"
+            placeholder="Digite seu nome de usuário"
+            rv-value="app.state.form.username.value"
+            required="required"
+            rv-class-has-error="app.state.form.username.hasError"
+          )
+          div(
+            class="rn-form__error"
+            rv-if="app.state.form.username.hasError"
+            rv-text="app.state.form.username.error"
+          )
+        div(class="rn-form__group cpf")
+          label(class="rn-form__label" for="cpf") CPF
+          input(
+            id="cpf"
+            type="text"
+            class="rn-form__input"
+            placeholder="Digite seu CPF"
+            rv-value="app.state.form.cpf.value"
+            pattern="[0-9]{11}"
+            minlength="11"
+            maxlength="11"
+            required="required"
+            title="Digite os 11 números do CPF"
+            rv-class-has-error="app.state.form.cpf.hasError"
+          )
+          small(
+            class="rn-form__hint",
+            rv-if="app.state.form.cpf.hasError | eq false"
+          ) Digite apenas os números
+          div(
+            class="rn-form__error"
+            rv-if="app.state.form.cpf.hasError"
+            rv-text="app.state.form.cpf.error"
+          )
+
+      div(class="rn-form__row modify-password", rv-if="app.state.changePassword")
+        div(class="rn-form__group currentPassword")
+          label(class="rn-form__label" for="currentPassword") Senha atual
+          input(
+            id="currentPassword"
+            type="password"
+            class="rn-form__input"
+            placeholder="Digite sua senha atual"
+            rv-value="app.state.form.currentPassword.value"
+            rv-class-has-error="app.state.form.currentPassword.hasError"
+          )
+          div(
+            class="rn-form__error"
+            rv-if="app.state.form.currentPassword.hasError"
+            rv-text="app.state.form.currentPassword.error"
+          )
+        div(class="rn-form__group newPassword")
+          label(class="rn-form__label" for="newPassword") Nova senha
+          input(
+            id="newPassword"
+            type="password"
+            class="rn-form__input"
+            placeholder="Digite a nova senha"
+            rv-value="app.state.form.newPassword.value"
+          )
+        div(class="rn-form__group confirmationPassword")
+          label(class="rn-form__label" for="confirmationPassword") Confirmação
+          input(
+            id="confirmationPassword"
+            type="password"
+            class="rn-form__input"
+            placeholder="Digite a nova senha novamente"
+            rv-value="app.state.form.confirmationPassword.value"
+          )
+        div(class="rn-form__group confirmChangePassword")
+          button(
+            type="button"
+            rv-on-click="app.controller.profile.confirmChangePassword"
+            class="rn-profile__form--confirmChangePassword rn-btn rn-btn__primary--outline",
+          ) Confirmar senha
+
+      div(class="rn-form__row")
+        div(class="rn-form__group")
+          button(
+            type="button"
+            rv-text="app.state.changePasswordText"
+            rv-on-click="app.controller.profile.changePassword"
+            class="rn-profile__form--changePassword rn-btn rn-btn__link",
+          )
+      div(class="rn-form__row")
+        div(class="rn-form__group")
+          button(class="rn-btn rn-btn__primary", type="submit", rv-text="app.state.form.buttonText")

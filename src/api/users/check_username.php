@@ -15,21 +15,18 @@
   
   $data = json_decode(file_get_contents("php://input"));
   
-  if (
-    !empty($data->username) &&
-    !empty($data->password)
-  ) {
-    $resp = $user->login($data->username, $data->password);
+  if (!empty($data->username)) {
+    $resp = $user->checkUsername($data->username, $data->usernameUser);
 
     if ($resp["success"]) {
       http_response_code(200);
-      echo json_encode(array($resp)[0]);
+      echo json_encode($resp["available"]);
     } else {
       http_response_code(500);
       echo json_encode($resp);
     }
   } else {
     http_response_code(400);
-    echo json_encode(array("message" => "Unable to login. Data is incomplete."));
+    echo json_encode(array("message" => "Unable to verify username. Data is incomplete."));
   }
 ?>

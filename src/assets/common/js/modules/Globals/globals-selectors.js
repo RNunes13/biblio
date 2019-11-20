@@ -25,3 +25,7 @@ export const header = {
   headerComponent: document.querySelector('.js--header'),
   userInfo: document.querySelector('.js--header-user-info'),
 };
+
+export const profile = {
+  profileComponent: document.querySelector('.js--profile'),
+};
