@@ -1,11 +1,14 @@
 
 import { data } from '../data/index';
-import { profile as El } from '../../Globals/globals-selectors';
 import { controller } from '../controller/index';
+import { getAddress, getPhones } from '../methods';
+import { profile as El } from '../../Globals/globals-selectors';
 
 export default {
   init() {
     bindData();
+    loadPhones();
+    loadAddress();
   },
 };
 
@@ -35,4 +38,28 @@ function bindData() {
       controller,
     },
   }).models;
+}
+
+function loadPhones() {
+  getPhones(Biblio.profileComponent.app.state.user.id)
+  .then((phones) => {
+    Biblio.profileComponent.app.state.user.phones = phones.slice();
+    Biblio.profileComponent.app.state.form.phones = phones.slice();
+  })
+  .catch((err) => {
+    console.error(err);
+    alertify.error('Ocorreu um erro na consulta telefones.');
+  });
+}
+
+function loadAddress() {
+  getAddress(Biblio.profileComponent.app.state.user.id)
+  .then((address) => {
+    Biblio.profileComponent.app.state.user.addresses = address.slice();
+    Biblio.profileComponent.app.state.form.addresses = address.slice();
+  })
+  .catch((err) => {
+    console.error(err);
+    alertify.error('Ocorreu um erro na consulta endereços.');
+  });
 }

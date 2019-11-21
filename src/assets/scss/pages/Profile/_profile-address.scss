@@ -1,0 +1,123 @@
+
+.rn-profile__form {
+  &--address {
+    @include rem(margin-bottom, 15px);
+
+    .rn-form__row {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap !important;
+
+      @include mq('xs', max) {
+        flex-direction: column !important;
+        align-items: flex-start;
+      }
+  
+      & > *:not(:last-child) {
+        @include rem(margin-right, 8px);
+      }
+
+      &:not(:last-child) {
+        @include rem(margin-bottom, 10px);
+        border-bottom: 1px dashed $color-grey;
+      }
+    }
+
+    .cep {
+      @include mq('lg') { width: 10% }
+      @include mq('lg', max) { width: 12% }
+      @include mq('md', max) { width: 17% }
+      @include mq('sm', max) { width: 25% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .street {
+      @include mq('md') { width: 40% }
+      @include mq('md', max) { width: 65% }
+      @include mq('sm', max) { width: 71% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .street_number {
+      @include mq('lg') { width: 7% }
+      @include mq('lg', max) { width: 9% }
+      @include mq('md', max) { width: 13% }
+      @include mq('sm', max) { width: 20% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .additional {
+      @include mq('lg') { width: 39% }
+      @include mq('lg', max) { width: 30% }
+      @include mq('md', max) { width: 48% }
+      @include mq('sm', max) { width: 76% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .neighborhood {
+      @include mq('lg') { width: 20% }
+      @include mq('md', max) { width: 48% }
+      @include mq('sm', max) { width: 34% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .city {
+      @include mq('lg') { width: 20% }
+      @include mq('md', max) { width: 30% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .uf {
+      @include mq('lg') { width: 10% }
+      @include mq('md', max) { width: 30% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+  }
+
+  &--address {
+    &-info {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-grow: 1;
+
+      & > *:not(:last-child) {
+        @include rem(margin-right, 8px);
+      }
+    }
+
+    &-delete {
+      flex-shrink: 0;
+    }
+  }
+
+  &--deleteAddress {
+    @include flex-centered;
+    padding: 0;
+    
+    &::before {
+      @include rem(font-size, 25px);
+      @extend %iconfont;
+      content: '\EA10';
+      color: $color-persian-red;
+
+      @include mq('xs', max) {
+        @include rem(font-size, 20px);
+      }
+    }
+
+    &::after {
+      @include mq('xs', max) {
+        @include rem(margin-left, 5px);
+        @include rem(font-size, 14px);
+        font-weight: 500;
+        color: $color-persian-red;
+        content: 'Remover';
+      }
+    }
+  }
+
+  &--addAddress {
+    padding: 0;
+  }
+}

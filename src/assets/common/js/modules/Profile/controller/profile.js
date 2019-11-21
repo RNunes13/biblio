@@ -83,6 +83,14 @@ export const profile = {
       console.error(error);
       alertify.error("Ocorreu um erro na atualização da senha. Tente novamente em instantes.");
     }
+  },
+
+  async deletePhone(_, scope) {
+    console.log(scope.phone)
+  },
+
+  async deleteAddress(_, scope) {
+    console.log(scope.address)
   }
 };
 

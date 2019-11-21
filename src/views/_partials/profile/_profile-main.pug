@@ -131,6 +131,10 @@ section(class="rn-profile rn-container rn-card js--profile")
             rv-on-click="app.controller.profile.changePassword"
             class="rn-profile__form--changePassword rn-btn rn-btn__link",
           )
+      
+      include ./_profile-phone.pug
+      include ./_profile-address.pug
+
       div(class="rn-form__row")
         div(class="rn-form__group")
           button(class="rn-btn rn-btn__primary", type="submit", rv-text="app.state.form.buttonText")
