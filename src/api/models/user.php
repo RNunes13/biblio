@@ -125,13 +125,23 @@
           );
         }
 
+        if ($password == $new_hash) {
+          return array(
+            "success" => false,
+            "error" => array(
+              "code" => "@Biblio:newPasswordSameAsCurrentPassword",
+              "message" => "New password equals current password."
+            )
+          );
+        }
+
         $query = "UPDATE " . $this->table_name . " SET password = :new_password WHERE id = :id";
 
         $statement = $this->conn->prepare($query);
 
         // bind values
         $statement->bindParam(":id", $userId);
-        $statement->bindParam(":password", $new_hash);
+        $statement->bindParam(":new_password", $new_hash);
 
         if ($statement->execute()) {
           return array("success" => true);

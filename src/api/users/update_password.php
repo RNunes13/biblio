@@ -22,9 +22,9 @@
   ) {
     $resp = $user->updatePassword($data->userId, $data->currentPassword, $data->newPassword);
 
-    if ($resp["success"]) {
+    if (!empty($resp)) {
       http_response_code(200);
-      echo json_encode($resp["success"]);
+      echo json_encode($resp);
     } else {
       http_response_code(500);
       echo json_encode($resp);

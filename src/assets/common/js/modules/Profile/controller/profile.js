@@ -36,12 +36,6 @@ export const profile = {
     });
   },
 
-  togglePassword(_, scope) {
-    const { showPassword } = scope.app.state.form;
-
-    El.passwordField.setAttribute('type', showPassword ? 'text' : 'password')
-  },
-
   changePassword(_, scope) {
     const changePassword = scope.app.state.changePassword;
 
@@ -64,10 +58,30 @@ export const profile = {
       
       const { data } = resp;
 
-      console.log(data);
+      if (!data.success) {
+        const { error } = data;
+
+        if (error.code === "@Biblio:incorrectPassword") {
+          alertify.error("A senha atual não corresponde com a senha do usuário.");
+        }
+
+        if (error.code === "@Biblio:newPasswordSameAsCurrentPassword") {
+          alertify.warning("A nova senha não pode ser igual a senha atual.");
+        }
+
+        return;
+      }
+
+      alertify.success("Senha modificada com sucesso.");
+
+      scope.app.state.form.currentPassword.value = "";
+      scope.app.state.form.newPassword.value = "";
+      scope.app.state.form.confirmationPassword.value = "";
+      scope.app.state.changePassword = false;
+      scope.app.state.changePasswordText = 'Alterar senha';
     } catch (error) {
       console.error(error);
-      alertify.error("Ocorreu um erro na atualização da senha. Tente novamente em instantes.")
+      alertify.error("Ocorreu um erro na atualização da senha. Tente novamente em instantes.");
     }
   }
 };
