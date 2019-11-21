@@ -49,12 +49,51 @@ export const profile = {
     scope.app.state.changePasswordText = scope.app.state.changePassword ? 'Esconder senha' : 'Alterar senha';
   },
 
-  confirmChangePassword(_, scope) {
-    console.log('Current pass -> ', scope.app.state.form.currentPassword);
-    console.log('New pass -> ', scope.app.state.form.newPassword);
-    console.log('Confirmation pass -> ', scope.app.state.form.confirmationPassword);
+  async confirmChangePassword(_, scope) {
+    if (!validPasswords(scope)) return;
+
+    const { currentPassword, newPassword } = scope.app.state.form;
+    const { id } = scope.app.state.user;
+
+    try {
+      const resp = await axios.post('/api/users/update_password.php', {
+        userId: id,
+        currentPassword: currentPassword.value,
+        newPassword: newPassword.value
+      });
+      
+      const { data } = resp;
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      alertify.error("Ocorreu um erro na atualização da senha. Tente novamente em instantes.")
+    }
   }
 };
+
+function validPasswords(scope) {
+  const { currentPassword, newPassword, confirmationPassword } = scope.app.state.form;
+
+  let hasError = !currentPassword.value || !newPassword.value || !confirmationPassword.value;
+
+  scope.app.state.form.currentPassword.hasError = !currentPassword.value ? true : false;
+  scope.app.state.form.newPassword.hasError = !newPassword.value ? true : false;
+  scope.app.state.form.confirmationPassword.hasError = !confirmationPassword.value ? true : false;
+
+  if (!currentPassword.value) scope.app.state.form.currentPassword.error = 'Campo obrigatório';
+
+  if (!newPassword.value) scope.app.state.form.newPassword.error = 'Campo obrigatório';
+
+  if (!confirmationPassword.value) scope.app.state.form.confirmationPassword.error = 'Campo obrigatório';
+
+  if (newPassword.value && confirmationPassword.value && newPassword.value !== confirmationPassword.value) {
+    alertify.warning('A confirmação da senha não corresponde a nova senha.');
+    hasError = true;
+  }
+
+  return !hasError;
+}
 
 function validCPF(cpf) {
   const digits = cpf.substring(0, 9);

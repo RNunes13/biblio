@@ -94,6 +94,12 @@ section(class="rn-profile rn-container rn-card js--profile")
             class="rn-form__input"
             placeholder="Digite a nova senha"
             rv-value="app.state.form.newPassword.value"
+            rv-class-has-error="app.state.form.newPassword.hasError"
+          )
+          div(
+            class="rn-form__error"
+            rv-if="app.state.form.newPassword.hasError"
+            rv-text="app.state.form.newPassword.error"
           )
         div(class="rn-form__group confirmationPassword")
           label(class="rn-form__label" for="confirmationPassword") Confirmação
@@ -103,6 +109,12 @@ section(class="rn-profile rn-container rn-card js--profile")
             class="rn-form__input"
             placeholder="Digite a nova senha novamente"
             rv-value="app.state.form.confirmationPassword.value"
+            rv-class-has-error="app.state.form.confirmationPassword.hasError"
+          )
+          div(
+            class="rn-form__error"
+            rv-if="app.state.form.confirmationPassword.hasError"
+            rv-text="app.state.form.confirmationPassword.error"
           )
         div(class="rn-form__group confirmChangePassword")
           button(

@@ -7,7 +7,7 @@ export default {
   },
 
   showMenu() {
-    El.userInfo.addEventListener('click', (evt) => {
+    El.userInfo && El.userInfo.addEventListener('click', (evt) => {
       Biblio.userMenu.classList.toggle('is--open');
       Biblio.headerUser.classList.toggle('menu-open');
       Biblio.overlay.classList.toggle('is--active');

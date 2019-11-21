@@ -93,5 +93,66 @@
         return array("success" => true, "available" => true);
       }
     }
+
+    public function updatePassword($userId, $current, $new) {
+      $current_hash = md5($current);
+      $new_hash = md5($new);
+
+      $check_password = "SELECT * FROM " . $this->table_name . " WHERE id = :id AND deleted = false";
+   
+      $stmt = $this->conn->prepare($check_password);
+
+      // sanitize
+      $userId = htmlspecialchars(strip_tags($userId));
+
+      // bind values
+      $stmt->bindParam(":id", $userId);
+
+      $stmt->execute();
+
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      if ($result) {
+        extract($result);
+
+        if ($password != $current_hash) {
+          return array(
+            "success" => false,
+            "error" => array(
+              "code" => "@Biblio:incorrectPassword",
+              "message" => "Current password does not match user password."
+            )
+          );
+        }
+
+        $query = "UPDATE " . $this->table_name . " SET password = :new_password WHERE id = :id";
+
+        $statement = $this->conn->prepare($query);
+
+        // bind values
+        $statement->bindParam(":id", $userId);
+        $statement->bindParam(":password", $new_hash);
+
+        if ($statement->execute()) {
+          return array("success" => true);
+        } else {
+          return array(
+            "success" => false,
+            "error" => array(
+              "code" => "@Biblio:passwordUpdateError",
+              "message" => $stmt->errorInfo()
+            )
+          );
+        }
+      } else {
+        return array(
+          "success" => false,
+          "error" => array(
+            "code" => "@Biblio:userNotFound",
+            "message" => "User not found."
+          )
+        );
+      }
+    }
   }
 ?>
