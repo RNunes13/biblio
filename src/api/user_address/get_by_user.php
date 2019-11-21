@@ -16,11 +16,6 @@
 
   $resp = $user_address->getByUser();
 
-  if ($resp) {
-    http_response_code(200);
-    echo json_encode($resp);
-  } else {
-    http_response_code(404);
-    echo json_encode(array("message" => "UserAddress does not exist with user_id = " . $_GET['user_id']));
-  }
+  http_response_code(200);
+  echo json_encode($resp);
 ?>

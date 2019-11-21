@@ -55,7 +55,7 @@
     
         return $user_address_arr;
       } else {
-        return null;
+        return array();
       }
     }
 
@@ -69,7 +69,7 @@
         $num = $stmt->rowCount();
 
         if ($num) {
-          return array("success" => true, "message" => true);
+          return array("code" => 200, "success" => true, "message" => true);
         } else {
           return array(
             "code" => 404,

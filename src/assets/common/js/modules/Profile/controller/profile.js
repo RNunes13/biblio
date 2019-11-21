@@ -86,11 +86,39 @@ export const profile = {
   },
 
   async deletePhone(_, scope) {
-    console.log(scope.phone)
+    const { id, ddd, number } = scope.phone;
+    
+    const confirm = window.confirm(`O telefone (${ddd}) ${number} será excluído.`);
+
+    if (confirm) {
+      axios.delete(`/api/user_phone/delete_by_id.php?id=${id}`)
+      .then(() => {
+        alertify.success('Telefone excluído com sucesso')
+        scope.app.state.form.phones = scope.app.state.form.phones.filter(p => p.id != id);
+      })
+      .catch((err) => {
+        console.error(err);
+        alertify.error('Ocorreu um erro ao tentar excluir o telefone. Tente novamente em instantes.')
+      });
+    }
   },
 
   async deleteAddress(_, scope) {
-    console.log(scope.address)
+    const { id, zip_code } = scope.address;
+    
+    const confirm = window.confirm(`O endereço com o CEP ${zip_code} será excluído.`);
+
+    if (confirm) {
+      axios.delete(`/api/user_address/delete_by_id.php?id=${id}`)
+      .then(() => {
+        alertify.success('Endereço excluído com sucesso')
+        scope.app.state.form.addresses = scope.app.state.form.addresses.filter(p => p.id != id);
+      })
+      .catch((err) => {
+        console.error(err);
+        alertify.error('Ocorreu um erro ao tentar excluir o endereço. Tente novamente em instantes.')
+      });
+    }
   }
 };
 
