@@ -47,5 +47,32 @@
         return null;
       }
     }
+
+    function deleteById() {
+      $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+   
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(1, $this->id);
+      
+      if ($stmt->execute()) {
+        $num = $stmt->rowCount();
+
+        if ($num) {
+          return array("success" => true, "message" => true);
+        } else {
+          return array(
+            "code" => 404,
+            "success" => false,
+            "message" => "UserPhone does not found with id = ".$this->id
+          );
+        }
+      } else {
+        return array(
+          "code" => 500,
+          "success" => false,
+          "message" => $stmt->errorInfo()
+        );
+      }
+    }
   }
 ?>
