@@ -74,5 +74,44 @@
         );
       }
     }
+
+    function update() {
+      $query = "UPDATE " . $this->table_name . " SET ddd = :ddd, number = :number WHERE id = :id";
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam('ddd', $this->ddd);
+      $stmt->bindParam('number', $this->number);
+      $stmt->bindParam('id', $this->id);
+      
+      if ($stmt->execute()) {
+        $num = $stmt->rowCount();
+
+        if ($num) {
+          return array(
+            "code" => 200,
+            "data" => array(
+              "success" => true,
+              "message" => "UserPhone updated"
+            )
+          );
+        } else {
+          return array(
+            "code" => 404,
+            "data" => array(
+              "success" => false,
+              "message" => "UserPhone does not found with id ".$this->id
+            )
+          );
+        }
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
+        );
+      }
+    }
   }
 ?>

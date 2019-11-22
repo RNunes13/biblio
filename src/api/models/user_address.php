@@ -85,5 +85,59 @@
         );
       }
     }
+
+    function update() {
+      $query = "
+        UPDATE " . $this->table_name . " SET
+          zip_code = :zip_code,
+          street = :street,
+          number = :number,
+          additional = :additional,
+          neighborhood = :neighborhood,
+          city = :city,
+          uf = :uf
+        WHERE id = :id
+      ";
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam('zip_code', $this->zip_code);
+      $stmt->bindParam('street', $this->street);
+      $stmt->bindParam('number', $this->number);
+      $stmt->bindParam('additional', $this->additional);
+      $stmt->bindParam('neighborhood', $this->neighborhood);
+      $stmt->bindParam('city', $this->city);
+      $stmt->bindParam('uf', $this->uf);
+      $stmt->bindParam('id', $this->id);
+      
+      if ($stmt->execute()) {
+        $num = $stmt->rowCount();
+
+        if ($num) {
+          return array(
+            "code" => 200,
+            "data" => array(
+              "success" => true,
+              "message" => "UserAddress updated"
+            )
+          );
+        } else {
+          return array(
+            "code" => 404,
+            "data" => array(
+              "success" => false,
+              "message" => "UserAddress does not found with id ".$this->id
+            )
+          );
+        }
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
+        );
+      }
+    }
   }
 ?>
