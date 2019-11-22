@@ -14,7 +14,6 @@ div(class="rn-profile__form--address")
           pattern="[0-9]{8}"
           minlength="8"
           maxlength="8"
-          placeholder="Digite o CEP"
           rv-value="address.zip_code"
           title="Digite apenas números"
         )
@@ -24,7 +23,6 @@ div(class="rn-profile__form--address")
           id="street"
           type="text"
           class="rn-form__input"
-          placeholder="Digite o nome da Rua"
           rv-value="address.street"
         )
       div(class="rn-form__group street_number")
@@ -33,7 +31,6 @@ div(class="rn-profile__form--address")
           id="street_number"
           type="text"
           class="rn-form__input"
-          placeholder="Digite o número"
           rv-value="address.number"
         )
       div(class="rn-form__group additional")
@@ -50,7 +47,6 @@ div(class="rn-profile__form--address")
           id="neighborhood"
           type="text"
           class="rn-form__input"
-          placeholder="Digite o nome do bairro"
           rv-value="address.neighborhood"
         )
       div(class="rn-form__group city")
@@ -59,7 +55,6 @@ div(class="rn-profile__form--address")
           id="city"
           type="text"
           class="rn-form__input"
-          placeholder="Digite o nome da cidade"
           rv-value="address.city"
         )
       div(class="rn-form__group uf")
@@ -70,7 +65,6 @@ div(class="rn-profile__form--address")
           name="uf"
           rv-value="address.uf"
         )
-          option(value="" disabled selected) Escolha o estado
           each state in states
             option(value=state.text) #{state.text}
     div(class="rn-profile__form--address-delete")

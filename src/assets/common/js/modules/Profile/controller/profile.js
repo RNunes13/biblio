@@ -86,8 +86,13 @@ export const profile = {
   },
 
   async deletePhone(_, scope) {
-    const { id, ddd, number } = scope.phone;
+    const { id, ddd, number, _new } = scope.phone;
     
+    if (_new) {
+      scope.app.state.form.phones = scope.app.state.form.phones.filter(p => p.id != id);
+      return;
+    }
+
     const confirm = window.confirm(`O telefone (${ddd}) ${number} será excluído.`);
 
     if (confirm) {
@@ -104,7 +109,12 @@ export const profile = {
   },
 
   async deleteAddress(_, scope) {
-    const { id, zip_code } = scope.address;
+    const { id, zip_code, _new } = scope.address;
+    
+    if (_new) {
+      scope.app.state.form.addresses = scope.app.state.form.addresses.filter(a => a.id != id);
+      return;
+    }
     
     const confirm = window.confirm(`O endereço com o CEP ${zip_code} será excluído.`);
 
@@ -112,13 +122,42 @@ export const profile = {
       axios.delete(`/api/user_address/delete_by_id.php?id=${id}`)
       .then(() => {
         alertify.success('Endereço excluído com sucesso')
-        scope.app.state.form.addresses = scope.app.state.form.addresses.filter(p => p.id != id);
+        scope.app.state.form.addresses = scope.app.state.form.addresses.filter(a => a.id != id);
       })
       .catch((err) => {
         console.error(err);
         alertify.error('Ocorreu um erro ao tentar excluir o endereço. Tente novamente em instantes.')
       });
     }
+  },
+
+  addPhone(_, scope) {
+    scope.app.state.form.phones = [
+      ...scope.app.state.form.phones,
+      {
+        id: new Date().getTime(),
+        ddd: '',
+        number: '',
+        _new: true,
+      }
+    ]
+  },
+
+  addAddress(_, scope) {
+    scope.app.state.form.addresses = [
+      ...scope.app.state.form.addresses,
+      {
+        id: new Date().getTime(),
+        additional: null,
+        city: '',
+        neighborhood: '',
+        number: '',
+        street: '',
+        uf: '',
+        zip_code: '',
+        _new: true,
+      }
+    ]
   }
 };
 
