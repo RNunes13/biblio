@@ -1,0 +1,17 @@
+div(class="rn-bookings__card", rv-each-booking="app.state.bookings.data")
+  span(class="rn-bookings__card--id") Reserva {{ booking.id }}
+  div(class="rn-bookings__card--details")
+    p(class="rn-bookings__card--book")
+      strong Livro: 
+      span {{ booking.book }}
+    p(class="rn-bookings__card--date")
+      strong Data solicitação: 
+      span {{ booking.reservation_date }}
+    p(class="rn-bookings__card--book")
+      strong Status: 
+      span {{ booking.status }}
+  button(
+    class="rn-bookings__card--cancel rn-btn rn-btn__danger--outline",
+    rv-on-click="app.controller.booking.cancel",
+    rv-if="booking.status | eq 'Aguardando'"
+  ) Cancelar

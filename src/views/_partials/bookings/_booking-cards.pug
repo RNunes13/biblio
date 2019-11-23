@@ -1,0 +1,10 @@
+div(class="rn-bookings__cards")
+  div(rv-if="app.state.bookings.isLoading")
+    include ../loader/_loader.pug
+  div(class="rn-bookings__cards--wrap", rv-if="app.state.bookings.isLoading | eq false")
+    include ./_booking-card.pug
+  p(
+    class="rn-bookings__cards--empty",
+    rv-if="app.state.bookings.isLoading | eq false"
+    rv-show="app.state.bookings.data | length | lt 1"
+  ) Nenhuma reserva encontrada

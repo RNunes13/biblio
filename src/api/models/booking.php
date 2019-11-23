@@ -120,5 +120,73 @@
         return array("success" => false, "message" => $stmt->errorInfo());
       }
     }
+
+    function getByUser() {
+      $query = "SELECT bh.*, book.title AS 'book_title' FROM " . $this->table_name . " AS bh JOIN book ON book.id = bh.book_id WHERE user_id = ?";
+   
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(1, $this->user_id);
+      $stmt->execute();
+   
+      $num = $stmt->rowCount();
+
+      if ($num > 0) {
+        $booking_arr = array();
+    
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          extract($row);
+    
+          $booking_item = array(
+            "id" => $id,
+            "status" => $status,
+            "book" => $book_title,
+            "reservation_date" => $reservation_date,
+          );
+    
+          array_push($booking_arr, $booking_item);
+        }
+    
+        return $booking_arr;
+      } else {
+        return array();
+      }
+    }
+
+    function cancel($booking_id) {
+      $query = "UPDATE " . $this->table_name . " SET status = 'canceled' WHERE id = ?";
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(1, $booking_id);
+
+      if ($stmt->execute()) {
+        $num = $stmt->rowCount();
+
+        if ($num) {
+          return array(
+            "code" => 200,
+            "data" => array(
+              "success" => true,
+              "message" => "Booking canceled"
+            )
+          );
+        } else {
+          return array(
+            "code" => 404,
+            "data" => array(
+              "success" => false,
+              "message" => "Booking does not found with id ".$booking_id
+            )
+          );
+        }
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
+        );
+      }
+    }
   }
 ?>

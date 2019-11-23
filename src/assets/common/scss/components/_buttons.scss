@@ -64,6 +64,28 @@
     }
   }
 
+  &__danger {
+    border-color: $color-persian-red;
+    background-color: $color-persian-red;
+    color: $color-white;
+
+    @include hover-supported() {
+      background-color: darken($color-persian-red, 10%);
+      border-color: darken($color-persian-red, 10%);
+    }
+
+    &--outline {
+      border-color: $color-persian-red;
+      background-color: transparent;
+      color: $color-persian-red;
+
+      @include hover-supported() {
+        background-color: $color-persian-red;
+        color: $color-white;
+      }
+    }
+  }
+
   &__link {
     @include rem(font-size, 15px);
     @include font-weight(semi-bold);

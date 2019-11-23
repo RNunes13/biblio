@@ -1,0 +1,61 @@
+div(class="rn-bookings__search")
+  button(
+    class="rn-bookings__search--show rn-btn rn-btn__link js--filters-show",
+    rv-on-click="app.controller.search.toggle"
+    rv-text="app.state.showSearchInfo"
+  )
+  form(
+    class="rn-bookings__search--form",
+    rv-show="app.state.showSearch",
+    rv-on-submit="app.controller.search.submit"
+  )
+    fieldset(rv-disabled="app.state.isFiltering")
+      div(class="rn-bookings__search--wrap")
+        div(class="rn-form__group code")
+          label(class="rn-form__label", for="code") Código
+          input(
+            class='rn-form__input',
+            type='text',
+            name='id',
+            id='code',
+            rv-value='app.state.form.code'
+            rv-on-keyup="app.controller.search.onChange"
+          )
+        div(class="rn-form__group book")
+          label(class="rn-form__label", for="book") Livro
+          input(
+            class='rn-form__input',
+            type='text',
+            name='book',
+            id='book',
+            rv-value='app.state.form.book'
+            rv-on-keyup="app.controller.search.onChange"
+          )
+        div(class="rn-form__group status")
+          label(class="rn-form__label", for="status") Status
+          select(
+            class="rn-form__select",
+            id="status",
+            name="status"
+            rv-value="app.state.form.status"
+            rv-on-change="app.controller.search.onChange"
+          )
+            option(value="Aguardando") Aguardando
+            option(value="Cancelada") Cancelada
+            option(value="Concluída") Concluída
+        div(class="rn-form__group date")
+          label(class="rn-form__label", for="date") Data solicitação
+          input(
+            class='rn-form__input',
+            type='date',
+            name='date',
+            id='date',
+            rv-value='app.state.form.date'
+            rv-on-change="app.controller.search.onChange"
+          )
+      div(class="rn-form__group")
+        button(
+          class="rn-bookings__search--reset rn-btn rn-btn__link",
+          type="button",
+          rv-on-click="app.controller.search.clear"
+        ) Limpar
