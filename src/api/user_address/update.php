@@ -20,7 +20,6 @@
     !empty($data->zip_code) &&
     !empty($data->street) &&
     !empty($data->number) &&
-    !empty($data->additional) &&
     !empty($data->neighborhood) &&
     !empty($data->city) &&
     !empty($data->uf)
@@ -29,7 +28,7 @@
     $user_address->zip_code = $data->zip_code;
     $user_address->street = $data->street;
     $user_address->number = $data->number;
-    $user_address->additional = $data->additional;
+    $user_address->additional = !empty($data->additional) ? $data->additional : null;
     $user_address->neighborhood = $data->neighborhood;
     $user_address->city = $data->city;
     $user_address->uf = $data->uf;

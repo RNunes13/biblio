@@ -4,75 +4,77 @@
 div(class="rn-profile__form--address")
   h2(class="rn-subtitle") Endereços
   div(class="rn-form__row", rv-each-address="app.state.form.addresses")
-    div(class="rn-profile__form--address-info")
-      div(class="rn-form__group cep")
-        label(class="rn-form__label" for="cep") CEP
-        input(
-          id="cep"
-          type="text"
-          class="rn-form__input"
-          pattern="[0-9]{8}"
-          minlength="8"
-          maxlength="8"
-          rv-value="address.zip_code"
-          title="Digite apenas números"
+    fieldset(rv-disabled="address.isSearching")
+      div(class="rn-profile__form--address-info")
+        div(class="rn-form__group cep")
+          label(class="rn-form__label" for="cep") CEP
+          input(
+            id="cep"
+            type="text"
+            class="rn-form__input"
+            pattern="[0-9]{8}"
+            minlength="8"
+            maxlength="8"
+            rv-value="address.zip_code"
+            title="Digite apenas números"
+            rv-on-blur="app.controller.profile.getAddress"
+          )
+        div(class="rn-form__group street")
+          label(class="rn-form__label" for="street") Rua
+          input(
+            id="street"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.street"
+          )
+        div(class="rn-form__group street_number")
+          label(class="rn-form__label" for="street_number") Número
+          input(
+            id="street_number"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.number"
+          )
+        div(class="rn-form__group additional")
+          label(class="rn-form__label" for="street") Complemento
+          input(
+            id="additional"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.additional"
+          )
+        div(class="rn-form__group neighborhood")
+          label(class="rn-form__label" for="street") Bairro
+          input(
+            id="neighborhood"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.neighborhood"
+          )
+        div(class="rn-form__group city")
+          label(class="rn-form__label" for="city") Cidade
+          input(
+            id="city"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.city"
+          )
+        div(class="rn-form__group uf")
+          label(class="rn-form__label" for="uf") UF
+          select(
+            class="rn-form__select",
+            id="uf",
+            name="uf"
+            rv-value="address.uf"
+          )
+            each state in states
+              option(value=state.text) #{state.text}
+      div(class="rn-profile__form--address-delete")
+        button(
+          type="button"
+          rv-on-click="app.controller.profile.deleteAddress"
+          class="rn-profile__form--deleteAddress rn-btn rn-btn__link"
         )
-      div(class="rn-form__group street")
-        label(class="rn-form__label" for="street") Rua
-        input(
-          id="street"
-          type="text"
-          class="rn-form__input"
-          rv-value="address.street"
-        )
-      div(class="rn-form__group street_number")
-        label(class="rn-form__label" for="street_number") Número
-        input(
-          id="street_number"
-          type="text"
-          class="rn-form__input"
-          rv-value="address.number"
-        )
-      div(class="rn-form__group additional")
-        label(class="rn-form__label" for="street") Complemento
-        input(
-          id="additional"
-          type="text"
-          class="rn-form__input"
-          rv-value="address.additional"
-        )
-      div(class="rn-form__group neighborhood")
-        label(class="rn-form__label" for="street") Bairro
-        input(
-          id="neighborhood"
-          type="text"
-          class="rn-form__input"
-          rv-value="address.neighborhood"
-        )
-      div(class="rn-form__group city")
-        label(class="rn-form__label" for="city") Cidade
-        input(
-          id="city"
-          type="text"
-          class="rn-form__input"
-          rv-value="address.city"
-        )
-      div(class="rn-form__group uf")
-        label(class="rn-form__label" for="uf") UF
-        select(
-          class="rn-form__select",
-          id="uf",
-          name="uf"
-          rv-value="address.uf"
-        )
-          each state in states
-            option(value=state.text) #{state.text}
-    div(class="rn-profile__form--address-delete")
-      button(
-        type="button"
-        rv-on-click="app.controller.profile.deleteAddress"
-        class="rn-profile__form--deleteAddress rn-btn rn-btn__link"
-      )
   div(class="rn-form__row")
     button(
       type="button"

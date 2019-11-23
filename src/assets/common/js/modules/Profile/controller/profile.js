@@ -169,6 +169,50 @@ export const profile = {
         _new: true,
       }
     ]
+  },
+
+  async getAddress(evt, scope) {
+    const { zip_code } = scope.address;
+
+    if (zip_code.length < 8 || !/[0-9]{8}/.test(zip_code)) {
+      alertify.warning('O CEP está no formato inválido para consulta do endereço.');
+      return;
+    }
+    
+    try {
+      scope.address.isSearching = true;
+
+      const resp = await axios.get(`https://viacep.com.br/ws/${zip_code}/json/`);
+
+      const { data } = resp;
+
+      const { erro, bairro, localidade, logradouro, uf } = data;
+
+      if (erro) {
+        scope.address.street = "";
+        scope.address.number = "";
+        scope.address.additional = "";
+        scope.address.neighborhood = "";
+        scope.address.city = "";
+        scope.address.uf = "";
+        
+        return;
+      }
+
+      scope.address.street = logradouro;
+      scope.address.number = "";
+      scope.address.additional = "";
+      scope.address.neighborhood = bairro;
+      scope.address.city = localidade;
+      scope.address.uf = uf;
+
+      scope.address.isSearching = false;
+      evt.target.parentElement.parentElement.querySelector('#street_number').focus();
+    } catch (err) {
+      console.error(err);
+      alertify.error("Ocorreu um erro na consulta do endereço.");
+      scope.address.isSearching = false;
+    }
   }
 };
 
@@ -266,15 +310,19 @@ async function validForm(scope) {
 }
 
 async function savePhones(phones) {
+  const validPhone = ({ ddd, number }) => ddd && number;
+
   try {
     const userId = Biblio.profileComponent.app.state.user.id;
     
     const newPhones = phones
       .filter(p => p._new)
+      .filter(p => validPhone(p))
       .map(p => ({ ...p, user_id: userId  }));
     
     const updatePhones = phones
-      .filter(p => !newPhones.map(_p => _p.id).includes(p.id));
+      .filter(p => !newPhones.map(_p => _p.id).includes(p.id))
+      .filter(p => validPhone(p));
 
     await axios.post('/api/user_phone/update_all.php', updatePhones);
     await axios.post('/api/user_phone/create_list.php', newPhones);
@@ -289,15 +337,22 @@ async function savePhones(phones) {
 }
 
 async function saveAddresses(addresses) {
+  const validAddress = ({ zip_code, street, number, neighborhood, city, uf }) =>
+    zip_code && street && number & neighborhood && city && uf;
+
   try {
     const userId = Biblio.profileComponent.app.state.user.id;
     
     const newAddresses = addresses
       .filter(a => a._new)
+      .filter(a => validAddress(a))
       .map(a => ({ ...a, user_id: userId  }));
 
     const updateAddresses = addresses
-      .filter(a => !newAddresses.map(_a => _a.id).includes(a.id));
+      .filter(a => !newAddresses.map(_a => _a.id).includes(a.id))
+      .filter(a => validAddress(a));
+
+    console.log(updateAddresses);
 
     await axios.post('/api/user_address/update_all.php', updateAddresses);
     await axios.post('/api/user_address/create_list.php', newAddresses);
