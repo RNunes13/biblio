@@ -1,0 +1,17 @@
+
+.rn-loan__cards {
+  &--wrap {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include mq('xs', max) {
+      flex-direction: column;
+    }
+  }
+
+  &--empty {
+    @include font-weight(semi-bold);
+    color: $color-bunting;
+    text-align: center;
+  }
+}

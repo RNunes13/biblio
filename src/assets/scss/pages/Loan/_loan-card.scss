@@ -2,7 +2,7 @@
 // Local variables
 $marginVertical: 10px;
 
-.rn-bookings__card {
+.rn-loan__card {
   @include rem(padding, 15px);
   @include rem(border-radius, 4px);
   margin: 0 calc(#{$marginVertical}/2) 10px;

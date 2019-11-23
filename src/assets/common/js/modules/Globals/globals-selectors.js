@@ -33,3 +33,7 @@ export const profile = {
 export const booking = {
   bookingComponent: document.querySelector('.js--booking'),
 };
+
+export const loan = {
+  loanComponent: document.querySelector('.js--loan'),
+};

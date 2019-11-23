@@ -101,6 +101,12 @@ $header-user-height: 45px;
           content: '\EA11';
         }
       }
+
+      &-loans {
+        &::before {
+          content: '\EA12';
+        }
+      }
     }
   }
 }

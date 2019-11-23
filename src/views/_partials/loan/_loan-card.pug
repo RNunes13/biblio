@@ -1,0 +1,25 @@
+div(class="rn-loan__card", rv-each-loan="app.state.loans.data")
+  span(class="rn-loan__card--id") Empréstimo {{ loan.id }}
+  div(class="rn-loan__card--details")
+    p(class="rn-loan__card--book")
+      strong Livro: 
+      span {{ loan.book }}
+    p(class="rn-loan__card--start")
+      strong Início: 
+      span {{ loan.loan_date }}
+    p(class="rn-loan__card--end")
+      strong Fim: 
+      span {{ loan.end_date }}
+    p(class="rn-loan__card--status")
+      strong Status: 
+      span {{ loan.status }}
+    p(class="rn-loan__card--renewal", rv-if="loan.status | eq 'Ativo'")
+      strong Renovações: 
+      span {{ loan.renewal_count }} (Restantes: 
+      span(rv-text="loan.renewals_allowed | minus loan.renewal_count")
+      | )
+  button(
+    class="rn-loan__card--renew rn-btn rn-btn__primary--outline",
+    rv-on-click="app.controller.loan.renew",
+    rv-if="loan.showRenewButton"
+  ) Renovar

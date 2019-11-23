@@ -375,9 +375,18 @@ CREATE TRIGGER before_book_loan_insert BEFORE INSERT ON `biblio`.`book_loan`
 -- -----------------------------------------------------
 CREATE TRIGGER before_book_loan_update BEFORE UPDATE ON `biblio`.`book_loan`
   FOR EACH ROW BEGIN
+    DECLARE renewalsQuantity INT;
+
     -- Set the return date when finalizing the loan
     IF (OLD.status = 'active' AND NEW.status = 'finished') THEN
       SET NEW.return_date = now();
+    END IF;
+
+    -- Checking number of renewals
+    SELECT renewals_allowed INTO renewalsQuantity FROM `biblio`.`setting` WHERE id = 1;
+
+    IF ((NEW.renewal_count != OLD.renewal_count) && (OLD.renewal_count >= renewalsQuantity)) THEN
+      SIGNAL sqlstate '45000' set message_text = 'BookLoanUpdateError - It is no longer possible to renew this loan.';
     END IF;
   END |
 

@@ -1,0 +1,10 @@
+div(class="rn-loan__cards")
+  div(rv-if="app.state.loans.isLoading")
+    include ../loader/_loader.pug
+  div(class="rn-loan__cards--wrap", rv-if="app.state.loans.isLoading | eq false")
+    include ./_loan-card.pug
+  p(
+    class="rn-loan__cards--empty",
+    rv-if="app.state.loans.isLoading | eq false"
+    rv-show="app.state.loans.data | length | lt 1"
+  ) Nenhum empréstimo encontrado

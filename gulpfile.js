@@ -33,7 +33,9 @@ const DEST_PATH = 'build';
 
 const projectName = 'biblio';
 const commomFiles = ['globals'];
-const otherFiles  = ['home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings'];
+const otherFiles  = [
+  'home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings', 'loan'
+];
 
 const PATHS = {
   styles: { src: `${SRC_PATH}/assets/**/*.scss`, dest: `${DEST_PATH}/assets/css` },
