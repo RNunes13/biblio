@@ -29,3 +29,7 @@ export const header = {
 export const profile = {
   profileComponent: document.querySelector('.js--profile'),
 };
+
+export const booking = {
+  bookingComponent: document.querySelector('.js--booking'),
+};

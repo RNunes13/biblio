@@ -95,6 +95,12 @@ $header-user-height: 45px;
           content: '\EA09';
         }
       }
+
+      &-books {
+        &::before {
+          content: '\EA11';
+        }
+      }
     }
   }
 }

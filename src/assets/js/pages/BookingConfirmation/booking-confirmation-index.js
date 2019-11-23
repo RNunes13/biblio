@@ -1,8 +1,8 @@
 
-import BookingMain from '../../../common/js/modules/BookingConfirmation';
+import BookingConfirmationMain from '../../../common/js/modules/BookingConfirmation';
 
 export default {
   init() {
-    BookingMain.init();
+    BookingConfirmationMain.init();
   },
 };
