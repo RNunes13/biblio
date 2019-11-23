@@ -113,5 +113,32 @@
         );
       }
     }
+
+    function create() {
+      $query = "INSERT INTO " . $this->table_name . " (ddd, number, user_id) VALUES (:ddd, :number, :user_id)";
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam('ddd', $this->ddd);
+      $stmt->bindParam('number', $this->number);
+      $stmt->bindParam('user_id', $this->user_id);
+      
+      if ($stmt->execute()) {
+        return array(
+          "code" => 201,
+          "data" => array(
+            "success" => true,
+            "message" => "UserPhone created"
+          )
+        );
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
+        );
+      }
+    }
   }
 ?>

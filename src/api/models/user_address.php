@@ -139,5 +139,40 @@
         );
       }
     }
+
+    function create() {
+      $query = "
+        INSERT INTO " . $this->table_name . " (user_id, zip_code, street, number, additional, neighborhood, city, uf) 
+        VALUES (:user_id, :zip_code, :street, :number, :additional, :neighborhood, :city, :uf)
+      ";
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam('user_id', $this->user_id);
+      $stmt->bindParam('zip_code', $this->zip_code);
+      $stmt->bindParam('street', $this->street);
+      $stmt->bindParam('number', $this->number);
+      $stmt->bindParam('additional', $this->additional);
+      $stmt->bindParam('neighborhood', $this->neighborhood);
+      $stmt->bindParam('city', $this->city);
+      $stmt->bindParam('uf', $this->uf);
+      
+      if ($stmt->execute()) {
+        return array(
+          "code" => 201,
+          "data" => array(
+            "success" => true,
+            "message" => "UserAddress created"
+          )
+        );
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
+        );
+      }
+    }
   }
 ?>
