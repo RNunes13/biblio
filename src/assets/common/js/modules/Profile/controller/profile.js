@@ -11,19 +11,30 @@ export const profile = {
     scope.app.state.form.isSubmiting = true;
     scope.app.state.form.buttonText = 'Salvando...';
 
-    setTimeout(() => {
+    if (
+      !await savePhones(scope.app.state.form.phones) ||
+      !await saveAddresses(scope.app.state.form.addresses)
+    ) {
       scope.app.state.form.isSubmiting = false;
       scope.app.state.form.buttonText = 'Salvar';
-    }, 1000);
 
-    return;
+      return;
+    };
 
-    axios.post('/api/users/update.php', {})
+    const data = {
+      id: scope.app.state.user.id,
+      name: scope.app.state.form.name.value,
+      username: scope.app.state.form.username.value,
+      email: scope.app.state.form.email.value,
+      cpf: scope.app.state.form.cpf.value
+    }
+
+    axios.post('/api/users/update.php', data)
     .then(({ data }) => {
       alertify.success('Perfil atualizado');
 
       scope.app.state.user = data;
-      window.localStorage.setItem('@Biblio:user', data);
+      window.localStorage.setItem('@Biblio:user', JSON.stringify(data));
     })
     .catch(({response }) => {
       const { error } = response.data;
@@ -252,4 +263,50 @@ async function validForm(scope) {
   }
 
   return !hasError;
+}
+
+async function savePhones(phones) {
+  try {
+    const userId = Biblio.profileComponent.app.state.user.id;
+    
+    const newPhones = phones
+      .filter(p => p._new)
+      .map(p => ({ ...p, user_id: userId  }));
+    
+    const updatePhones = phones
+      .filter(p => !newPhones.map(_p => _p.id).includes(p.id));
+
+    await axios.post('/api/user_phone/update_all.php', updatePhones);
+    await axios.post('/api/user_phone/create_list.php', newPhones);
+
+    return true;
+  } catch(err) {
+    console.error(err);
+    alertify.error('Ocorreu um erro ao salvar o(s) telefone(s). Tente novamente em instantes.');
+
+    return false;
+  }
+}
+
+async function saveAddresses(addresses) {
+  try {
+    const userId = Biblio.profileComponent.app.state.user.id;
+    
+    const newAddresses = addresses
+      .filter(a => a._new)
+      .map(a => ({ ...a, user_id: userId  }));
+
+    const updateAddresses = addresses
+      .filter(a => !newAddresses.map(_a => _a.id).includes(a.id));
+
+    await axios.post('/api/user_address/update_all.php', updateAddresses);
+    await axios.post('/api/user_address/create_list.php', newAddresses);
+
+    return true;
+  } catch(err) {
+    console.error(err);
+    alertify.error('Ocorreu um erro ao salvar o(s) endereço(s). Tente novamente em instantes.');
+
+    return false;
+  }
 }

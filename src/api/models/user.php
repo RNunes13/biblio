@@ -32,8 +32,8 @@
       $username = htmlspecialchars(strip_tags($username));
 
       // bind values
-      $stmt->bindParam(":username", $username);
-      $stmt->bindParam(":password", $password_hash);
+      $stmt->bindParam("username", $username);
+      $stmt->bindParam("password", $password_hash);
 
       $stmt->execute();
 
@@ -160,6 +160,57 @@
           "error" => array(
             "code" => "@Biblio:userNotFound",
             "message" => "User not found."
+          )
+        );
+      }
+    }
+
+    function update() {
+      $query = "
+        UPDATE " . $this->table_name . " 
+        SET name = :name, username = :username, email = :email, cpf = :cpf 
+        WHERE id = :id
+      ";
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam('id', $this->id);
+      $stmt->bindParam('name', $this->name);
+      $stmt->bindParam('username', $this->username);
+      $stmt->bindParam('email', $this->email);
+      $stmt->bindParam('cpf', $this->cpf);
+      
+      if ($stmt->execute()) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+ 
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam("id", $this->id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        extract($result);
+
+        $user = array(
+          "id" => $id,
+          "cpf" => $cpf,
+          "name" => $name,
+          "email" => $email,
+          "role" => $role_id,
+          "picture" => "http://www.gravatar.com/avatar/" . md5($email) . ".jpg?s=80&d=identicon",
+          "username" => $username,
+          "created_at" => $created_at,
+          "updated_at" => $updated_at,
+        );
+
+        return array(
+          "code" => 200,
+          "data" => $user
+        );
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
           )
         );
       }
