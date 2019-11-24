@@ -1,6 +1,6 @@
 
 import { data } from '../data/index';
-import { header as El } from '../../Globals/globals-selectors';
+import { header, navbar } from '../../Globals/globals-selectors';
 import { controller } from '../controller/index';
 
 export default {
@@ -12,7 +12,7 @@ export default {
 function bindData() {
   const user = JSON.parse(window.localStorage.getItem("@Biblio:user"));
 
-  Biblio.headerComponent = Biblio.rivets.bind(El.headerComponent, {
+  const obj = {
     app: {
       props: data.props,
       state: {
@@ -21,5 +21,8 @@ function bindData() {
       },
       controller,
     },
-  }).models;
+  };
+
+  Biblio.headerComponent = Biblio.rivets.bind(header.headerComponent, obj).models;
+  Biblio.navbarComponent = Biblio.rivets.bind(navbar.navbarComponent, obj).models;
 }

@@ -1,3 +1,65 @@
 
 .rn-navbar {
+  position: fixed;
+  top: $mobile-header-height;
+  left: 0;
+  right: 0;
+  background-color: $color-white;
+  z-index: z('navbar');
+  transition-property: transform, opacity, visibility;
+  transition-duration: $transition-duration;
+  transition-timing-function: $decelerate-ease;
+
+  @include mq('sm') {
+    display: none !important;
+  }
+
+  &:not(.is--active) {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__user {
+    background-color: $color-secondary;
+
+    &--container {
+      @include rem(padding-top, 10px);
+      @include rem(padding-bottom, 10px);
+      display: flex;
+      align-items: center;
+    }
+
+    &--picture {
+      @include rem(margin-right, 10px);
+      @include rem(width, 45px);
+      @include rem(height, 45px);
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    &--name {
+      @include font-weight(semi-bold);
+      color: $color-white;
+    }
+  }
+
+  &__container {
+    @include rem(padding-top, 10px);
+    @include rem(padding-bottom, 10px);
+  }
+
+  &__item {
+    @include rem(margin-bottom, 8px);
+    
+    a,
+    button {
+      @include rem(font-size, 18px);
+      @include font-weight(semi-bold);
+      display: flex;
+      align-items: center;
+      color: $color-baltic-sea;
+    }
+  }
 }

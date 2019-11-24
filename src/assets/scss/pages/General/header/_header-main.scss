@@ -2,9 +2,11 @@
 .rn-header {
   width: 100%;
   flex: 0 0 auto;
+  position: fixed;
+  top: 0;
   z-index: z('header');
   background-color: $color-white;
-  box-shadow: 0 0 10px -6px $color-grey;
+  box-shadow: 0 0 10px -6px $color-black;
   transition: height 200ms $accelerate-ease;
 
   @include mq('sm') {
@@ -39,5 +41,25 @@
     @include rem(margin-right, 5px);
     display: flex;
     text-decoration: underline;
+  }
+
+  &__menu {
+    @include mq('sm'){
+      display: none;
+    }
+
+    &::before {
+      @include rem(font-size, 20px);
+      @include font-weight(semi-bold);
+      @extend %iconfont;
+      color: $color-bunting;
+      content: '\EA13';
+    }
+
+    &.nav-open {
+      &::before {
+        content: '\EA07';
+      }
+    }
   }
 }

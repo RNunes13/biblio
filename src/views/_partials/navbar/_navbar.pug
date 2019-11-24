@@ -1,7 +1,26 @@
-- var items = [{name: 'Home', href: '#home', class: 'is--active'},{name: 'About', href: '#about'},{name: 'Contact', href: '#contact'}]
 
-nav(class="rn-navbar js--navbar")
-  ul(class="rn-navbar__items js--navbar-items")
-    each item in items
-      li(class=`rn-navbar__item ${item.class} js--navbar-item`)
-        a(class="rn-navbar__link js--navbar-link", href=item.href) #{item.name}
+nav(class="rn-navbar js--navbar", rv-if="app.state.user")
+  div(class="rn-navbar__user")
+    div(class="rn-navbar__user--container rn-container")
+      figure(class="rn-navbar__user--picture")
+        img(
+          class="has--placeloader js--lazy",
+          src=imgRemoveIconNotFound,
+          rv-data-src="app.state.user.picture",
+          rv-alt="app.state.user.name",
+          rv-title="app.state.user.name"
+          placeholder="assets/images/user-placeholder.png"
+        )
+      span(class="rn-navbar__user--name", rv-text="app.state.user.name | firstName")
+  div(class="rn-navbar__container rn-container")  
+    ul(class="rn-navbar__items js--navbar-items")
+      li(class=`rn-navbar__item js--navbar-item`)
+        a(class="icon icon-user", href="/") Acervo
+      li(class=`rn-navbar__item js--navbar-item`)
+        a(class="icon icon-user", href="/profile.html") Meu perfil
+      li(class=`rn-navbar__item js--navbar-item`)
+        a(class="icon icon-books", href="/bookings.html") Reservas
+      li(class=`rn-navbar__item js--navbar-item`)
+        a(class="icon icon-loans", href="/loan.html") Empréstimos
+      li(class=`rn-navbar__item js--navbar-item`)
+        button(class="icon icon-logout", rv-on-click="app.controller.user.logout") Sair

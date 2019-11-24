@@ -6,6 +6,10 @@ $header-user-height: 45px;
   position: relative;
   height: $header-user-height;
 
+  @include mq('sm', max) {
+    display: none;
+  }
+
   &.menu-open {
     #{$user}--info::after {
       transform: rotate(90deg);

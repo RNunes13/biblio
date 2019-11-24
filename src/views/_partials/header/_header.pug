@@ -8,3 +8,8 @@ header(class="rn-header js--header")
       a(class="rn-header__signin rn-btn rn-btn__primary", href="/login.html") Entrar
     div(class="rn-header__user js--header-user", rv-if="app.state.user")
       include ./_header-user-info.pug
+    button(
+      type="button",
+      rv-if="app.state.user",
+      class="rn-header__menu rn-btn js--header-menu",
+    )

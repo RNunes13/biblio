@@ -37,3 +37,7 @@ export const booking = {
 export const loan = {
   loanComponent: document.querySelector('.js--loan'),
 };
+
+export const navbar = {
+  navbarComponent: document.querySelector('.js--navbar'),
+};

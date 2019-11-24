@@ -37,6 +37,7 @@ export default {
     Biblio.backTop = document.querySelector('.js--back-top');
     Biblio.headerUser = document.querySelector('.js--header-user');
     Biblio.userMenu = document.querySelector('.js--header-user-menu');
+    Biblio.menuBtn = document.querySelector('.js--header-menu');
     Biblio.rivets = window.rivets;
 
     // External Plugins
@@ -109,7 +110,9 @@ export default {
         Biblio.overlay.classList.remove('is--active');
         Biblio.body.classList.remove('has--no-scroll');
         Biblio.userMenu.classList.remove('is--open');
+        Biblio.navbar.classList.remove('is--active');
         Biblio.headerUser.classList.remove('menu-open');
+        Biblio.menuBtn.classList.remove('nav-open');
       }
     };
   },
