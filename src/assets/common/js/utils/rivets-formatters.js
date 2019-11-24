@@ -9,3 +9,7 @@ rivets.formatters.minus = (value, arg) => value - arg;
 
 rivets.formatters.emptyBooks = (loadingBooks, submitingForm) => !loadingBooks && !submitingForm;
 rivets.formatters.firstName = (value) => value.split(' ')[0];
+
+
+rivets.formatters.backofficeAccess = (value) => ['1', '2', '3'].includes(value);
+rivets.formatters.in = (role, access) => access.split(',').includes(role);

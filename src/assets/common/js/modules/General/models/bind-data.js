@@ -1,6 +1,6 @@
 
 import { data } from '../data/index';
-import { header, navbar } from '../../Globals/globals-selectors';
+import { header, navbar, sidebar } from '../../Globals/globals-selectors';
 import { controller } from '../controller/index';
 
 export default {
@@ -25,4 +25,5 @@ function bindData() {
 
   Biblio.headerComponent = Biblio.rivets.bind(header.headerComponent, obj).models;
   Biblio.navbarComponent = Biblio.rivets.bind(navbar.navbarComponent, obj).models;
+  Biblio.sidebarComponent = sidebar.sidebarComponent ? Biblio.rivets.bind(sidebar.sidebarComponent, obj).models : null;
 }

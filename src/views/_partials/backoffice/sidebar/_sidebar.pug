@@ -1,5 +1,5 @@
 
-- var items = [{ class: "home", link: "/backoffice", text: "Home" },{ class: "books", link: "/backoffice/books.html", text: "Livros" },{ class: "bookings", link: "/backoffice/bookings.html", text: "Reservas" },{ class: "loans", link: "/backoffice/loans.html", text: "Empréstimos" },{ class: "publishers", link: "/backoffice/publishers.html", text: "Editoras" },{ class: "users", link: "/backoffice/users.html", text: "Usuários" }]
+- var items = [{ class: "home", link: "/backoffice", text: "Home", access: "1,2,3" },{ class: "books", link: "/backoffice/books.html", text: "Livros", access: "1,2,3" },{ class: "bookings", link: "/backoffice/bookings.html", text: "Reservas", access: "1,3" },{ class: "loans", link: "/backoffice/loans.html", text: "Empréstimos", access: "1,3" },{ class: "publishers", link: "/backoffice/publishers.html", text: "Editoras", access: "1,2" },{ class: "users", link: "/backoffice/users.html", text: "Usuários", access: "1,3" }]
 
 div(class="rn-sidebar rn-container js--sidebar")
     p(class="rn-sidebar__title") #{$pageName}
@@ -8,4 +8,5 @@ div(class="rn-sidebar rn-container js--sidebar")
         a(
           class=`rn-sidebar__buttons--${item.class} rn-btn rn-btn__primary--outline icon icon-${item.class}`,
           href=item.link
+          rv-if=`app.state.user.role | in '${item.access}'`
         ) #{item.text}

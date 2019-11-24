@@ -42,6 +42,14 @@ export const navbar = {
   navbarComponent: document.querySelector('.js--navbar'),
 };
 
+export const sidebar = {
+  sidebarComponent: document.querySelector('.js--sidebar'),
+};
+
+export const admin_home = {
+  adminComponent: document.querySelector('.js--admin-home'),
+};
+
 export const admin_books = {
   adminBookComponent: document.querySelector('.js--admin-books'),
   bookModal: {

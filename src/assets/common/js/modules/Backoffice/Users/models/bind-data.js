@@ -13,7 +13,7 @@ export default {
 async function bindData() {
   const user = JSON.parse(window.localStorage.getItem('@Biblio:user'));
 
-  if (!user || (user && user.role !== '1')) {
+  if (!user || (user && !['1', '3'].includes(user.role))) {
     window.location.href = window.location.origin;
     return;
   }
