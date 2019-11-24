@@ -188,5 +188,84 @@
         );
       }
     }
+
+    function read() {
+      $query = "
+        SELECT
+          bh.*,
+          book.title AS 'book_title',
+          user.name AS 'user_name'
+        FROM " . $this->table_name . " AS bh
+        JOIN book ON book.id = bh.book_id
+        JOIN user ON user.id = bh.user_id
+      ";
+   
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+
+      $num = $stmt->rowCount();
+
+      if ($num > 0) {
+        $booking_arr = array();
+        $booking_arr["records"] = array();
+    
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+          extract($row);
+    
+          $booking_item = array(
+            "id" => $id,
+            "status" => $status,
+            "book_id" => $book_id,
+            "book" => $book_title,
+            "user_id" => $user_id,
+            "user" => $user_name,
+            "reservation_date" => $reservation_date,
+          );
+    
+          array_push($booking_arr["records"], $booking_item);
+        }
+    
+        return $booking_arr;
+      } else {
+        return array();
+      }
+    }
+
+    function release($booking_id) {
+      $query = "UPDATE " . $this->table_name . " SET status = 'completed' WHERE id = ?";
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(1, $booking_id);
+
+      if ($stmt->execute()) {
+        $num = $stmt->rowCount();
+
+        if ($num) {
+          return array(
+            "code" => 200,
+            "data" => array(
+              "success" => true,
+              "message" => "Booking released"
+            )
+          );
+        } else {
+          return array(
+            "code" => 404,
+            "data" => array(
+              "success" => false,
+              "message" => "Booking does not found with id ".$booking_id
+            )
+          );
+        }
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
+        );
+      }
+    }
   }
 ?>

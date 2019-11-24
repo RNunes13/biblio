@@ -1,0 +1,19 @@
+extends ./../_layouts/_base-backoffice.pug
+
+//- Template variables
+block vars
+  - var $templateName = 'bookings'
+  - var $templateClass = 'bookings'
+  - var $pageName = 'Reservas'
+
+//- Page styles
+block append styles
+  link(href=`/assets/css/admin/biblio-${$templateName}.css`, media='all', rel='stylesheet')/
+
+//- Main Content
+block content
+  include ./../_partials/backoffice/bookings/_bookings-main.pug
+
+//- Page scripts
+block append scripts
+  script(src=`/assets/js/admin/biblio-${$templateName}.js`)

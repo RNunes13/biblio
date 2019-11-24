@@ -1,0 +1,5 @@
+section(class="rn-bookings admin rn-container js--admin-bookings")
+  div(rv-if="app.state.bookings.isLoading")
+    include ../../loader/_loader.pug
+
+  include ./_bookings-table.pug

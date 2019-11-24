@@ -45,7 +45,7 @@ export const loan = {
     }
   },
 
-  async delete(evt, scope) {
+  async complete(evt, scope) {
     evt.stopPropagation();
 
     const { id } = scope.loan;
@@ -54,7 +54,7 @@ export const loan = {
 
     if (confirmation) {
       try {
-        await axios.delete(`/api/book_loan/complete.php?id=${id}`);
+        await axios.put('/api/book_loan/complete.php', { id });
   
         alertify.success('Empréstimo finalizado com sucesso.');
   

@@ -57,7 +57,7 @@ function loadLoans() {
           ),
         }
       })
-      .sort((a, b) => a.id > b.id ? 1 : a.id < b.id ? -1 : 0);
+      .sort((a, b) => parseInt(a.id) > parseInt(b.id) ? 1 : parseInt(a.id) < parseInt(b.id) ? -1 : 0);
 
     Biblio.loanComponent.app.state.loans.raw = loans.slice();
     Biblio.loanComponent.app.state.loans.data = loans.slice();

@@ -1,0 +1,28 @@
+div(class="rn-table__container")
+  table(class="rn-bookings__table rn-table", rv-if="app.state.bookings.isLoading | eq false")
+    thead(class="rn-table__head")
+      tr
+        th(class="id") #
+        th(class="text-left") Usuário
+        th(class="text-left") Livro
+        th(class="text-center") Status
+        th(class="text-center") Criado em
+        th Ações
+    tbody
+      tr(class="has--click", rv-each-booking="app.state.bookings.data")
+        td(class="text-center semi-bold") {{ booking.id }}
+        td(class="text-left") {{ booking.user }}
+        td(class="text-left") {{ booking.book }}
+        td(class="text-center") {{ booking.status }}
+        td(class="text-center") {{ booking.reservation_date }}
+        td(class="actions")
+          button(
+            class="rn-btn renew",
+            rv-on-click="app.controller.booking.release",
+            rv-if="booking.status | eq 'Aguardando'"
+          ) Liberar
+          button(
+            class="rn-btn complete",
+            rv-on-click="app.controller.booking.cancel",
+            rv-if="booking.status | eq 'Aguardando'"
+          ) Cancelar

@@ -203,29 +203,39 @@
       return array("success" => false, "message" => $stmt->errorInfo());
     }
 
-    function deleteById() {
-      $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-   
-      $stmt = $this->conn->prepare($query);
-      $stmt->bindParam(1, $this->id);
-      
+    function complete($loan_id) {
+      $update = "UPDATE " . $this->table_name . " SET status = 'finished' WHERE id = ?";
+
+      $stmt = $this->conn->prepare($update);
+      $stmt->bindParam(1, $loan_id);
+
       if ($stmt->execute()) {
         $num = $stmt->rowCount();
 
         if ($num) {
-          return array("code" => 200, "success" => true, "message" => true);
+          return array(
+            "code" => 200,
+            "data" => array(
+              "success" => true,
+              "message" => "BookLoan completed"
+            )
+          );
         } else {
           return array(
             "code" => 404,
-            "success" => false,
-            "message" => "BookLoan does not found with id = ".$this->id
+            "data" => array(
+              "success" => false,
+              "message" => "BookLoan does not found with id ".$booking_id
+            )
           );
         }
       } else {
         return array(
           "code" => 500,
-          "success" => false,
-          "message" => $stmt->errorInfo()
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
         );
       }
     }

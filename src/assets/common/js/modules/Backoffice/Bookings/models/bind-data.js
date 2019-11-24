@@ -1,8 +1,8 @@
 
 import { data } from '../data/index';
+import { admin_bookings as El } from '../../../Globals/globals-selectors';
 import { getBookings } from '../methods';
 import { controller } from '../controller/index';
-import { booking as El } from '../../Globals/globals-selectors';
 
 export default {
   init() {
@@ -14,15 +14,15 @@ export default {
 async function bindData() {
   const user = JSON.parse(window.localStorage.getItem('@Biblio:user'));
 
-  if (!user) {
+  if (!user || (user && user.role !== '1')) {
     window.location.href = window.location.origin;
     return;
   }
 
-  Biblio.bookingComponent = Biblio.rivets.bind(El.bookingComponent, {
+  Biblio.adminBookingComponent = Biblio.rivets.bind(El.adminBookingComponent, {
     app: {
       props: data.props,
-      state : {
+      state: {
         ...data.state,
         user,
       },
@@ -32,11 +32,9 @@ async function bindData() {
 }
 
 function loadBookings() {
-  const { id } = Biblio.bookingComponent.app.state.user;
-
-  getBookings(id)
-  .then((data) => {
-    const bookings = data
+  getBookings()
+  .then((resp) => {
+    const bookings = resp.records
       .map((d) => {
         const formatStatus = () => {
           switch (d.status) {
@@ -50,19 +48,17 @@ function loadBookings() {
         return {
           ...d,
           status: formatStatus(),
-          reservation_date: new Date(d.reservation_date).toLocaleString(),
+          reservation_date: new Date(d.reservation_date).toLocaleDateString(),
         }
       })
       .sort((a, b) => parseInt(a.id) > parseInt(b.id) ? 1 : parseInt(a.id) < parseInt(b.id) ? -1 : 0);
 
-    Biblio.bookingComponent.app.state.bookings.raw = bookings.slice();
-    Biblio.bookingComponent.app.state.bookings.data = bookings.slice();
+    Biblio.adminBookingComponent.app.state.bookings.raw = bookings.slice();
+    Biblio.adminBookingComponent.app.state.bookings.data = bookings.slice();
   })
   .catch((err) => {
     console.error(err);
-    alertify.error("Ocorreu um erro na consulta das reservas. Tente novamente em instantes.")
+    alertify.error('Ocorreu um erro na consulta das reservas.');
   })
-  .finally(() => {
-    Biblio.bookingComponent.app.state.bookings.isLoading = false
-  });
+  .finally(() => Biblio.adminBookingComponent.app.state.bookings.isLoading = false);
 }

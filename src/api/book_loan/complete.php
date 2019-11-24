@@ -1,7 +1,7 @@
 <?php
   header("Access-Control-Allow-Origin: *");
   header("Access-Control-Allow-Headers: access");
-  header("Access-Control-Allow-Methods: DELETE");
+  header("Access-Control-Allow-Methods: put");
   header("Access-Control-Allow-Credentials: true");
   header('Content-Type: application/json');
   
@@ -11,16 +11,16 @@
   $database = new Database();
   $db = $database->getConnection();
   $book_loan = new BookLoan($db);
+ 
+  $data = json_decode(file_get_contents("php://input"));
+
+  if (!empty($data->id)) {
+    $resp = $book_loan->complete($data->id);
   
-  $book_loan->id = isset($_GET['id']) ? $_GET['id'] : die();
-  
-  $resp = $book_loan->deleteById();
-  
-  if ($resp["success"]) {
-    http_response_code($resp["code"]);
-    echo json_encode($resp["message"]);
+    http_response_code($resp['code']);
+    echo json_encode($resp['data']);
   } else {
-    http_response_code($resp["code"]);
-    echo json_encode($resp["message"]);
+    http_response_code(400);
+    echo json_encode(array("message" => "Unable to complete book_loan, ID was not provided."));
   }
 ?>
