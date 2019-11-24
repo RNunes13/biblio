@@ -1,0 +1,24 @@
+- var imgRemoveIconNotFound = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+div(class="rn-publishers__modal modal modal__lg hidden js--admin-publishers-modal", rv-class-hidden="app.state.showModal | eq false")
+  div(class="modal__backdrop", rv-on-click="app.controller.publisher.close")
+  div(class="modal__content")
+    div(class="modal__heading")
+      p(class="modal__title", rv-text="app.state.modalTitle")
+      button(class="modal__close", rv-on-click="app.controller.publisher.close")
+    div(class="modal__body")
+      form(class="rn-form")
+        fieldset(rv-disabled="app.state.publishers.selected.isSubmiting")
+          div(class="rn-form__row")
+            div(class="rn-form__group name")
+              label(class="rn-form__label", for="name") Nome
+              input(
+                id="name"
+                type="text"
+                required="required"
+                class="rn-form__input"
+                rv-value="app.state.publishers.selected.name"
+              )
+    div(class="modal__footer")
+      button(class="rn-btn rn-btn__primary", rv-on-click="app.controller.publisher.save") Salvar
+      button(class="rn-btn rn-btn__primary--outline close", rv-on-click="app.controller.publisher.close") Fechar

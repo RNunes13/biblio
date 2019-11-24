@@ -1,7 +1,7 @@
 
 export const state = {
   showModal: false,
-  books: {
+  publishers: {
     isLoading: true,
     raw: [],
     data: [],

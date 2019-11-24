@@ -49,3 +49,7 @@ export const admin_books = {
     thumbnail: document.querySelector('.js--admin-books-modal-image'),
   },
 };
+
+export const admin_publishers = {
+  adminPublisherComponent: document.querySelector('.js--admin-publishers'),
+};

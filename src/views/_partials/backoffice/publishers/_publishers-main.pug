@@ -1,0 +1,9 @@
+section(class="rn-publishers admin rn-container js--admin-publishers")
+  div(class="admin__new")
+    button(class="rn-btn rn-btn__primary--outline", rv-on-click="app.controller.publisher.newPublisher") Novo
+  div(rv-if="app.state.publishers.isLoading")
+    include ../../loader/_loader.pug
+
+  include ./_publishers-search.pug
+  include ./_publishers-table.pug
+  include ./_publishers-modal.pug

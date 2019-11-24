@@ -1,0 +1,19 @@
+extends ./../_layouts/_base-backoffice.pug
+
+//- Template variables
+block vars
+  - var $templateName = 'publishers'
+  - var $templateClass = 'publishers'
+  - var $pageName = 'Editoras'
+
+//- Page styles
+block append styles
+  link(href=`/assets/css/admin/biblio-${$templateName}.css`, media='all', rel='stylesheet')/
+
+//- Main Content
+block content
+  include ./../_partials/backoffice/publishers/_publishers-main.pug
+
+//- Page scripts
+block append scripts
+  script(src=`/assets/js/admin/biblio-${$templateName}.js`)
