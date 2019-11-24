@@ -1,0 +1,32 @@
+div(class="rn-table__container")
+  table(class="rn-loans__table rn-table", rv-if="app.state.loans.isLoading | eq false")
+    thead(class="rn-table__head")
+      tr
+        th(class="id") #
+        th(class="text-left") Usuário
+        th(class="text-left") Livro
+        th(class="text-center") Status
+        th(class="text-center") Renovações
+        th(class="text-center") Criado em
+        th(class="text-center") Acaba em
+        th Ações
+    tbody
+      tr(class="has--click", rv-each-loan="app.state.loans.data", rv-on-click="app.controller.loan.setLoan")
+        td(class="text-center semi-bold") {{ loan.id }}
+        td(class="text-left") {{ loan.user }}
+        td(class="text-left") {{ loan.book }}
+        td(class="text-center") {{ loan.status }}
+        td(class="text-center") {{ loan.renewal_count }}
+        td(class="text-center") {{ loan.loan_date }}
+        td(class="text-center") {{ loan.end_date }}
+        td(class="actions")
+          button(
+            class="rn-btn renew",
+            rv-on-click="app.controller.loan.renew",
+            rv-if="loan.showRenewButton"
+          ) Renovar
+          button(
+            class="rn-btn complete",
+            rv-on-click="app.controller.loan.complete",
+            rv-if="loan.status | eq 'Ativo'"
+          ) Finalizar

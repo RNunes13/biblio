@@ -1,13 +1,14 @@
-table(class="rn-publishers__table rn-table", rv-if="app.state.publishers.isLoading | eq false")
-  thead(class="rn-table__head")
-    tr
-      th(class="id") #
-      th(class="text-left fill") Nome
-      th Ações
-  tbody
-    tr(class="has--click", rv-each-publisher="app.state.publishers.data", rv-on-click="app.controller.publisher.setPublisher")
-      td(class="text-center semi-bold") {{ publisher.id }}
-      td {{ publisher.name }}
-      td(class="actions")
-        button(class="rn-btn edit", rv-on-click="app.controller.publisher.setPublisher") Editar
-        button(class="rn-btn delete", rv-on-click="app.controller.publisher.delete") Deletar
+div(class="rn-table__container")
+  table(class="rn-publishers__table rn-table", rv-if="app.state.publishers.isLoading | eq false")
+    thead(class="rn-table__head")
+      tr
+        th(class="id") #
+        th(class="text-left fill") Nome
+        th Ações
+    tbody
+      tr(class="has--click", rv-each-publisher="app.state.publishers.data", rv-on-click="app.controller.publisher.setPublisher")
+        td(class="text-center semi-bold") {{ publisher.id }}
+        td {{ publisher.name }}
+        td(class="actions")
+          button(class="rn-btn edit", rv-on-click="app.controller.publisher.setPublisher") Editar
+          button(class="rn-btn delete", rv-on-click="app.controller.publisher.delete") Deletar

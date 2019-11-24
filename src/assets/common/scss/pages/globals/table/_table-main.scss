@@ -1,7 +1,12 @@
 
 .rn-table {
+  @include rem(min-width, 680px);
   width: 100%;
   border-collapse: collapse;
+
+  &__container {
+    overflow-x: auto;
+  }
 
   .text-center { text-align: center }
   .text-left { text-align: left }
@@ -48,17 +53,21 @@
           }
 
           .edit,
-          .delete {
+          .delete,
+          .renew,
+          .complete {
             @include rem(min-height, 25px);
             padding: 0;
             text-decoration: underline;
           }
 
-          .edit {
+          .edit,
+          .renew {
             color: $color-primary;
           }
 
-          .delete {
+          .delete,
+          .complete {
             color: $color-persian-red;
           }
         }

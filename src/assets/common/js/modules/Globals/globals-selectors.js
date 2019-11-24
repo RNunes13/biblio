@@ -53,3 +53,7 @@ export const admin_books = {
 export const admin_publishers = {
   adminPublisherComponent: document.querySelector('.js--admin-publishers'),
 };
+
+export const admin_loans = {
+  adminLoanComponent: document.querySelector('.js--admin-loans'),
+};

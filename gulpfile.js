@@ -38,7 +38,7 @@ const otherFiles  = [
 ];
 
 const adminFiles  = [
-  'admin', 'books', 'publishers'
+  'admin', 'books', 'publishers', 'loans'
 ];
 
 const PATHS = {

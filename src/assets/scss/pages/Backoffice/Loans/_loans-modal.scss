@@ -1,0 +1,13 @@
+
+$marginVertical: 8px;
+
+.rn-loans__modal {
+  .rn-form {
+    .user,
+    .book {
+      margin-left: $marginVertical;
+      margin-right: $marginVertical;
+      width: calc(50% - #{$marginVertical} * 2);
+    }
+  }
+}

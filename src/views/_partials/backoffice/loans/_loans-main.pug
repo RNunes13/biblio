@@ -1,0 +1,9 @@
+section(class="rn-loans admin rn-container js--admin-loans")
+  div(class="admin__new")
+    button(class="rn-btn rn-btn__primary--outline", rv-on-click="app.controller.loan.newLoan") Novo
+  div(rv-if="app.state.loans.isLoading")
+    include ../../loader/_loader.pug
+
+  include ./_loans-search.pug
+  include ./_loans-table.pug
+  include ./_loans-modal.pug
