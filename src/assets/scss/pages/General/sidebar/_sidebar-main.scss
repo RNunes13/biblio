@@ -1,0 +1,60 @@
+
+.rn-sidebar {
+  @include rem(margin-bottom, 10px);
+  @include rem(padding, 15px 20px);
+  @include rem(border-radius, 4px);
+  @include flex-spaced;
+  background-color: $color-white;
+  box-shadow: 0 0 10px -6px $color-black;
+
+  @include mq('sm', max) {
+    flex-direction: column;
+  }
+
+  @include mq('xs', max) {
+    @include rem(margin, 0 15px 10px);
+  }
+
+  &__title {
+    @include rem(margin-right, 10px);
+    @include rem(font-size, 20px);
+    @include font-weight(semi-bold);
+    color: $color-bunting;
+    flex-shrink: 0;
+
+    @include mq('sm', max) {
+      @include rem(margin-bottom, 10px);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+
+    @include mq('sm') {
+      flex-wrap: wrap;
+    }
+
+    @include mq('sm', max) {
+      white-space: nowrap;
+      justify-content: flex-start;
+      overflow-x: scroll;
+    }
+
+    a {
+      @include rem(margin-top, 5px);
+      @include rem(margin-bottom, 5px);
+      @include rem(min-height, 35px);
+
+      @include mq('sm', max) {
+        flex: 1 0 auto;
+      }
+
+      &:not(:last-child) {
+        @include rem(margin-right, 5px);
+      }
+    }
+  }
+}

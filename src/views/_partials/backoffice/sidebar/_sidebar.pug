@@ -1,0 +1,11 @@
+
+- var items = [{ class: "home", link: "/backoffice", text: "Home" },{ class: "books", link: "/backoffice/books.html", text: "Livros" },{ class: "bookings", link: "/backoffice/bookins.html", text: "Reservas" },{ class: "loans", link: "/backoffice/loans.html", text: "Empréstimos" },{ class: "publishers", link: "/backoffice/publishers.html", text: "Editoras" },{ class: "users", link: "/backoffice/publishers.html", text: "Usuários" },{ class: "reports", link: "/backoffice/reports.html", text: "Relatórios" }]
+
+div(class="rn-sidebar rn-container js--sidebar")
+    p(class="rn-sidebar__title") #{$pageName}
+    div(class="rn-sidebar__buttons")
+      each item in items
+        a(
+          class=`rn-sidebar__buttons--${item.class} rn-btn rn-btn__primary--outline icon icon-${item.class}`,
+          href=item.link
+        ) #{item.text}

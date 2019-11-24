@@ -1,0 +1,32 @@
+
+include ./../_mixins/_metaTags.pug
+
+block vars
+
+doctype
+html(lang='pt-BR')
+  //- Head
+  include ./../_partials/utils/_head.pug
+
+  body
+    div(class='rn-overlay js--overlay')
+
+    //- Header
+    include ./../_partials/header/_header.pug
+
+    //- Navbar
+    include ./../_partials/navbar/_navbar.pug
+
+    //- Main Content
+    main(class=`rn-${$templateClass}__main js--${$templateClass}`, role='main')
+      a(class="rn-back-top js--back-top", href="#")
+      include ./../_partials/backoffice/sidebar/_sidebar.pug
+      block content
+
+    //- Footer
+    include ./../_partials/footer/_footer.pug
+
+    //- Scripts
+    block scripts
+      include ./../_partials/utils/_scripts.pug
+      include ./../_partials/utils/_google-fonts.pug

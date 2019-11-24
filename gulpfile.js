@@ -34,7 +34,8 @@ const DEST_PATH = 'build';
 const projectName = 'biblio';
 const commomFiles = ['globals'];
 const otherFiles  = [
-  'home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings', 'loan'
+  'home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings', 'loan',
+  'admin'
 ];
 
 const PATHS = {
@@ -42,6 +43,7 @@ const PATHS = {
   js: { src: `${SRC_PATH}/assets/**/*.js`, dest: `${DEST_PATH}/assets/js` },
   img: { src: `${SRC_PATH}/assets/images/*.*`, dest: `${DEST_PATH}/assets/images` },
   views: { src: `${SRC_PATH}/views/*.pug`, dest: `${DEST_PATH}/` },
+  backoffice: { src: `${SRC_PATH}/views/backoffice/*.pug`, dest: `${DEST_PATH}/backoffice` },
   api: { src: `${SRC_PATH}/api/**/*.php`, dest: `${DEST_PATH}/api` },
 };
 
@@ -114,6 +116,14 @@ function styles(done) {
 }
 
 function views() {
+  gulp.src(PATHS.backoffice.src)
+    .pipe(pug({
+      doctype: 'html',
+      pretty: true
+    }))
+    .pipe(gulp.dest(PATHS.backoffice.dest))
+    .pipe(browserSync.stream());
+
   return gulp.src(PATHS.views.src)
     .pipe(pug({
       doctype: 'html',
