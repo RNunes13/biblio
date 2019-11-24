@@ -1,0 +1,14 @@
+
+.admin {
+  @include rem(padding-top, 20px);
+  @include rem(padding-bottom, 20px);
+  background-color: $color-white;
+  box-shadow: 0 0 10px -6px $color-black;
+
+  &__new {
+    @include rem(margin-bottom, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

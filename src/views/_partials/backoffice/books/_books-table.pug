@@ -1,0 +1,19 @@
+table(class="rn-books__table rn-table")
+  thead(class="rn-table__head")
+    tr
+      th(class="id") #
+      th(class="text-left") Nome
+      th(class="text-left") Autor
+      th(class="text-left") Descrição interna
+      th Quantidade
+      th Ações
+  tbody
+    tr(class="has--click", rv-each-book="app.state.books.data", rv-on-click="app.controller.book.setBook")
+      td(class="text-center semi-bold") {{ book.id }}
+      td {{ book.title }}
+      td {{ book.author }}
+      td {{ book.internal_description }}
+      td(class="text-center") {{ book.quantity }}
+      td(class="actions")
+        button(class="rn-btn edit", rv-on-click="app.controller.book.setBook") Editar
+        button(class="rn-btn delete", rv-on-click="app.controller.book.delete") Deletar

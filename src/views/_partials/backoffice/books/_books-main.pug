@@ -1,0 +1,9 @@
+section(class="rn-books admin rn-container js--admin-books")
+  div(class="admin__new")
+    button(class="rn-btn rn-btn__primary--outline", rv-on-click="app.controller.book.newBook") Novo
+  div(rv-if="app.state.books.isLoading")
+    include ../../loader/_loader.pug
+
+  include ./_books-search.pug
+  include ./_books-table.pug
+  include ./_books-modal.pug

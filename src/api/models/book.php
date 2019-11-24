@@ -25,8 +25,9 @@
         $this->conn = $db;
     }
 
-    function read() {
-      $query = "SELECT book.*, pc.name AS 'publisher_name' FROM " . $this->table_name . " JOIN publishing_company AS pc ON pc.id = book.publishing_company_id";
+    function read($admin = false) {
+      $condition = !$admin ? ' WHERE active = true AND quantity > 0' : '';
+      $query = "SELECT book.*, pc.name AS 'publisher_name' FROM " . $this->table_name . " JOIN publishing_company AS pc ON pc.id = book.publishing_company_id".$condition;
    
       $stmt = $this->conn->prepare($query);
       $stmt->execute();
@@ -146,6 +147,99 @@
       }
 
       return $books_arr;
+    }
+
+    function update() {
+      $query = "
+        UPDATE " . $this->table_name . " SET
+          title = :title,
+          author = :author,
+          genre = :genre,
+          edition = :edition,
+          release_year = :release_year,
+          isbn = :isbn,
+          active = :active,
+          internal_identification = :internal_identification,
+          number_pages = :number_pages,
+          quantity = :quantity,
+          publishing_company_id = :publishing_company_id
+        WHERE id = :id
+      ";
+
+      $stmt = $this->conn->prepare($query);
+
+      // sanitize
+      $this->id = htmlspecialchars(strip_tags($this->id));
+      $this->title = htmlspecialchars(strip_tags($this->title));
+      $this->author = htmlspecialchars(strip_tags($this->author));
+      $this->genre = htmlspecialchars(strip_tags($this->genre));
+      $this->edition = htmlspecialchars(strip_tags($this->edition));
+      $this->release_year = htmlspecialchars(strip_tags($this->release_year));
+      $this->isbn = htmlspecialchars(strip_tags($this->isbn));
+      $this->active = htmlspecialchars(strip_tags($this->active ? "1" : "0"));
+      $this->internal_identification = htmlspecialchars(strip_tags($this->internal_identification));
+      $this->number_pages = htmlspecialchars(strip_tags($this->number_pages));
+      $this->quantity = htmlspecialchars(strip_tags($this->quantity));
+      $this->publishing_company_id = htmlspecialchars(strip_tags($this->publishing_company_id));
+
+      // bind values
+      $stmt->bindParam(":id", $this->id);
+      $stmt->bindParam(":title", $this->title);
+      $stmt->bindParam(":author", $this->author);
+      $stmt->bindParam(":genre", $this->genre);
+      $stmt->bindParam(":edition", $this->edition);
+      $stmt->bindParam(":release_year", $this->release_year);
+      $stmt->bindParam(":isbn", $this->isbn);
+      $stmt->bindParam(":active", $this->active);
+      $stmt->bindParam(":internal_identification", $this->internal_identification);
+      $stmt->bindParam(":number_pages", $this->number_pages);
+      $stmt->bindParam(":quantity", $this->quantity);
+      $stmt->bindParam(":publishing_company_id", $this->publishing_company_id);
+
+      if ($stmt->execute()) {
+        return array(
+          "code" => 200,
+          "data" => array(
+            "success" => true,
+            "message" => "Book updated"
+          )
+        );
+      } else {
+        return array(
+          "code" => 500,
+          "data" => array(
+            "success" => false,
+            "message" => $stmt->errorInfo()
+          )
+        );
+      }
+    }
+
+    function deleteById() {
+      $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+   
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(1, $this->id);
+      
+      if ($stmt->execute()) {
+        $num = $stmt->rowCount();
+
+        if ($num) {
+          return array("code" => 200, "success" => true, "message" => true);
+        } else {
+          return array(
+            "code" => 404,
+            "success" => false,
+            "message" => "Book does not found with id = ".$this->id
+          );
+        }
+      } else {
+        return array(
+          "code" => 500,
+          "success" => false,
+          "message" => $stmt->errorInfo()
+        );
+      }
     }
   }
 ?>

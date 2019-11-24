@@ -1,0 +1,53 @@
+
+$marginVertical: 8px;
+
+.rn-books__modal {
+  .rn-form {
+    &__row {
+      & > * {
+        @include rem(margin-right, #{$marginVertical});
+        @include rem(margin-left, #{$marginVertical});
+        flex-grow: 1;
+
+        @include mq('sm', max) {
+          width: 100% !important;
+          margin-right: 0 !important;
+          margin-left: 0 !important;
+        }
+      }
+    }
+
+    figure {
+      @include rem(margin, 0 auto 15px !important);
+      @include rem(max-width, 150px);
+    }
+
+    .name,
+    .author {
+      @include mq('sm') { width: calc(50% - #{$marginVertical} * 2) }
+    }
+
+    .genre,
+    .isbn,
+    .edition,
+    .isbn,
+    .number_pages {
+      @include mq('sm') { width: calc(25% - #{$marginVertical} * 2) }
+    }
+
+    .publisher,
+    .release,
+    .quantity {
+      @include mq('sm') { width: calc(33% - #{$marginVertical} * 2) }
+    }
+
+    .description,
+    .active {
+      width: 100%;
+    }
+
+    .active {
+      display: inline-flex;
+    }
+  }
+}

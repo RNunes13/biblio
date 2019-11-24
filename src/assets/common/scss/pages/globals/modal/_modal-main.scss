@@ -24,6 +24,12 @@
     }
   }
 
+  &__lg {
+    #{$modal}__content {
+      @include rem(max-width, 800px !important);
+    }
+  }
+
   &__backdrop {
     position: fixed;
     top: 0;

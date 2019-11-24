@@ -2,15 +2,15 @@
   header("Access-Control-Allow-Origin: *");
   header("Content-Type: application/json; charset=UTF-8");
 
-  include_once '../config/database.php';
-  include_once '../models/book.php';
+  include_once '../../config/database.php';
+  include_once '../../models/book.php';
   
   $database = new Database();
   $db = $database->getConnection();
   
   $book = new Book($db);
 
-  $stmt = $book->read();
+  $stmt = $book->read(true);
   $num = $stmt->rowCount();
 
   if ($num > 0) {

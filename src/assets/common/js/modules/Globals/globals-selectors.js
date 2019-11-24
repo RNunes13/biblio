@@ -41,3 +41,11 @@ export const loan = {
 export const navbar = {
   navbarComponent: document.querySelector('.js--navbar'),
 };
+
+export const admin_books = {
+  adminBookComponent: document.querySelector('.js--admin-books'),
+  bookModal: {
+    self: document.querySelector('.js--admin-books-modal'),
+    thumbnail: document.querySelector('.js--admin-books-modal-image'),
+  },
+};

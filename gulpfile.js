@@ -34,8 +34,11 @@ const DEST_PATH = 'build';
 const projectName = 'biblio';
 const commomFiles = ['globals'];
 const otherFiles  = [
-  'home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings', 'loan',
-  'admin'
+  'home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings', 'loan'
+];
+
+const adminFiles  = [
+  'admin', 'books'
 ];
 
 const PATHS = {
@@ -85,6 +88,12 @@ function js(done) {
     `${SRC_PATH}/assets/js`,
     `${DEST_PATH}/assets/js`
   ));
+  
+  adminFiles.map((file) => fn(
+    `${projectName}-${file}`,
+    `${SRC_PATH}/assets/js/admin`,
+    `${DEST_PATH}/assets/js/admin`
+  ));
 
   done && done();
 }
@@ -110,6 +119,11 @@ function styles(done) {
   otherFiles.map((file) => fn(
     `${SRC_PATH}/assets/scss/${projectName}-${file}.scss`,
     `${DEST_PATH}/assets/css`
+  ));
+  
+  adminFiles.map((file) => fn(
+    `${SRC_PATH}/assets/scss/admin/${projectName}-${file}.scss`,
+    `${DEST_PATH}/assets/css/admin`
   ));
 
   done && done();

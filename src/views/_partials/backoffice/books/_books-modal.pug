@@ -1,0 +1,133 @@
+- var imgRemoveIconNotFound = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+- var infos = [{ label: 'Autor', text: 'app.state.books.selected.author' },{ label: 'Gênero', text: 'app.state.books.selected.genre' },{ label: 'Nº Páginas', text: 'app.state.books.selected.number_pages' },{ label: 'Edição', text: 'app.state.books.selected.edition' },{ label: 'Ano de lançamento', text: 'app.state.books.selected.release_year' },{ label: 'ISBN', text: 'app.state.books.selected.isbn' },{ label: 'Identificação interna', text: 'app.state.books.selected.internal_identification' },{ label: 'Editora', text: 'app.state.books.selected.publisher.name' }];
+
+div(class="rn-books__modal modal modal__lg hidden js--admin-books-modal", rv-class-hidden="app.state.showModal | eq false")
+  div(class="modal__backdrop", rv-on-click="app.controller.book.close")
+  div(class="modal__content")
+    div(class="modal__heading")
+      p(class="modal__title", rv-text="app.state.modalTitle")
+      button(class="modal__close", rv-on-click="app.controller.book.close")
+    div(class="modal__body")
+      form(class="rn-form")
+        fieldset(rv-disabled="app.state.books.selected.isSubmiting")
+          div(class="rn-form__row")
+            figure(class="rn-books__modal--thumbnail")
+              img(
+                class="has--placeloader img-zoomable js--admin-books-modal-image js--lazy",
+                src=imgRemoveIconNotFound,
+                rv-data-src="app.state.books.selected.thumbnail",
+                rv-alt="app.state.books.selected.title",
+                rv-title="app.state.books.selected.title"
+                rv-lazyload-image
+              )
+          div(class="rn-form__row")
+            div(class="rn-form__group name")
+              label(class="rn-form__label", for="name") Nome
+              input(
+                id="name"
+                type="text"
+                required="required"
+                class="rn-form__input"
+                rv-value="app.state.books.selected.title"
+              )
+            div(class="rn-form__group author")
+              label(class="rn-form__label", for="author") Autor
+              input(
+                id="author"
+                type="text"
+                required="required"
+                class="rn-form__input"
+                rv-value="app.state.books.selected.author"
+              )
+            div(class="rn-form__group genre")
+              label(class="rn-form__label", for="genre") Gênero
+              input(
+                id="genre"
+                type="text"
+                required="required"
+                class="rn-form__input"
+                rv-value="app.state.books.selected.genre"
+              )
+            div(class="rn-form__group isbn")
+              label(class="rn-form__label", for="isbn") ISBN
+              input(
+                id="isbn"
+                type="text"
+                maxlength="13"
+                required="required"
+                pattern="[0-9]{13}"
+                class="rn-form__input"
+                rv-value="app.state.books.selected.isbn"
+              )
+            div(class="rn-form__group edition")
+              label(class="rn-form__label", for="edition") Edição
+              input(
+                id="edition"
+                type="text"
+                required="required"
+                class="rn-form__input"
+                rv-value="app.state.books.selected.edition"
+              )
+            div(class="rn-form__group number_pages")
+              label(class="rn-form__label", for="number_pages") Nº páginas
+              input(
+                id="number_pages"
+                type="number"
+                min="0"
+                required="required"
+                class="rn-form__input"
+                rv-value="app.state.books.selected.number_pages"
+              )
+            div(class="rn-form__group publisher")
+              label(class="rn-form__label", for="publishing_company") Editora
+              select(
+                class="rn-form__select",
+                id="publishing_company",
+                name="publisher"
+                rv-value="app.state.books.selected.publisher"
+              )
+                option(
+                  rv-each-publisher="app.props.publishers",
+                  rv-value="publisher.id"
+                  rv-text="publisher.name"
+                )
+            div(class="rn-form__group release")
+              label(class="rn-form__label", for="release_year") Ano lançamento
+              input(
+                id="release_year"
+                type="text"
+                required="required"
+                class="rn-form__input"
+                pattern="[0-9]{4}"
+                rv-value="app.state.books.selected.release_year"
+              )
+            div(class="rn-form__group quantity")
+              label(class="rn-form__label", for="quantity") Quantidade
+              input(
+                id="quantity"
+                type="number"
+                required="required"
+                class="rn-form__input"
+                min="0"
+                rv-value="app.state.books.selected.quantity"
+              )
+            div(class="rn-form__group description")
+              label(class="rn-form__label", for="description") Descrição interna
+              textarea(
+                id="description"
+                required="required"
+                class="rn-form__textarea"
+                rv-value="app.state.books.selected.internal_identification"
+              )
+            div(class="rn-form__group active")
+              input(
+                id="active"
+                name="active"
+                type="checkbox"
+                class="rn-form__input"
+                rv-checked="app.state.books.selected.active"
+              )
+              label(class="rn-form__label", for="active") Ativo?
+    div(class="modal__footer")
+      button(class="rn-btn rn-btn__primary", rv-on-click="app.controller.book.save") Salvar
+      button(class="rn-btn rn-btn__primary--outline close", rv-on-click="app.controller.book.close") Fechar

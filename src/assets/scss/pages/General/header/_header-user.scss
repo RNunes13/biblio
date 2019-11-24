@@ -111,6 +111,12 @@ $header-user-height: 45px;
           content: '\EA12';
         }
       }
+
+      &-backoffice {
+        &::before {
+          content: '\EA14';
+        }
+      }
     }
   }
 }

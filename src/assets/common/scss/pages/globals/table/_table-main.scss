@@ -1,0 +1,67 @@
+
+.rn-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  .text-center { text-align: center }
+  .text-left { text-align: left }
+  .text-right { text-align: right }
+  .semi-bold { @include font-weight(semi-bold) }
+
+  thead {
+    th {
+      border-bottom: 2px solid $color-silver;
+
+      &.id {
+        @include rem(min-width, 40px);
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+      transition: background-color $transition-duration $decelerate-ease;
+      
+      &:nth-child(odd) {
+        background-color: $color-white-ice;
+      }
+      
+      &:nth-child(even) {
+        background-color: $color-white;
+      }
+
+      @include hover-supported() {
+        background-color: $color-solitude;
+      }
+
+      td {
+        @include rem(padding, 5px);
+
+        &.actions {
+          @include rem(min-width, 125px);
+          @include flex-centered;
+
+          button:not(:last-child) {
+            @include rem(margin-right, 8px);
+          }
+
+          .edit,
+          .delete {
+            @include rem(min-height, 25px);
+            padding: 0;
+            text-decoration: underline;
+          }
+
+          .edit {
+            color: $color-primary;
+          }
+
+          .delete {
+            color: $color-persian-red;
+          }
+        }
+      }
+    }
+  }
+}

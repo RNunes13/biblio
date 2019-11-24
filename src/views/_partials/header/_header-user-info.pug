@@ -13,6 +13,7 @@ div(class="rn-header__user--info js--header-user-info")
   span(class="rn-header__user--name", rv-text="app.state.user.name | firstName")
 
 div(class="rn-header__user--menu js--header-user-menu")
+  a(class="menu-item icon icon-backoffice", href="/backoffice", rv-if="app.state.user.role | eq 1") Backoffice
   a(class="menu-item icon icon-user", href="/profile.html") Meu perfil
   a(class="menu-item icon icon-books", href="/bookings.html") Reservas
   a(class="menu-item icon icon-loans", href="/loan.html") Empréstimos

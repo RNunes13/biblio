@@ -65,7 +65,7 @@ export default {
         if (placeholder) {
           el.setAttribute('src', placeholder);
         } else {
-          el.setAttribute('src', 'assets/images/book-placeholder.jpg');
+          el.setAttribute('src', '/assets/images/book-placeholder.jpg');
         }
 
         el.classList.remove('has--placeloader');

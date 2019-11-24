@@ -6,6 +6,7 @@
   @include rem(padding, 0 10px);
   @include rem(max-width, 360px);
   width: 100% !important;
+  z-index: z('alertify-notifier');
 
   &.ajs-center {
     transform: translateX(-50%) !important;

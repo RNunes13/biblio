@@ -5,7 +5,7 @@ div(class="rn-home__book", rv-each-book="app.state.books.data", rv-on-click="app
     img(
       class="has--placeloader js--lazy",
       src=imgRemoveIconNotFound,
-      rv-data-src="book.thumbnail",
+      rv-data-src="book.thumbnail | or '/assets/images/book-placeholder.jpg'",
       rv-alt="book.title",
       rv-title="book.title"
       rv-lazyload-image
