@@ -49,5 +49,24 @@ $marginVertical: 8px;
     .active {
       display: inline-flex;
     }
+
+    .file {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  &--file {
+    display: none;
+
+    &-btn {
+      @include rem(margin-right, 10px);
+    }
+
+    &-removeBtn{
+      @include rem(margin-left, 10px);
+      color: $color-persian-red;
+    }
   }
 }

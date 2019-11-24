@@ -10,7 +10,7 @@ div(class="rn-books__modal modal modal__lg hidden js--admin-books-modal", rv-cla
     div(class="modal__body")
       form(class="rn-form")
         fieldset(rv-disabled="app.state.books.selected.isSubmiting")
-          div(class="rn-form__row")
+          div(class="rn-form__row", rv-if="app.state.books.selected.thumbnail")
             figure(class="rn-books__modal--thumbnail")
               img(
                 class="has--placeloader img-zoomable js--admin-books-modal-image js--lazy",
@@ -21,6 +21,26 @@ div(class="rn-books__modal modal modal__lg hidden js--admin-books-modal", rv-cla
                 rv-lazyload-image
               )
           div(class="rn-form__row")
+            div(class="rn-form__group file")
+              input(
+                id="thumbnail"
+                type="file"
+                class="rn-books__modal--file js--admin-books-modal-file"
+              )
+              button(
+                type="button"
+                class="rn-btn rn-btn__primary--outline rn-books__modal--file-btn js--admin-books-modal-file-btn"
+              ) Escolher capa
+              span(
+                class="js--admin-books-modal-file-name",
+                rv-text="app.state.books.selected.newThumbnail.name"
+              ) NightSkyStars.jpg
+              button(
+                type="button"
+                class="rn-btn rn-btn__link rn-books__modal--file-removeBtn js--admin-books-modal-file-remove",
+                rv-show="app.state.books.selected.newThumbnail.image"
+              ) Remover
+          div(class="rn-form__row")
             div(class="rn-form__group name")
               label(class="rn-form__label", for="name") Nome
               input(
@@ -29,6 +49,7 @@ div(class="rn-books__modal modal modal__lg hidden js--admin-books-modal", rv-cla
                 required="required"
                 class="rn-form__input"
                 rv-value="app.state.books.selected.title"
+                accept="image/jpeg"
               )
             div(class="rn-form__group author")
               label(class="rn-form__label", for="author") Autor

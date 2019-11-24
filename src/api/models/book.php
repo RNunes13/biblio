@@ -36,8 +36,8 @@
     }
 
     function create(){
-      $query = "INSERT INTO " . $this->table_name . " (title, author, genre, edition, release_year, isbn, internal_identification, number_pages, quantity, publishing_company_id)
-                VALUES (:title, :author, :genre, :edition, :release_year, :isbn, :internal_identification, :number_pages, :quantity, :publishing_company_id)";
+      $query = "INSERT INTO " . $this->table_name . " (title, author, genre, edition, release_year, isbn, internal_identification, number_pages, quantity, publishing_company_id, thumbnail)
+                VALUES (:title, :author, :genre, :edition, :release_year, :isbn, :internal_identification, :number_pages, :quantity, :publishing_company_id, :thumbnail)";
    
       $stmt = $this->conn->prepare($query);
    
@@ -52,6 +52,7 @@
       $this->number_pages = htmlspecialchars(strip_tags($this->number_pages));
       $this->quantity = htmlspecialchars(strip_tags($this->quantity));
       $this->publishing_company_id = htmlspecialchars(strip_tags($this->publishing_company_id));
+      $this->thumbnail = htmlspecialchars(strip_tags($this->thumbnail));
       
       // bind values
       $stmt->bindParam(":title", $this->title);
@@ -64,6 +65,7 @@
       $stmt->bindParam(":number_pages", $this->number_pages);
       $stmt->bindParam(":quantity", $this->quantity);
       $stmt->bindParam(":publishing_company_id", $this->publishing_company_id);
+      $stmt->bindParam(":thumbnail", $this->thumbnail);
    
       if ($stmt->execute()) {
         return array("success" => true);
@@ -162,7 +164,8 @@
           internal_identification = :internal_identification,
           number_pages = :number_pages,
           quantity = :quantity,
-          publishing_company_id = :publishing_company_id
+          publishing_company_id = :publishing_company_id,
+          thumbnail = :thumbnail
         WHERE id = :id
       ";
 
@@ -181,6 +184,7 @@
       $this->number_pages = htmlspecialchars(strip_tags($this->number_pages));
       $this->quantity = htmlspecialchars(strip_tags($this->quantity));
       $this->publishing_company_id = htmlspecialchars(strip_tags($this->publishing_company_id));
+      $this->thumbnail = htmlspecialchars(strip_tags($this->thumbnail));
 
       // bind values
       $stmt->bindParam(":id", $this->id);
@@ -195,6 +199,7 @@
       $stmt->bindParam(":number_pages", $this->number_pages);
       $stmt->bindParam(":quantity", $this->quantity);
       $stmt->bindParam(":publishing_company_id", $this->publishing_company_id);
+      $stmt->bindParam(":thumbnail", $this->thumbnail);
 
       if ($stmt->execute()) {
         return array(

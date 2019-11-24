@@ -31,6 +31,14 @@ export const book = {
     const { selected: book } = Biblio.adminBookComponent.app.state.books;
     const isNew = book._new;
 
+    const { newThumbnail } = book;
+
+    let imageUrl = '';
+
+    if (newThumbnail) {
+      imageUrl = await uploadImage(newThumbnail.file);
+    }
+
     const data = {
       title: book.title,
       author: book.author,
@@ -43,6 +51,7 @@ export const book = {
       number_pages: book.number_pages,
       quantity: book.quantity,
       publishing_company_id: book.publisher.id || book.publisher,
+      thumbnail: imageUrl,
     }
 
     try {
@@ -82,3 +91,26 @@ export const book = {
     }
   }
 };
+
+async function uploadImage(image) {
+  const formData = new FormData();
+  formData.append('image', image);
+
+  return new Promise((resolve, reject) => {
+    axios({
+      url: "https://api.imgbb.com/1/upload?key=45057c3b76ddbfba473e8a5f7c488440",
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: formData,
+    }).then(({ data }) => {
+      resolve(data.data.display_url);
+    }).catch((err) => {
+      console.error(err);
+      alertify.error('Ocorreu um erro ao tentar salvar a capa do livro.');
+  
+      resolve(null);
+    });
+  });
+}
