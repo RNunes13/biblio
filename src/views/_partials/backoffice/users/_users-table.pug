@@ -1,0 +1,18 @@
+div(class="rn-table__container")
+  table(class="rn-users__table rn-table", rv-if="app.state.users.isLoading | eq false")
+    thead(class="rn-table__head")
+      tr
+        th(class="id") #
+        th(class="text-left") Nome
+        th(class="text-center") Ativo
+        th(class="text-center") Criado em
+        th Ações
+    tbody
+      tr(class="has--click", rv-each-user="app.state.users.data", rv-on-click="app.controller.user.setUser")
+        td(class="text-center semi-bold") {{ user.id }}
+        td(class="text-left") {{ user.name }}
+        td(class="text-center") {{ user.active }}
+        td(class="text-center") {{ user.created_at }}
+        td(class="actions")
+          button(class="rn-btn edit", rv-on-click="app.controller.user.setUser") Editar
+          button(class="rn-btn delete", rv-on-click="app.controller.user.delete") Deletar

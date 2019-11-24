@@ -195,6 +195,7 @@ export const profile = {
         scope.address.neighborhood = "";
         scope.address.city = "";
         scope.address.uf = "";
+        scope.address.isSearching = false;
         
         return;
       }

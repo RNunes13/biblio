@@ -1,0 +1,36 @@
+
+$marginVertical: 8px;
+
+.rn-users__modal {
+  .rn-form {
+    &__row {
+      & > * {
+        @include rem(margin-right, #{$marginVertical});
+        @include rem(margin-left, #{$marginVertical});
+
+        @include mq('sm', max) {
+          width: 100% !important;
+          margin-right: 0 !important;
+          margin-left: 0 !important;
+        }
+      }
+    }
+
+    .name,
+    .email {
+      @include mq('sm') { width: calc(50% - #{$marginVertical} * 2) }
+      flex-grow: 1;
+    }
+
+    .username,
+    .cpf,
+    .role {
+      @include mq('sm') { width: calc(33% - #{$marginVertical} * 2) }
+      flex-grow: 1;
+    }
+
+    .active {
+      display: inline-flex;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+section(class="rn-users admin rn-container js--admin-users")
+  div(class="admin__new")
+    button(class="rn-btn rn-btn__primary--outline", rv-on-click="app.controller.user.newUser") Novo
+  div(rv-if="app.state.users.isLoading")
+    include ../../loader/_loader.pug
+
+  include ./_users-table.pug
+  include ./_users-modal.pug

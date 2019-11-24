@@ -1,0 +1,84 @@
+- var imgRemoveIconNotFound = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+div(class="rn-users__modal modal modal__lg hidden js--admin-users-modal", rv-class-hidden="app.state.showModal | eq false")
+  div(class="modal__backdrop", rv-on-click="app.controller.user.close")
+  div(class="modal__content")
+    div(class="modal__heading")
+      p(class="modal__title", rv-text="app.state.modalTitle")
+      button(class="modal__close", rv-on-click="app.controller.user.close")
+    div(class="modal__body")
+      form(class="rn-form")
+        fieldset(rv-disabled="app.state.users.selected.isSubmiting")
+          div(class="rn-form__row")
+            div(class="rn-form__group name")
+              label(class="rn-form__label" for="name") Nome
+              input(
+                id="name"
+                type="text"
+                required="required"
+                class="rn-form__input"
+                rv-value="app.state.users.selected.name"
+              )
+            div(class="rn-form__group email")
+              label(class="rn-form__label" for="email") Email
+              input(
+                id="email"
+                type="email"
+                class="rn-form__input"
+                rv-value="app.state.users.selected.email"
+                required="required"
+              )
+            div(class="rn-form__group username")
+              label(class="rn-form__label" for="username") Usuário
+              input(
+                id="username"
+                type="text"
+                class="rn-form__input"
+                rv-value="app.state.users.selected.username"
+                required="required"
+              )
+            div(class="rn-form__group cpf")
+              label(class="rn-form__label" for="cpf") CPF
+              input(
+                id="cpf"
+                type="text"
+                class="rn-form__input"
+                rv-value="app.state.users.selected.cpf"
+                pattern="[0-9]{11}"
+                minlength="11"
+                maxlength="11"
+                required="required"
+                title="Digite os 11 números do CPF"
+              )
+              small(
+                class="rn-form__hint",
+                rv-if="app.state.users.selected.cpf.hasError | eq false"
+              ) Digite apenas os números
+            div(class="rn-form__group role")
+              label(class="rn-form__label", for="role_id") Permissão
+              select(
+                class="rn-form__select",
+                id="role_id",
+                name="role_id"
+                rv-value="app.state.users.selected.role"
+              )
+                option(
+                  rv-each-role="app.props.roles",
+                  rv-value="role.id"
+                  rv-text="role.name"
+                )
+            div(class="rn-form__group active")
+              input(
+                id="active"
+                name="active"
+                type="checkbox"
+                class="rn-form__input"
+                rv-checked="app.state.users.selected.deleted"
+              )
+              label(class="rn-form__label", for="active") Deletado?
+          include ./_users-phone.pug
+          include ./_users-address.pug
+
+    div(class="modal__footer")
+      button(class="rn-btn rn-btn__primary", rv-on-click="app.controller.user.save") Salvar
+      button(class="rn-btn rn-btn__primary--outline close", rv-on-click="app.controller.user.close") Fechar

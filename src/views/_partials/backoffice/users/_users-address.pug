@@ -1,0 +1,82 @@
+
+- var states = [{ value: 12, text: 'AC' },{ value: 27, text: 'AL' },{ value: 13, text: 'AM' },{ value: 16, text: 'AP' },{ value: 29, text: 'BA' },{ value: 23, text: 'CE' },{ value: 53, text: 'DF' },{ value: 32, text: 'ES' },{ value: 52, text: 'GO' },{ value: 21, text: 'MA' },{ value: 31, text: 'MG' },{ value: 50, text: 'MS' },{ value: 51, text: 'MT' },{ value: 15, text: 'PA' },{ value: 25, text: 'PB' },{ value: 26, text: 'PE' },{ value: 22, text: 'PI' },{ value: 41, text: 'PR' },{ value: 33, text: 'RJ' },{ value: 24, text: 'RN' },{ value: 11, text: 'RO' },{ value: 14, text: 'RR' },{ value: 43, text: 'RS' },{ value: 42, text: 'SC' },{ value: 28, text: 'SE' },{ value: 35, text: 'SP' },{ value: 17, text: 'TO' }]
+
+div(class="rn-users__form--address")
+  h2(class="rn-subtitle") Endereços
+  div(class="rn-form__row", rv-each-address="app.state.users.selected.addresses")
+    fieldset(rv-disabled="address.isSearching")
+      div(class="rn-users__form--address-info")
+        div(class="rn-form__group cep")
+          label(class="rn-form__label" for="cep") CEP
+          input(
+            id="cep"
+            type="text"
+            class="rn-form__input"
+            pattern="[0-9]{8}"
+            minlength="8"
+            maxlength="8"
+            rv-value="address.zip_code"
+            rv-on-blur="app.controller.user.getAddress"
+          )
+        div(class="rn-form__group street")
+          label(class="rn-form__label" for="street") Rua
+          input(
+            id="street"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.street"
+          )
+        div(class="rn-form__group street_number")
+          label(class="rn-form__label" for="street_number") Número
+          input(
+            id="street_number"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.number"
+          )
+        div(class="rn-form__group additional")
+          label(class="rn-form__label" for="street") Complemento
+          input(
+            id="additional"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.additional"
+          )
+        div(class="rn-form__group neighborhood")
+          label(class="rn-form__label" for="street") Bairro
+          input(
+            id="neighborhood"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.neighborhood"
+          )
+        div(class="rn-form__group city")
+          label(class="rn-form__label" for="city") Cidade
+          input(
+            id="city"
+            type="text"
+            class="rn-form__input"
+            rv-value="address.city"
+          )
+        div(class="rn-form__group uf")
+          label(class="rn-form__label" for="uf") UF
+          select(
+            class="rn-form__select",
+            id="uf",
+            name="uf"
+            rv-value="address.uf"
+          )
+            each state in states
+              option(value=state.text) #{state.text}
+      div(class="rn-users__form--address-delete")
+        button(
+          type="button"
+          rv-on-click="app.controller.user.deleteAddress"
+          class="rn-users__form--deleteAddress rn-btn rn-btn__link"
+        )
+  div(class="rn-form__row")
+    button(
+      type="button"
+      rv-on-click="app.controller.user.addAddress"
+      class="rn-users__form--addAddress rn-btn rn-btn__link"
+    ) Adicionar

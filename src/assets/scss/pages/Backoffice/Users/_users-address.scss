@@ -1,0 +1,119 @@
+
+.rn-users__form {
+  &--address {
+    @include rem(margin-bottom, 15px);
+
+    .rn-form__row {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap !important;
+
+      @include mq('xs', max) {
+        flex-direction: column !important;
+        align-items: flex-start;
+      }
+  
+      & > *:not(:last-child) {
+        @include rem(margin-right, 8px);
+      }
+
+      &:not(:last-child) {
+        @include rem(margin-bottom, 10px);
+        border-bottom: 1px dashed $color-grey;
+      }
+    }
+
+    .cep {
+      width: 17%;
+
+      @include mq('sm', max) { width: 25% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .street {
+      width: 65%;
+
+      @include mq('md', max) { width: 65% }
+      @include mq('sm', max) { width: 71% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .street_number {
+      width: 10%;
+
+      @include mq('sm', max) { width: 20% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .additional {
+      width: 35%;
+
+      @include mq('sm', max) { width: 76% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .neighborhood {
+      width: 25%;
+
+      @include mq('sm', max) { width: 34% }
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .city {
+      width: 20%;
+
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+
+    .uf {
+      width: 11%;
+
+      @include mq('xs', max) { width: 100%; margin-right: 0 !important; }
+    }
+  }
+
+  &--address {
+    &-info {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-grow: 1;
+
+      & > *:not(:last-child) {
+        @include rem(margin-right, 8px);
+      }
+    }
+
+    &-delete {
+      flex-shrink: 0;
+    }
+  }
+
+  &--deleteAddress {
+    @include flex-centered;
+    padding: 0;
+    
+    &::before {
+      @include rem(font-size, 25px);
+      @extend %iconfont;
+      content: '\EA10';
+      color: $color-persian-red;
+
+      @include mq('xs', max) {
+        @include rem(font-size, 20px);
+      }
+    }
+
+    &::after {
+      @include rem(margin-left, 5px);
+      @include rem(font-size, 14px);
+      font-weight: 500;
+      color: $color-persian-red;
+      content: 'Remover';
+    }
+  }
+
+  &--addAddress {
+    padding: 0;
+  }
+}

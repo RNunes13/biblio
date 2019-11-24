@@ -61,3 +61,7 @@ export const admin_loans = {
 export const admin_bookings = {
   adminBookingComponent: document.querySelector('.js--admin-bookings'),
 };
+
+export const admin_users = {
+  adminUserComponent: document.querySelector('.js--admin-users'),
+};

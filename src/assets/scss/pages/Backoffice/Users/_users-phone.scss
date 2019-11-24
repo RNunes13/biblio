@@ -1,0 +1,82 @@
+
+.rn-users__form {
+  &--phone {
+    @include rem(margin-bottom, 15px);
+
+    .rn-form__row {
+      align-items: center;
+  
+      & > *:not(:last-child) {
+        @include rem(margin-right, 8px !important);
+      }
+  
+      @include mq('sm', max) {
+        flex-direction: row;
+      }
+
+      @include breakpoint(max-width, 350px) {
+        flex-direction: column;
+      }
+
+      &:not(:last-child) {
+        @include rem(margin-bottom, 10px);
+        border-bottom: 1px dashed $color-grey;
+      }
+    }
+
+    .ddd {
+      max-width: 60px;
+    
+      @include breakpoint(max-width, 350px) {
+        max-width: none;
+      }
+    }
+
+    .number {
+      max-width: 150px;
+    
+      @include breakpoint(max-width, 350px) {
+        max-width: none;
+      }
+    }
+
+    .deletePhone {
+      @include between-breakpoints(351px, 767px) {
+        width: 30px !important;
+      }
+    }
+  }
+
+  &--deletePhone {
+    @include flex-centered;
+    @include rem(margin-top, 20px);
+    
+    @include breakpoint(max-width, 350px) {
+      margin-top: 0;
+    }
+
+    &::before {
+      @include rem(font-size, 25px);
+      @extend %iconfont;
+      content: '\EA10';
+      color: $color-persian-red;
+
+      @include breakpoint(max-width, 350px) {
+        @include rem(font-size, 20px);
+      }
+    }
+
+    &::after {
+      @include breakpoint(max-width, 350px) {
+        @include rem(margin-left, 5px);
+        @include rem(font-size, 14px);
+        color: $color-persian-red;
+        content: 'Remover';
+      }
+    }
+  }
+
+  &--addPhone {
+    padding: 0;
+  }
+}

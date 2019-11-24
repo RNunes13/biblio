@@ -1,0 +1,40 @@
+
+div(class="rn-users__form--phone js--users-phone")
+  h2(class="rn-subtitle") Telefones
+  div(class="rn-form__row", rv-each-phone="app.state.users.selected.phones")
+    div(class="rn-form__group ddd")
+      label(class="rn-form__label" for="ddd") DDD
+      input(
+        id="ddd"
+        type="text"
+        class="rn-form__input"
+        pattern="[0-9]{2}"
+        minlength="2"
+        maxlength="2"
+        rv-value="phone.ddd"
+        title="Digite apenas números"
+      )
+    div(class="rn-form__group number")
+      label(class="rn-form__label" for="number") Número
+      input(
+        id="number"
+        type="text"
+        class="rn-form__input"
+        pattern="[0-9]{8,9}"
+        minlength="8"
+        maxlength="9"
+        rv-value="phone.number"
+        title="Digite apenas os 8 ou 9 números do telefone"
+      )
+    div(class="rn-form__group deletePhone")
+      button(
+        type="button",
+        class="rn-users__form--deletePhone",
+        rv-on-click="app.controller.user.deletePhone"
+      )
+  div(class="rn-form__row")
+    button(
+      type="button"
+      rv-on-click="app.controller.user.addPhone"
+      class="rn-users__form--addPhone rn-btn rn-btn__link"
+    ) Adicionar
