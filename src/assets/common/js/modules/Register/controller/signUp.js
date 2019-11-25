@@ -13,25 +13,23 @@ export const signUp = {
 
     const name = scope.app.state.form.name.value;
     const email = scope.app.state.form.email.value;
-    const username = scope.app.state.form.username.value;
+    const username = scope.app.state.form.username.value.toLocaleLowerCase();
     const password = scope.app.state.form.password.value;
 
     axios.post('/api/users/register.php', { name, email, username, password })
-    .then((resp) => {
-      alertify.success(`Conta criada, seja bem-vindo ${name}!`); 
-    })
-    .catch(({response }) => {
-      const { error } = response.data;
+    .then(({ data }) => {
+      alertify.success(`Conta criada, seja bem-vindo ${name}!`);
 
-      if (error.code === "@Biblio:InvalidCredentials") {
-        alertify.error('Credenciais inválidas');
-      } else {
-        alertify.error(error.message);
-      }
+      window.localStorage.setItem('@Biblio:user', JSON.stringify(data));
+
+      setTimeout(() => window.location.href = window.location.origin, 2000);
+    })
+    .catch(() => {
+      alertify.error("Ocorre um erro no cadastro. Tente novamente em instantes.");
     })
     .finally(() => {
       scope.app.state.form.isSubmiting = false;
-      scope.app.state.form.buttonText = 'Acessar';
+      scope.app.state.form.buttonText = 'Cadastrar';
     });
   },
 

@@ -34,7 +34,7 @@ export const signIn = {
     scope.app.state.form.isSubmiting = true;
     scope.app.state.form.buttonText = 'Validando...';
 
-    const username = scope.app.state.form.username.value;
+    const username = scope.app.state.form.username.value.toLocaleLowerCase();
     const password = scope.app.state.form.password.value;
 
     axios.post('/api/users/login.php', { username, password })

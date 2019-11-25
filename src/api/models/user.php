@@ -399,5 +399,52 @@
         );
       }
     }
+
+    function create() {
+      $insert = "
+        INSERT INTO " . $this->table_name . " (name, username, email, password, role_id, deleted)
+        VALUES (:name, :username, :email, :password, 4, false) 
+      ";
+
+      $password_hash = md5($this->password);
+
+      $stmt = $this->conn->prepare($insert);
+      $stmt->bindParam(':name', $this->name);
+      $stmt->bindParam(':username', $this->username);
+      $stmt->bindParam(':email', $this->email);
+      $stmt->bindParam(':password', $password_hash);
+
+      if ($stmt->execute()) {
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY id DESC LIMIT 1";
+ 
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        extract($result);
+
+        $user = array(
+          "id" => $id,
+          "cpf" => $cpf,
+          "name" => $name,
+          "email" => $email,
+          "role" => $role_id,
+          "picture" => "http://www.gravatar.com/avatar/" . md5($email) . ".jpg?s=80&d=identicon",
+          "username" => $username,
+          "created_at" => $created_at,
+          "updated_at" => $updated_at,
+        );
+
+        return array(
+          "success" => true,
+          "data" => $user
+        );
+      } else {
+        return array(
+          "success" => false,
+          "message" => $stmt->errorInfo()
+        );
+      }
+    }
   }
 ?>

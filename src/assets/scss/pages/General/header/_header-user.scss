@@ -117,6 +117,12 @@ $header-user-height: 45px;
           content: '\EA14';
         }
       }
+
+      &-book {
+        &::before {
+          content: '\EA15';
+        }
+      }
     }
   }
 }
