@@ -14,7 +14,9 @@
   },
   "scripts": {
     "clean": "gulp clean",
-    "start": "npm run clean && gulp start --colors"
+    "start": "npm run clean && gulp start --colors",
+    "build": "npm run clean && gulp build",
+    "publish:local": "npm run build && sudo rm -rf /var/www/html/* && sudo cp -avr ~/Documents/Repositories/Personal/biblio/build/* /var/www/html/"
   },
   "dependencies": {
     "axios": "^0.19.0",

@@ -148,7 +148,7 @@ function views() {
 }
 
 function iconfont() {
-  gulp.src(`${SRC_PATH}/assets/common/iconfont/*.svg`).pipe(iconFont({
+  return gulp.src(`${SRC_PATH}/assets/common/iconfont/*.svg`).pipe(iconFont({
     fontName: `iconfont-${projectName}`,
     formats: ['eot', 'ttf', 'woff', 'woff2'],
     appendCodepoints: true,
@@ -188,6 +188,19 @@ function minifyImages() {
 		.pipe(gulp.dest(PATHS.img.dest))
 }
 
+function build(done) {
+  gulp.series([
+    copyApiFile,
+    minifyImages,
+    iconfont,
+    styles,
+    views,
+    js,
+  ])();
+
+  done && done();
+}
+
 function start() {
   // Init server
   connect.server({
@@ -201,13 +214,7 @@ function start() {
     proxy: `${HOSTNAME}:${PORT}`,
   });
 
-  // Run the compile tasks
-  copyApiFile();
-  minifyImages();
-  iconfont();
-  styles();
-  views();
-  js();
+  build();
 
   // Watchers
   gulp.watch(PATHS.styles.src, gulp.series([styles]));
@@ -217,4 +224,5 @@ function start() {
 }
 
 exports.start = start;
+exports.build = build;
 exports.clean = clean;

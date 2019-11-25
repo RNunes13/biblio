@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `biblio`.`user` (
   `username` VARCHAR(100) NOT NULL,
   `email` VARCHAR(200) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
-  `cpf` VARCHAR(11) NOT NULL,
+  `cpf` VARCHAR(11) NULL,
   `role_id` INT NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT now(),
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `biblio`.`book` (
   `isbn` VARCHAR(13) NOT NULL,
   `active` TINYINT NOT NULL DEFAULT 1,
   `internal_identification` VARCHAR(100),
-  `number_pages` INT NULL,
+  `number_pages` INT NULL DEFAULT 0,
   `quantity` INT NOT NULL DEFAULT 0,
   `publishing_company_id` INT NOT NULL,
   `thumbnail` VARCHAR(255) NULL,
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `biblio`.`book_loan` (
   `user_id` INT NOT NULL,
   `loan_date` DATETIME NOT NULL DEFAULT now(),
   `return_date` DATETIME NULL,
-  `renewal_count` INT NOT NULL DEAFULT 0,
+  `renewal_count` INT NOT NULL DEFAULT 0,
   `status` VARCHAR(60) NOT NULL DEFAULT 'active',
   `updated_at` DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
   PRIMARY KEY (`id`),
@@ -281,11 +281,11 @@ INSERT INTO `biblio`.`publishing_company` (`id`, `name`) VALUES (3, 'rocco');
 INSERT INTO `biblio`.`publishing_company` (`id`, `name`) VALUES (4, 'Harpercollins');
 
 -- Book
-INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, ``) VALUES (1, 'Ideias para futuramente não ficar no passado', 'Guilherme Machado', 'Autoajuda', '2019', '9788545203735', 208, 10, 2, 'https://live.staticflickr.com/65535/49069862456_83dc54fe2b_o.jpg');
-INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, ``) VALUES (2, 'Do Mil Ao Milhão', 'Thiago Nigro', 'Negócios', '2018', '9788595083271', 192, 7, 4, 'https://live.staticflickr.com/65535/49069862526_ce9400b3ac_o.jpg');
-INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, ``) VALUES (3, 'O poder da autorresponsabilidade', 'Paulo Vieira', 'Negócios', '2018', '9788545202219', 96, 23, 2, 'https://live.staticflickr.com/65535/49070069727_5a546850ef_o.jpg');
-INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, ``) VALUES (4, 'Sapiens - Uma Breve História da Humanidade', 'Yuval Noah Harari', 'Não-ficção', '2014', '9788525432186', 464, 3, 1, 'https://live.staticflickr.com/65535/49070069712_0471630118_o.jpg');
-INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, ``) VALUES (5, 'Mulheres Que Correm Com Os Lobos', 'Clarissa Pinkola Estés', 'Não-ficção', '1992', '9788532529787', 576, 2, 3, 'https://live.staticflickr.com/65535/49070069682_4aa089443e.jpg');
+INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, `thumbnail`) VALUES (1, 'Ideias para futuramente não ficar no passado', 'Guilherme Machado', 'Autoajuda', '2019', '9788545203735', 208, 10, 2, 'https://live.staticflickr.com/65535/49069862456_83dc54fe2b_o.jpg');
+INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, `thumbnail`) VALUES (2, 'Do Mil Ao Milhão', 'Thiago Nigro', 'Negócios', '2018', '9788595083271', 192, 7, 4, 'https://live.staticflickr.com/65535/49069862526_ce9400b3ac_o.jpg');
+INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, `thumbnail`) VALUES (3, 'O poder da autorresponsabilidade', 'Paulo Vieira', 'Negócios', '2018', '9788545202219', 96, 23, 2, 'https://live.staticflickr.com/65535/49070069727_5a546850ef_o.jpg');
+INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, `thumbnail`) VALUES (4, 'Sapiens - Uma Breve História da Humanidade', 'Yuval Noah Harari', 'Não-ficção', '2014', '9788525432186', 464, 3, 1, 'https://live.staticflickr.com/65535/49070069712_0471630118_o.jpg');
+INSERT INTO `biblio`.`book` (`id`, `title`, `author`, `genre`, `release_year`, `isbn`, `number_pages`, `quantity`, `publishing_company_id`, `thumbnail`) VALUES (5, 'Mulheres Que Correm Com Os Lobos', 'Clarissa Pinkola Estés', 'Não-ficção', '1992', '9788532529787', 576, 2, 3, 'https://live.staticflickr.com/65535/49070069682_4aa089443e.jpg');
 
 -- Booking history
 INSERT INTO `biblio`.`booking_history` (`book_id`, `user_id`, `reservation_date`, `status`, `updated_at`) VALUES (2, 5, CONVERT('2019-02-04 12:28:34', DATETIME), 'completed', CONVERT('2019-02-05 14:17:23', DATETIME));
@@ -385,7 +385,7 @@ CREATE TRIGGER before_book_loan_update BEFORE UPDATE ON `biblio`.`book_loan`
     -- Checking number of renewals
     SELECT renewals_allowed INTO renewalsQuantity FROM `biblio`.`setting` WHERE id = 1;
 
-    IF ((NEW.renewal_count != OLD.renewal_count) && (OLD.renewal_count >= renewalsQuantity)) THEN
+    IF ((NEW.renewal_count != OLD.renewal_count) AND (OLD.renewal_count >= renewalsQuantity)) THEN
       SIGNAL sqlstate '45000' set message_text = 'BookLoanUpdateError - It is no longer possible to renew this loan.';
     END IF;
   END |
