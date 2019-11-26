@@ -1,0 +1,18 @@
+extends ./_layouts/_base.pug
+
+//- Template variables
+block vars
+  - var $templateName = 'reserve'
+  - var $templateClass = 'reserve'
+
+//- Page styles
+block append styles
+  link(href=`/assets/css/biblio-${$templateName}.css`, media='all', rel='stylesheet')/
+
+//- Main Content
+block content
+  p Estamos fazendo a reserva do livro, aguarde um instante.
+
+//- Page scripts
+block append scripts
+  script(src=`/assets/js/biblio-${$templateName}.js`)

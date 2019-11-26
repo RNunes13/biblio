@@ -5,7 +5,9 @@ export function checkUser(redirect_to) {
   if (user) {
     return user;
   } else {
-    window.location.href = window.location.origin + `/login.html${redirect_to ? '?redirect_to=' + encodeURIComponent(redirect_to) : ''}`;
+    window.location.href = window.location.origin + '/login.html';
+
+    window.localStorage.setItem("@Biblio:redirectTo", redirect_to);
 
     return false;
   }

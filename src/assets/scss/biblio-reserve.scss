@@ -1,0 +1,12 @@
+
+@import './settings/config-base';
+
+.rn-reserve__main {
+  text-align: center;
+
+  p {
+    @include rem(font-size, 20px);
+    @include font-weight(semi-bold);
+    color: $color-bunting;
+  }
+}

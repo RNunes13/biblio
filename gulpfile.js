@@ -34,7 +34,7 @@ const DEST_PATH = 'build';
 const projectName = 'biblio';
 const commomFiles = ['globals'];
 const otherFiles  = [
-  'home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings', 'loan'
+  'home', 'general', 'login', 'register', 'booking-confirmation', 'profile', 'bookings', 'loan', 'reserve'
 ];
 
 const adminFiles  = [

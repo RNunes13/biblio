@@ -2,6 +2,7 @@
 $header-user-height: 45px;
 
 .rn-header__user {
+  @include rem(min-width, 150px);
   $user: &;
   position: relative;
   height: $header-user-height;

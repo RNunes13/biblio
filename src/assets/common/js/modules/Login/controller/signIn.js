@@ -45,8 +45,9 @@ export const signIn = {
 
       window.localStorage.setItem('@Biblio:user', JSON.stringify(data.user));
 
-      const query = window.location.search.replace('?', '');
-      const redirect = qs.parse(query).redirect_to || '/';
+      const redirect = window.localStorage.getItem("@Biblio:redirectTo");
+
+      if (redirect) window.localStorage.removeItem("@Biblio:redirectTo");
 
       window.location.href = window.location.origin + redirect;
     })
