@@ -26,7 +26,9 @@ export const signUp = {
 
       if (redirect) window.localStorage.removeItem("@Biblio:redirectTo");
 
-      setTimeout(() => window.location.href = window.location.origin + redirect, 2000);
+      setTimeout(() => {
+        window.location.href = window.location.origin + (redirect ? redirect : '')
+      }, 2000);
     })
     .catch(() => {
       alertify.error("Ocorre um erro no cadastro. Tente novamente em instantes.");

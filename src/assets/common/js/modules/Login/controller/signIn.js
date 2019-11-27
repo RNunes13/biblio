@@ -49,7 +49,7 @@ export const signIn = {
 
       if (redirect) window.localStorage.removeItem("@Biblio:redirectTo");
 
-      window.location.href = window.location.origin + redirect;
+      window.location.href = window.location.origin + (redirect ? redirect : '');
     })
     .catch(({response }) => {
       const { error } = response.data;
