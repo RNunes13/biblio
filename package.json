@@ -19,7 +19,7 @@
     "publish:local": "npm run build && sudo rm -rf /var/www/html/* && sudo cp -avr ~/Documents/Repositories/Personal/biblio/build/* /var/www/html/"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "initialize-css": "^1.4.0",
     "lodash.template": ">=4.5.0",
