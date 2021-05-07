@@ -27,7 +27,7 @@
     "regenerator-runtime": "^0.13.3",
     "scss-form-reset": "0.0.3",
     "smoothscroll": "^0.4.0",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "zooming": "^2.1.1"
   },
   "devDependencies": {
