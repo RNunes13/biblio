@@ -37,7 +37,7 @@
     "@babel/preset-env": "^7.6.3",
     "autoprefixer": "^9.7.1",
     "babelify": "^10.0.0",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.10",
     "browserify": "^16.5.0",
     "cssnano": "^4.1.10",
     "del": "^5.1.0",
